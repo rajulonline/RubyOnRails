@@ -1,0 +1,42 @@
+<%= form_for :children, :url => { :action => :display_child_test_case, :id=>@post } do |f| %>
+
+<%- model_class = Children -%>
+<div class="page-header">
+	<h1><%= t '.Adding Child Test Case', :model => model_class.model_name.human.titleize %></h1>
+</div>
+
+<!-- <div class="progress progress-striped active">
+<div class="bar" style="width: 40%;"></div>
+</div>
+-->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+<div class="control-group">
+
+	<%= f.label :content, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_area :content, :rows=>5,:class => 'text_area' %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.label :status, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.select :status, [['Not executed'],['Passed'],['Failed']] %>
+	</div>
+</div>
+
+<!-- <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %> -->
+<%= f.submit 'Add Children'%>
+
+<!-- <%= link_to 'Add Child Test Case',
+{ :controller=> 'children', :action => 'add_child_test_case', :post => @post}, :method => :post %> -->
+
+<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+:controller=> 'posts', :action => 'index' , :class => 'btn'%>
+</div>
+
+<% end %>

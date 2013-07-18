@@ -1,0 +1,50 @@
+<%= form_for @post, :html => { :class => 'form-horizontal' } do |f| %>
+
+<!-- # Message Header -->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+#Actual Form
+<div class="control-group">
+	<%= f.label :project_id, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'post[project_id]', options_for_select(@project.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+
+<div class="control-group">
+	<%= f.label :title, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_field :title, :class => 'text_field' %>
+	</div>
+</div>
+<div class="control-group">
+
+	<%= f.label :content, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_area :content, :rows=>5,:class => 'text_area' %>
+	</div>
+</div>
+<div class="control-group">
+	<%= f.label :agent, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'post[agent]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+<div class="control-group">
+	<%= f.label :status, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'post[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="form-actions">
+	<%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	posts_path, :class => 'btn'%>
+</div>
+
+<% end %>

@@ -1,0 +1,36 @@
+class Post < ActiveRecord::Base
+  attr_accessible :project_id,:parent_tc_id,:content, :agent, :title, :status
+  # belongs_to :person
+  has_many :childrens, :foreign_key=>:parent_tc_id,:dependent => :destroy
+  has_many :defects,:foreign_key=>:parent_tc_id,:dependent => :destroy
+  belongs_to :requirement
+  belongs_to :project,:foreign_key=>:parent_tc_id,:dependent => :destroy
+  # validates_each :name, :agent,:title,:status do |record, attr, value|
+    # record.errors.add(attr, 'must start with upper case') if value =~ /\A[a-z]/
+  validates :agent,  :format => { :with => /\A[a-zA-Z]+\z/,
+    :message => "Only letters allowed" }
+
+    #,:uniqueness => { :case_sensitive => false }
+   # before_validation :ensure_agent_has_a_value
+
+  validates :title, :presence => true
+  validates :status, :presence => true,
+                    :length => { :minimum => 3 }
+
+    # protected
+  # def ensure_agent_has_a_value
+    # if agent.blank?
+      # self.agent = title unless title.blank?
+    # end
+    # end
+    
+    def display_parent_child_test_cases
+      
+    end
+    
+    def self.all_cached
+    Rails.cache.fetch('Post.all'){all}
+  end
+
+
+end

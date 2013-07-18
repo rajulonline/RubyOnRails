@@ -1,0 +1,33 @@
+<%- model_class = Children -%>
+
+<div class="page-header">
+	<h1><%= 'Child Test Cases'%></h1>
+
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= model_class.human_attribute_name(:child_tc_id) %></th>
+			<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+			<th><%= model_class.human_attribute_name(:content) %></th>
+			<th><%= model_class.human_attribute_name(:status) %></th>
+			<th><%= model_class.human_attribute_name(:agent) %></th>
+
+		</tr>
+	</thead>
+	<tbody>
+
+		<%@children.each do |children| %>
+		<tr>
+			<td><%= children.child_tc_id %></td>
+			<td><%= children.parent_tc_id %></td>
+			<td><%= children.content %></td>
+			<td><%= children.status %></td>
+			<td><%= link_to children.agent %></td>
+
+		</tr>
+		<% end %>
+
+	</tbody>
+</table>
+

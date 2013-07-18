@@ -1,0 +1,89 @@
+<%= form_for :defect do |f| %>
+
+<!-- # Message Header -->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+<!-- # Progress bar -->
+
+<div class="control-group">
+
+	<%= f.label :Associated_Project, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[project_id]', options_for_select(@project.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Mapping_Requirement, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[req_id]', options_for_select(@requirement.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Parent_testcase, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Defect_Description, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_area :def_description, :rows=>5,:class => 'text_area' %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Tester_Name, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[tester_name]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Developer_Name, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[dev_name]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :Status, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+
+<div class="control-group">
+
+	<%= f.label :Severity, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[severity]', options_for_select(@severity.collect{ |u| [u.severity] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :category, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'defect[category]', options_for_select(@defecttype.collect{ |u| [u.category] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="form-actions">
+	<%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
+
+</div>
+
+<% end %>

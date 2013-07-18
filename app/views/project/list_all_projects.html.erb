@@ -1,0 +1,44 @@
+<%- model_class = Project -%>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= model_class.human_attribute_name(:id) %></th>
+					<th><%= model_class.human_attribute_name(:name) %></th>
+					<th><%= model_class.human_attribute_name(:description) %></th>
+					<th><%= model_class.human_attribute_name(:created_at ) %></th>
+
+				</tr>
+			</thead>
+	</head>
+
+	<%= select_tag options_for_select(@project.collect{ |u| [u.name] }), :action => 'project_dashboard'%>
+
+	<% @project.each do |project|%>
+
+	<tr>
+	<td><%= link_to "PRJ "+ "#{project.id}", :action=> 'project_dashboard',:id=>project.id, :remote=> true %></td>
+	<td><%= project.name %></td>
+	<td><%= project.description %></td>
+	<td><%= project.created_at %></td>
+	</tr>
+
+	<% end %>
+
+	</table>
+	<div>
+		<%= link_to t('.Defect', :default => t("helpers.links.Add Projects")), :action=>'create_new_project' %>
+	</div>
+	<div id='show_project_dashboard'>
+		<% if !@defect_count.nil? %>
+		<%= render :partial => "project_dashboard"%>
+		<%end%>
+	</div>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {
+			packages : ["corechart"]
+		});
+	</script>

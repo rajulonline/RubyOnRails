@@ -1,0 +1,43 @@
+<html>
+	<noscript>
+		<meta http-equiv="refresh" content="0; url=/tools/javascript.html">
+	</noscript>
+	
+	<div class="row">
+
+		<div class="span3">
+			<%= image_tag("", alt: "")%> <h3>Manage Test Cases?</h3>
+			<p>
+				Click on this button below
+			</p>
+			<%= link_to t('.new', :default => "Test Cases"), :controller=>'posts',:action=>'index' %>
+		</div>
+
+		<div class="span3">
+			<%= image_tag("", alt: "")%> <h3>Track bugs?</h3>
+			<p>
+				Click on this button below
+			</p>
+			<%= link_to t('.new', :default => "Bugs"), :controller=>'defect',:action=>'list_defects' %>
+
+		</div>
+
+		<div class="span3">
+			<%= image_tag("", alt: "")%> <h3>Manage Requirements?</h3>
+			<p>
+				Click on this button below
+			</p>
+			<%= link_to t('.new', :default => "Requirements"), :controller=>'requirement',:action=>'list_requirements' %>
+		</div>
+		<div class="span3">
+			<%= image_tag("", alt: "")%> <h3>Manage Projects?</h3>
+			<p>
+				Click on this button below
+			</p>
+			<%= link_to t('.new', :default => "Projects"), :controller=>'project',:action=>'list_all_projects' %>
+		</div>
+
+	
+
+	</div>
+</html>

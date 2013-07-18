@@ -1,0 +1,125 @@
+<%- model_class = Post -%>
+
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<div>
+	Parent
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:project_id) %>:</strong>
+	</dt>
+	<dd>
+		<%= @post.project_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:agent) %>:</strong>
+	</dt>
+	<dd>
+		<%= @post.agent %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:title) %>:</strong>
+	</dt>
+	<dd>
+		<%= @post.title %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:content) %>:</strong>
+	</dt>
+	<dd>
+		<%= @post.content %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:status) %>:</strong>
+	</dt>
+	<dd>
+		<%= @post.status %>
+	</dd>
+</dl>
+
+<% if @post.childrens.present? %>
+<% @post.childrens.each {|child| %>
+<div>
+	Child
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:agent) %>:</strong>
+	</dt>
+	<dd>
+		<%= child.agent %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:content) %>:</strong>
+	</dt>
+	<dd>
+		<%= child.content %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:status) %>:</strong>
+	</dt>
+	<dd>
+		<%= child.status %>
+	</dd>
+</dl>
+<% } %>
+<% end %>
+
+<% if @post.defects.present? %>
+<% @post.defects.each {|defect| %>
+<div>
+	Defect
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:id) %>:</strong>
+	</dt>
+	<dd>
+		<%= link_to (defect.id), :controller=>'defect', :action=>'list_defects' %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:status) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.status %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:def_description) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.def_description %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:tester_name) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.tester_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:dev_name) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.dev_name %>
+	</dd>
+</dl>
+<% } %>
+<% end %>
+
+<div class="form-actions">
+	<%= link_to t('.back', :default => t("helpers.links.back")),
+	posts_path, :class => 'btn'  %>
+	<%= link_to t('.edit', :default => t("helpers.links.edit")),
+	edit_post_path(@post), :class => 'btn' %>
+	<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+	post_path(@post),
+	:method => 'delete',
+	:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+	:class => 'btn btn-danger' %>
+	<%= link_to 'Add Child Test Case',
+	{ :controller=> 'children', :action => 'add_child_test_case', :post => @post}, :method => :post %>
+
+</div>
+

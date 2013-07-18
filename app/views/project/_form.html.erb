@@ -1,0 +1,35 @@
+<%= form_for :project , :html => { :class => 'form-horizontal' } do |f| %>
+
+<!-- # Message Header -->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+<!-- # Progress bar -->
+
+<div class="control-group">
+      
+    <%= f.label :Project_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name,:class => 'text_field' %>
+    </div>
+  </div>
+   
+ 
+  <div class="control-group">
+      
+    <%= f.label :Description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :rows=>5,:class => 'text_area' %>
+    </div>
+  </div>
+ 
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
+   
+  </div>
+
+  
+<% end %>

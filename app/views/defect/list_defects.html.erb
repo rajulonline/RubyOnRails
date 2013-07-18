@@ -1,0 +1,62 @@
+<%- model_class = Defect -%>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= model_class.human_attribute_name(:id) %></th>
+					<th><%= model_class.human_attribute_name(:project_id) %></th>
+					<th><%= model_class.human_attribute_name(:req_id) %></th>
+					<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+					<th><%= model_class.human_attribute_name(:def_description) %></th>
+					<th><%= model_class.human_attribute_name(:status) %></th>
+					<th><%= model_class.human_attribute_name(:category) %></th>
+					<th><%= model_class.human_attribute_name(:severity) %></th>
+					<th><%= model_class.human_attribute_name(:tester_name) %></th>
+					<th><%= model_class.human_attribute_name(:dev_name) %></th>
+
+				</tr>
+			</thead>
+	</head>
+	<div class="ui-widget">
+			<label for="Defects">Auto Complete Defects Search: </label>
+			<input id="Defects_Search" />
+<%= link_to t('.search', :default => t("helpers.links.search")), :action=>'create_new_project',:class => 'btn btn-danger' %> 			
+		</div>
+
+	<% @defect.each do |defect|%>
+	<script>
+		$(function() {
+			var availableTags = ["<%=Defect.all.map(&:def_description).join('","').html_safe%>"];
+			$("#Defects_Search").autocomplete({
+				source : availableTags
+			});
+		});
+	</script>
+
+	<tr>
+		<td><%= defect.id %></td>
+		<td><%= defect.project_id%></td>
+		<td><%= defect.req_id %></td>
+		<td><%= defect.parent_tc_id %></td>
+		<td><%= defect.def_description %></td>
+		<td><%= defect.status %></td>
+		<td><%= defect.category %></td>
+		<td><%= defect.severity %></td>
+		<td><%= defect.tester_name %></td>
+		<td><%= defect.dev_name %></td>
+
+	</tr>
+
+	<% end %>
+
+	</table>
+	<div>
+		<%= link_to t('.Defect', :default => t("helpers.links.Add Defect")), :action=>'create_defect' %>
+	</div>
+
+<div>
+		<%= link_to t('.Defect', :default => t("helpers.links.Defect Analysis Report")), :action=>'defect_analysis' %>
+	</div>

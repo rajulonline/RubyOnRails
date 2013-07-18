@@ -1,0 +1,20 @@
+ 
+
+ 
+ <% if @cases.present? %>
+      <%binding.pry%>
+      <tr>
+      	<td colspan="7" width="100%">
+      		<table>
+      			<% @cases.each {|child| %>
+      			<tr>
+      				<td><%= child.agent %></td>
+      				<td><%= child.content %></td>
+      		    </tr>
+      			<% } %>
+
+      		</table>
+        </td>
+      </tr>
+     
+    
