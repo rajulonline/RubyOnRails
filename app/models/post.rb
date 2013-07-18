@@ -28,9 +28,9 @@ class Post < ActiveRecord::Base
       
     end
     
-    # def self.all_cached
-    # Rails.cache.fetch('Post.all'){all}
-  # end
+    def self.all_cached
+    Rails.cache.fetch('Post.all'){all}
+  end
 
 
 end

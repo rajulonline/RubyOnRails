@@ -2,8 +2,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @post = Post.all
-  
+    #@post = Post.all_cached
+    cache_everything
+    # cache = ActiveSupport::Cache::MemoryStore.new
+    @stats = Rails.cache.stats.first.last
+ 
     if @post.nil?
       flash[:notice]='There are no test cases'
     end
