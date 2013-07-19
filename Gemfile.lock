@@ -83,6 +83,7 @@ GEM
     mime-types (1.23)
     multi_json (1.7.3)
     mysql2 (0.3.11)
+    pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -132,6 +133,11 @@ GEM
       railties (= 3.2.13)
     rails-footnotes (3.7.9)
       rails (>= 3.0.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.1)
+    rails_stdout_logging (0.0.1)
     railties (3.2.13)
       actionpack (= 3.2.13)
       activesupport (= 3.2.13)
@@ -190,12 +196,14 @@ DEPENDENCIES
   lunchy
   memcachier
   mysql2
+  pg
   pry
   pry-plus
   pry-rails
   quiet_assets
   rails (= 3.2.13)
   rails-footnotes
+  rails_12factor
   sass-rails (~> 3.2.3)
   simple_form
   therubyracer
