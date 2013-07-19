@@ -3,7 +3,6 @@ Learning::Application.routes.draw do
   resources :login
   resources :person
   
-  
   resources :products do
   get :autocomplete_brand_name, :on => :collection
 end
@@ -13,7 +12,7 @@ end
   end
   
   namespace :tools do
-  resources :defect,:requirement,:projects
+  resources :defect,:requirement,:projects, :subject
    end
   
   

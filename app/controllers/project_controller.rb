@@ -1,8 +1,31 @@
 class ProjectController < ApplicationController
   def list_all_projects
-    @project=Project.all
+    @project = Project.all
+    
     if @project.nil?
       flash[:notice]='Currently there are no projects'
+    end
+     respond_to do |format|
+      format.html
+      format.js
+      format.json
+    end
+
+  end
+  
+  def get_one_project
+   # project_name = Project.find_all_by_name(:name)
+  # value = Project.find_by_name(project_name).id
+  # @project = Project.find_all_by_id(value)
+
+    @project = Project.find_all_by_id(params[:id])
+    if @project.nil?
+      flash[:notice]='Currently there are no projects'
+    end
+     respond_to do |format|
+      format.html
+      format.js
+      format.json
     end
   end
 
@@ -30,6 +53,12 @@ class ProjectController < ApplicationController
       format.html
     end
 
+  end
+
+  def self .all_with_ids
+    all.map do |project|
+      { :id => project.id }
+    end
   end
 
   def create_new_project

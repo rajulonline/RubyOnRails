@@ -1,44 +1,39 @@
 <%- model_class = Project -%>
-<html lang="en">
+<html lang="en" id="test">
 	<head>
 		<meta charset="utf-8" />
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th><%= model_class.human_attribute_name(:id) %></th>
-					<th><%= model_class.human_attribute_name(:name) %></th>
-					<th><%= model_class.human_attribute_name(:description) %></th>
-					<th><%= model_class.human_attribute_name(:created_at ) %></th>
-
-				</tr>
-			</thead>
+		<script>
+			function get_project_dashboard(id) {
+				$.ajax({
+					url : 'get_one_project?id=' + id,
+					type : "GET",
+					dataType : "script"
+				});
+			}
+		</script>
 	</head>
 
-	<%= select_tag options_for_select(@project.collect{ |u| [u.name] }), :action => 'project_dashboard'%>
+	<body>
+		<%= form_tag do %>
 
-	<% @project.each do |project|%>
+		<%= select_tag  'project_id',options_for_select(@project.collect{ |u| [u.id] }),:onchange=>"get_project_dashboard($(this).val())", :style=>"width: 500px;", :prompt => "Please Choose" %>
 
-	<tr>
-	<td><%= link_to "PRJ "+ "#{project.id}", :action=> 'project_dashboard',:id=>project.id, :remote=> true %></td>
-	<td><%= project.name %></td>
-	<td><%= project.description %></td>
-	<td><%= project.created_at %></td>
-	</tr>
+		<% end %>
 
-	<% end %>
-
-	</table>
-	<div>
-		<%= link_to t('.Defect', :default => t("helpers.links.Add Projects")), :action=>'create_new_project' %>
-	</div>
-	<div id='show_project_dashboard'>
-		<% if !@defect_count.nil? %>
-		<%= render :partial => "project_dashboard"%>
-		<%end%>
-	</div>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-	<script type="text/javascript">
-		google.load("visualization", "1", {
-			packages : ["corechart"]
-		});
-	</script>
+		<div id="project_list">
+			<%= render :partial => 'project_list' %>
+		</div>
+		<div>
+			<%= link_to t('.Defect', :default => t("helpers.links.Add Projects")), :action=>'create_new_project' %>
+		</div>
+		<div id='show_project_dashboard'>
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "project_dashboard"%>
+			<%end%>
+		</div>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+			google.load("visualization", "1", {
+				packages : ["corechart"]
+			});
+		</script>

@@ -22,11 +22,15 @@
 # Defecttype.create(:type => 'Automation')
 # Defecttype.create(:type => 'Production')
 
+# 
+# Defectseverity.create(:severity=>'Cosmetic Defect')
+# Defectseverity.create(:severity=>'Show stopper')
+# Defectseverity.create(:severity=>'Minor')
+# Defectseverity.create(:severity=>'Work around possible')
+# Defectseverity.create(:severity=>'Major but not show stopper')
 
-Defectseverity.create(:severity=>'Cosmetic Defect')
-Defectseverity.create(:severity=>'Show stopper')
-Defectseverity.create(:severity=>'Minor')
-Defectseverity.create(:severity=>'Work around possible')
-Defectseverity.create(:severity=>'Major but not show stopper')
 
-
+Subject.create(:name => 'Physics',:count => 1)
+Subject.create(:name => 'Mathematics',:count => 0)
+Subject.create(:name => 'Chemistry',:count => 0)
+Subject.create(:name => 'Pyschology',:count => 0)

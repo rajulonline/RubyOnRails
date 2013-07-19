@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130717003422) do
+ActiveRecord::Schema.define(:version => 20130719175629) do
+
+  create_table "books", :force => true do |t|
+    t.string   "title",       :limit => 32, :null => false
+    t.float    "price"
+    t.integer  "subject_id"
+    t.text     "description"
+    t.datetime "created_at"
+  end
 
   create_table "children", :primary_key => "child_tc_id", :force => true do |t|
     t.string   "agent"
@@ -32,7 +40,7 @@ ActiveRecord::Schema.define(:version => 20130717003422) do
     t.string   "status"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "type"
+    t.string   "category"
     t.string   "severity"
   end
 
@@ -83,6 +91,10 @@ ActiveRecord::Schema.define(:version => 20130717003422) do
   end
 
   create_table "statuses", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "subjects", :force => true do |t|
     t.string "name"
   end
 
