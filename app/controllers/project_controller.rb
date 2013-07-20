@@ -18,7 +18,7 @@ class ProjectController < ApplicationController
   # value = Project.find_by_name(project_name).id
   # @project = Project.find_all_by_id(value)
 
-    @project = Project.find_all_by_id(params[:id])
+    @project = Project.find_all_by_name(params[:id])
     if @project.nil?
       flash[:notice]='Currently there are no projects'
     end

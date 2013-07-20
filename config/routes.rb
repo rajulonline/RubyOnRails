@@ -12,12 +12,9 @@ end
   end
   
   namespace :tools do
-  resources :defect,:requirement,:projects, :subject
+  resources :defect,:requirement,:projects
    end
   
-  
-  
-
   match "children" => "children/add_child_test_case"
   #match 'children/add_child_test_case' => 'children#add_child_test_case'
 
