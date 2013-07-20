@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<script>
-			function get_project_dashboard(id) {
+			function get_project_list(id) {
 				$.ajax({
 					url : 'get_one_project?id=' + id,
 					type : "GET",
@@ -15,7 +15,7 @@
 
 	<body>
 		<%= form_tag do %>
-		<%= select_tag  'project_id',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_dashboard($(this).val())", :style=>"width: 500px;", :prompt => "Please Choose" %>
+		<%= select_tag  'project_id',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_list($(this).val())", :style=>"width: 500px;", :prompt => "Please Choose" %>
 		<% end %>
 
 		<div id="project_list">
