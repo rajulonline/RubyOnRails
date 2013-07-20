@@ -122,7 +122,7 @@ class PostsController < ApplicationController
 
   def all_status
 
-    testcase_status= Person.find_by_status(params[:id])
+    testcase_status= Post.find_by_status(params[:id])
     if testcase_status.nil?
       redirect_to :action => "index", notice: 'No test case with this status.'
     end
