@@ -9,27 +9,7 @@
 			<h1> <%= 'Project Dashboard' %></h1>
 		</div>
 		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th><%= model_class.human_attribute_name(:id) %></th>
-					<th><%= model_class.human_attribute_name(:Open_Defects) %></th>
-					<th><%= model_class.human_attribute_name(:Open_TestCases) %></th>
-					<th><%= model_class.human_attribute_name(:In_Progress_Requirements) %></th>
-					<th><%= model_class.human_attribute_name(:In_Progress_issues) %></th>
-					<!-- <th><%= t '.actions', :default => t("helpers.actions") %></th> -->
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><%="PRJ "+ "#{@project.id}"%></td>
-					<td><%= @defect_count %></td>
-					<td><%= @post_count %></td>
-					<td><%= @req_count %></td>
-					<td><%= @total %></td>
-				</tr>
-			</tbody>
-		</table>
+		
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
 <div id="chart_div"></div>

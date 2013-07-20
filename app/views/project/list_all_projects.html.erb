@@ -15,22 +15,23 @@
 
 	<body>
 		<%= form_tag do %>
-
 		<%= select_tag  'project_id',options_for_select(@project.collect{ |u| [u.id] }),:onchange=>"get_project_dashboard($(this).val())", :style=>"width: 500px;", :prompt => "Please Choose" %>
-
 		<% end %>
 
 		<div id="project_list">
 			<%= render :partial => 'project_list' %>
 		</div>
+
 		<div>
 			<%= link_to t('.Defect', :default => t("helpers.links.Add Projects")), :action=>'create_new_project' %>
 		</div>
+
 		<div id='show_project_dashboard'>
 			<% if !@defect_count.nil? %>
 			<%= render :partial => "project_dashboard"%>
 			<%end%>
 		</div>
+
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
 			google.load("visualization", "1", {
