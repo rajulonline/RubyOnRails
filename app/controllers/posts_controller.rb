@@ -139,7 +139,6 @@ class PostsController < ApplicationController
   def all_project_test_cases
 
     @all_posts = Post.find_all_by_project_id(params[:id])
-    binding.pry
     if @all_posts.nil?
       flash[:notice] = 'No test cases available for this project'
     end

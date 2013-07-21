@@ -7,7 +7,10 @@
 				$.ajax({
 					url : 'get_one_project?id=' + id,
 					type : "GET",
-					dataType : "script"
+					dataType : "script",
+					success: function(id){
+       alert( "Project Selected: "+id);
+    }
 				});
 			}
 		</script>
