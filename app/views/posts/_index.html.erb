@@ -1,13 +1,15 @@
-<!doctype html>
 <%- model_class = Post -%>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		
-		<table class="table table-striped">
+		<div class="page-header">
+			<h1> <%= link_to 'Test Case Management', :controller => 'login', :action => 'index' %></h1>
+		</div>
+<table class="table table-striped">
 			<thead>
 				<tr>
 					<th><%= model_class.human_attribute_name(:id) %></th>
+					<th><%= model_class.human_attribute_name(:Project_id) %></th>
 					<th><%= model_class.human_attribute_name(:agent) %></th>
 					<th><%= model_class.human_attribute_name(:title) %></th>
 					<th><%= model_class.human_attribute_name(:content) %></th>
@@ -16,4 +18,41 @@
 					<th><%= t '.actions', :default => t("helpers.actions") %></th>
 				</tr>
 			</thead>
-			
+
+			<tbody>
+				<% @post.each do |post| %>
+
+				<tr>
+					<td><%= link_to post.id, post_path(post) %></td>
+					<td><%= link_to post.project_id,:action => :all_project_test_cases, :id=>post.project_id %></td>
+					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
+					<td><%= post.title %></td>
+					<td><%= post.content %></td>
+					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
+					<td><%= l post.created_at %></td>
+					<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+					edit_post_path(post), :class => 'btn btn-mini' %>
+					<%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+					post_path(post),
+					:method => :delete,
+					:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure? You run the risk of deleting the child test cases and the associated defects as well?')) },
+					:class => 'btn btn-mini btn-danger' %>
+
+					<%= link_to t('.new', :default => "Show"),
+					post,
+					:class => 'btn btn-mini btn-success' %> </td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+
+		<%= will_paginate @post %>
+
+		<%= link_to t('.new', :default => t("helpers.links.Add TestCase")),
+		new_post_path,
+		:class => 'btn btn-success' %>
+
+		<%= link_to t('.new', :default => t("helpers.links.Display all Child Test Cases")),
+		{ :controller=> 'children', :action => 'display_all_child_test_cases'},
+		:class => 'btn btn-success' %>

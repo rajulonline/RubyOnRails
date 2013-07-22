@@ -2,11 +2,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    #@post = Post.all_cached
+    @project = Project.all
+    # @post = Post.all
+    # @children = Children.all
     cache_everything
     # cache = ActiveSupport::Cache::MemoryStore.new
-    @stats = Rails.cache.stats.first.last
- 
+    # @stats = Rails.cache.stats.first.last
+
     if @post.nil?
       flash[:notice]='There are no test cases'
     end
@@ -14,6 +16,19 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @post }
+    end
+  end
+
+  def get_test_case
+    @project = Project.find_by_name(params[:id])
+    if @project.nil?
+      @post=Post.all
+    else
+    @post = Post.find_all_by_project_id(@project.id)
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
     end
   end
 
@@ -125,10 +140,10 @@ class PostsController < ApplicationController
     testcase_status= Post.find_by_status(params[:id])
     if testcase_status.nil?
       redirect_to :action => "index", notice: 'No test case with this status.'
-    end
     else
-    status_name = testcase_status.status
-    @post = Post.find_all_by_status(status_name)
+      status_name = testcase_status.status
+      @post = Post.find_all_by_status(status_name)
+    end
   end
 
   def all_test_cases
@@ -147,6 +162,5 @@ class PostsController < ApplicationController
       format.json { render json: @all_posts }
     end
   end
-  
-  
+
 end

@@ -1,5 +1,6 @@
 class ToolsController < ApplicationController
-  def index
-    reset_session
-  end
+  def genesis
+reset_session
+end    
+
 end
