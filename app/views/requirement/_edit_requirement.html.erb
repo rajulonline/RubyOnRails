@@ -1,0 +1,58 @@
+<%= form_for :requirement , :html => { :class => 'form-horizontal' } do |f| %>
+<!-- # Message Header -->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+<!-- # Progress bar -->
+
+ <div class="control-group">
+      
+    <%= f.label :Associated_Project, :class => 'control-label' %>
+    <div class="controls">
+       <%= select_tag 'requirement[project_id]', options_for_select(@all_project.collect{ |u| [u.id] },@requirement.project_id )%>
+    </div>
+  </div>
+  
+ 
+  <div class="control-group">
+      
+    <%= f.label :Requirement_Description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :req_description, :rows=>5,:class => 'text_area' %>
+    </div>
+  </div>
+ 
+  <div class="control-group">
+      
+    <%= f.label :Product_Owner, :class => 'control-label' %>
+    <div class="controls">
+      <%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] })%>
+    </div>
+  </div>
+ 
+  <div class="control-group">
+      
+    <%= f.label :Developer_Assigned, :class => 'control-label' %>
+    <div class="controls">
+      <%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] })  %>
+    </div>
+  </div>
+  
+     <div class="control-group">
+      
+    <%= f.label :Status, :class => 'control-label' %>
+    <div class="controls">
+       <%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] }) %>
+    </div>
+  </div>
+  
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
+   
+  </div>
+
+  
+<% end %>

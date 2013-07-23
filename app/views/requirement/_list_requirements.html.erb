@@ -26,9 +26,7 @@
 		<td><%= requirement.prod_owner %></td>
 		<td><%= requirement.dev_assigned%></td>
 		<td><%= requirement.created_at %></td>
-		<td><%= button_to "Edit", { :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :put ,:class => 'btn btn-mini' %> </td>
+		<td><%= button_to "Edit", { :action=>'edit_requirement',:id=>requirement.id,:project_id => requirement.project_id},:class => 'btn btn-mini', :remote=> true %> </td>
 
 		<td><%= button_to "Delete All",{ :controller => 'requirement',
 		:action=>'create_requirement'},
@@ -49,6 +47,13 @@
 		:action=>'create_requirement'},
 		:method => :put,
 		:class => 'btn btn-mini btn-success'%> </td>
-
 	</div>
+
+	<tr>
+		<div id='show_edit_requirement'>
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "edit_requirement" %>
+			<% end -%>
+		</div>
+	</tr>
 

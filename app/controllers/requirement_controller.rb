@@ -39,5 +39,23 @@ class RequirementController < ApplicationController
     end
   end
 
+def edit_requirement
+ if request.post?
+   #@requirement = Requirement.find(params[:id])
+   @project = Project.find(params[:project_id])
+   @all_project = Project.all
+   @requirement = @project.requirements.find(params[:id])
+    @post = Post.find(:all)
+    @login = Login.select('DISTINCT user')
+    @status = Status.find(:all)
+  
+ end
+    @requirement.save
+   respond_to do |format|
+      format.html # index.html.erb
+      format.js {}
+    end
+   
+end
 
 end
