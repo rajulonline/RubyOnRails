@@ -42,5 +42,20 @@ class DefectController < ApplicationController
       end
     end
   end
+  
+  def get_project_defects
+     @project = Project.find_by_name(params[:id])
+    if @project.nil?
+      @defect=Defect.all
+    else
+    @defect = Defect.find_all_by_project_id(@project.id)
+    if @defect.blank?
+    end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
 
 end

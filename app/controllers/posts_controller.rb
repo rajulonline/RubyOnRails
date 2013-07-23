@@ -20,7 +20,8 @@ class PostsController < ApplicationController
   end
 
   def get_test_case
-    @project = Project.find_by_name(params[:id])
+    #@project = Project.where("name=?",params[:id]).all
+   @project = Project.find_by_name(params[:id])
     if @project.nil?
       @post=Post.all
     else
