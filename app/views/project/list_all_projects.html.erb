@@ -26,7 +26,10 @@
 		</div>
 
 		<div>
-			<%= link_to t('.Defect', :default => t("helpers.links.Add Projects")), :action=>'create_new_project' %>
+			<td><%= button_to "Add Projects",{ :controller => 'project',
+		:action=>'create_new_project'},
+		:method => :put,
+		:class => 'btn btn-mini btn-success'%> </td>
 		</div>
 
 		<div id='show_project_dashboard'>
