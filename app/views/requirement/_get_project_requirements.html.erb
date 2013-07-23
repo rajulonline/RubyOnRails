@@ -1,0 +1,39 @@
+<%- model_class = Requirement -%>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:project_id) %></th>
+      <th><%= model_class.human_attribute_name(:req_description) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:prod_owner) %></th>
+      <th><%= model_class.human_attribute_name(:dev_name) %></th>
+      <th><%= model_class.human_attribute_name(:created_at ) %></th>
+     
+      
+    </tr>
+  </thead>
+  </head>
+ <% @requirement.each do |requirement|%>
+ 
+
+
+ <tr>
+       <td><%= requirement.id %></td>
+        <td><%= requirement.project_id%></td>
+        <td><%= requirement.req_description %></td>
+        <td><%= requirement.status %></td>
+        <td><%= requirement.prod_owner %></td>
+        <td><%= requirement.dev_assigned%></td>
+        <td><%= requirement.created_at %></td>    
+      </tr>
+   
+   <% end %>
+   
+ </table>
+  
+ 
+

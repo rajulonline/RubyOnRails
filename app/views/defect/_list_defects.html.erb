@@ -1,0 +1,66 @@
+<%- model_class = Defect -%>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<table class="table table-striped">
+
+			<thead>
+				<tr>
+					<th><%= model_class.human_attribute_name(:id) %></th>
+					<th><%= model_class.human_attribute_name(:project_id) %></th>
+					<th><%= model_class.human_attribute_name(:req_id) %></th>
+					<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+					<th><%= model_class.human_attribute_name(:def_description) %></th>
+					<th><%= model_class.human_attribute_name(:status) %></th>
+					<th><%= model_class.human_attribute_name(:category) %></th>
+					<th><%= model_class.human_attribute_name(:severity) %></th>
+					<th><%= model_class.human_attribute_name(:tester_name) %></th>
+					<th><%= model_class.human_attribute_name(:dev_name) %></th>
+					<th><%= model_class.human_attribute_name(:actions) %></th>
+
+				</tr>
+			</thead>
+	</head>
+
+	<% @defect.each do |defect|%>
+
+	<tr>
+		<td><%= defect.id %></td>
+		<td><%= defect.project_id%></td>
+		<td><%= defect.req_id %></td>
+		<td><%= defect.parent_tc_id %></td>
+		<td><%= defect.def_description %></td>
+		<td><%= defect.status %></td>
+		<td><%= defect.category %></td>
+		<td><%= defect.severity %></td>
+		<td><%= defect.tester_name %></td>
+		<td><%= defect.dev_name %></td>
+		<td><%= button_to "Edit", { :controller => 'requirement',
+		:action=>'create_requirement'},
+		:method => :put ,:class => 'btn btn-mini' %> </td>
+
+		<td><%= button_to "Delete All",{ :controller => 'requirement',
+		:action=>'create_requirement'},
+		:method => :delete,
+		:class => 'btn btn-mini btn-danger' %> </td>
+
+		<td><%= button_to "Show",{ :controller => 'requirement',
+		:action=>'create_requirement'},
+		:method => :show,
+		:class => 'btn btn-mini btn-success'%> </td>
+
+	</tr>
+
+	<% end %>
+
+	</table>
+	<div>
+		<td><%= button_to "Add Defect", {
+		:action=>'create_defect'},
+		:method => :put ,:class => 'btn btn-mini btn-success'%> </td>
+	</div>
+
+	<div>
+		<%= link_to t('.Defect', :default => t("helpers.links.Defect Analysis Report")), :action=>'defect_analysis', %>
+	</div>
