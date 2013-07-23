@@ -50,6 +50,7 @@ class DefectController < ApplicationController
     else
     @defect = Defect.find_all_by_project_id(@project.id)
     if @defect.blank?
+       flash.now[:notice]='No defects for this project'
     end
     end
     respond_to do |format|

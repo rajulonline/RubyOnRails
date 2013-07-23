@@ -22,5 +22,22 @@ class RequirementController < ApplicationController
       # end
     end
   end
+  
+  def get_project_requirements
+     @project = Project.find_by_name(params[:id])
+    if @project.nil?
+      @requirement=Requirement.all
+    else
+    @requirement = Requirement.find_all_by_project_id(@project.id)
+    if @requirement.blank?
+       flash.now[:notice]='No requirements for this project'
+    end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
+
 
 end

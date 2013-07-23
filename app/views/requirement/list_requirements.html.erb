@@ -1,43 +1,32 @@
+<!doctype html>
+<%- model_class = Post -%>
+<html lang="en" id="test">
+	<head>
+		<meta charset="utf-8" />
+		
+		<script>
+			function get_project_post(project_name) {
+				$.ajax({
+					type : "GET",
+					data: { id: project_name},
+					url : 'get_project_requirements',
+					dataType : "script",
+					success : function(data) {
+						// $('#testcases').html(data);
+					},
+					error : function(e) {
+						console.log(e.message);
+					}
+				});
+			}
+		</script>
+	</head>
 
-<%- model_class = Requirement -%>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:project_id) %></th>
-      <th><%= model_class.human_attribute_name(:req_description) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:prod_owner) %></th>
-      <th><%= model_class.human_attribute_name(:dev_name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at ) %></th>
-     
-      
-    </tr>
-  </thead>
-  </head>
- <% @requirement.each do |requirement|%>
- 
+	<body>
+		<%= form_tag do %>
+		<%= select_tag  'project_name',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_post($(this).val())", :style=>"width: 500px;", :prompt => "All Projects" %>
+		<% end %>
 
-
- <tr>
-       <td><%= requirement.id %></td>
-        <td><%= requirement.project_id%></td>
-        <td><%= requirement.req_description %></td>
-        <td><%= requirement.status %></td>
-        <td><%= requirement.prod_owner %></td>
-        <td><%= requirement.dev_assigned%></td>
-        <td><%= requirement.created_at %></td>    
-      </tr>
-   
-   <% end %>
-   
- </table>
-  <div>
-           <%= link_to t('.Defect', :default => t("helpers.links.Add Requirements")), :action=>'create_requirement' %> 
-          
- </div>
- 
-
+		<div id="project_requirements">
+			<%= render :partial => 'list_requirements' %>
+		</div
