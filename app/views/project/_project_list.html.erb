@@ -15,7 +15,7 @@
 		<tr>
 			<td><%= link_to "PRJ "+ "#{project.id}", :action=> 'project_dashboard',:id=>project.id, :remote=> true %></td>
 			<td><%= project.name %></td>
-			<td><%= project.description %></td>
+			<td><%= h truncate(project.description , :length => 15) %></td>
 			<td><%= project.created_at %></td>
 			<td><%= button_to "Edit", { :controller => 'project',
 		:action=>'list_all_projects'},
