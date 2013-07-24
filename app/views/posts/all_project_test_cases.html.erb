@@ -29,7 +29,7 @@
 					<td><%= link_to post.project_id,:action => :all_project_test_cases, :id=>post.project_id %></td>
 					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
 					<td><%= post.title %></td>
-					<td><%= post.content %></td>
+					<td><%= h truncate(post.content  , :length => 15)%></td>
 					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
 					<td><%= l post.created_at %></td>
 					<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),

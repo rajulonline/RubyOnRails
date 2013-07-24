@@ -1,4 +1,4 @@
-<%= form_for :requirement , :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for :requirement , :html => { :class => 'form-horizontal' },:remote => true, :format => :js do |f| %>
 <!-- # Message Header -->
 
 <%= f.error_messages :header_message => "Invalid fields!",

@@ -1,39 +1,50 @@
 <%- model_class = Requirement -%>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:project_id) %></th>
-      <th><%= model_class.human_attribute_name(:req_description) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:prod_owner) %></th>
-      <th><%= model_class.human_attribute_name(:dev_name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at ) %></th>
-     
-      
-    </tr>
-  </thead>
-  </head>
- <% @requirement.each do |requirement|%>
- 
+	<head>
+		<meta charset="utf-8" />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= model_class.human_attribute_name(:id) %></th>
+					<th><%= model_class.human_attribute_name(:project_id) %></th>
+					<th><%= model_class.human_attribute_name(:req_description) %></th>
+					<th><%= model_class.human_attribute_name(:status) %></th>
+					<th><%= model_class.human_attribute_name(:prod_owner) %></th>
+					<th><%= model_class.human_attribute_name(:dev_name) %></th>
+					<th><%= model_class.human_attribute_name(:created_at ) %></th>
+					<th><%= model_class.human_attribute_name(:actions ) %></th>
 
+				</tr>
+			</thead>
+	</head>
+	<% @requirement.each do |requirement|%>
+	<tr>
+		<td><%= requirement.id %></td>
+		<td><%= requirement.project_id%></td>
+		<td><%= requirement.req_description %></td>
+		<td><%= requirement.status %></td>
+		<td><%= requirement.prod_owner %></td>
+		<td><%= requirement.dev_assigned%></td>
+		<td><%= requirement.created_at %></td>
+		<td><%= button_to "Edit", { :action=>'edit_requirement',:id=>requirement.id,:project_id => requirement.project_id},:class => 'btn btn-mini', :remote=> true %> </td>
 
- <tr>
-       <td><%= requirement.id %></td>
-        <td><%= requirement.project_id%></td>
-        <td><%= requirement.req_description %></td>
-        <td><%= requirement.status %></td>
-        <td><%= requirement.prod_owner %></td>
-        <td><%= requirement.dev_assigned%></td>
-        <td><%= requirement.created_at %></td>    
-      </tr>
-   
-   <% end %>
-   
- </table>
-  
- 
+		<td><%= button_to "Delete All",{ :controller => 'requirement',
+		:action=>'create_requirement'},
+		:method => :delete,
+		:class => 'btn btn-mini btn-danger' %> </td>
+
+		<td><%= button_to "Show",{ :controller => 'requirement',
+		:action=>'create_requirement'},
+		:method => :show,
+		:class => 'btn btn-mini btn-success'%> </td>
+	</tr>
+
+	<% end %>
+
+	</table>
+	<div id='show_edit_requirement'>
+		<% if !@defect_count.nil? %>
+		<%= render :partial => "edit_requirement" %>
+		<% end -%>
+	</div>
 

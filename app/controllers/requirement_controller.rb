@@ -16,22 +16,22 @@ class RequirementController < ApplicationController
     if request.post?
       @requirement = Requirement.new(params[:requirement])
       # if @requirement.valid?
-        @requirement.save
-        flash[:notice] = "Saved successfully"
-        redirect_to :action => "list_requirements"
-      # end
+      @requirement.save
+      flash[:notice] = "Saved successfully"
+      redirect_to :action => "list_requirements"
+    # end
     end
   end
-  
+
   def get_project_requirements
-     @project = Project.find_by_name(params[:id])
+    @project = Project.find_by_name(params[:id])
     if @project.nil?
       @requirement=Requirement.all
     else
-    @requirement = Requirement.find_all_by_project_id(@project.id)
-    if @requirement.blank?
-       flash.now[:notice]='No requirements for this project'
-    end
+      @requirement = Requirement.find_all_by_project_id(@project.id)
+      if @requirement.blank?
+        flash.now[:notice]='No requirements for this project'
+      end
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -39,23 +39,23 @@ class RequirementController < ApplicationController
     end
   end
 
-def edit_requirement
- if request.post?
-   #@requirement = Requirement.find(params[:id])
-   @project = Project.find(params[:project_id])
-   @all_project = Project.all
-   @requirement = @project.requirements.find(params[:id])
-    @post = Post.find(:all)
-    @login = Login.select('DISTINCT user')
-    @status = Status.find(:all)
-  
- end
-    @requirement.save
-   respond_to do |format|
-      format.html # index.html.erb
-      format.js {}
+  def edit_requirement
+    if request.post?
+      #@requirement = Requirement.find(params[:id])
+      @project = Project.find(params[:project_id])
+      @all_project = Project.all
+      @requirement = @project.requirements.find(params[:id])
+      @post = Post.find(:all)
+      @login = Login.select('DISTINCT user')
+      @status = Status.find(:all)
+
     end
-   
-end
+    @requirement.save
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
 
 end
+
