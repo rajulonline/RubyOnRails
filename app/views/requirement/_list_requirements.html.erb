@@ -22,7 +22,7 @@
 	<tr>
 		<td><%= requirement.id %></td>
 		<td><%= requirement.project_id%></td>
-		<td><%= h truncate(requirement.req_description, :length => 15) %></td>
+		<td><%= modify_truncate(requirement.req_description,15) %></td>
 		<td><%= requirement.status %></td>
 		<td><%= requirement.prod_owner %></td>
 		<td><%= requirement.dev_assigned%></td>

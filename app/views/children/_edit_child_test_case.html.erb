@@ -1,0 +1,57 @@
+<%= form_for :children, :url => { :action => :update_child_test_case } ,:remote=>true do |f| %>
+
+<%- model_class = Children -%>
+<div class="page-header">
+	<h1><%= t '.Editing Child Test Case', :model => model_class.model_name.human.titleize %></h1>
+</div>
+
+<!-- <div class="progress progress-striped active">
+<div class="bar" style="width: 40%;"></div>
+</div>
+-->
+
+<%= f.error_messages :header_message => "Invalid fields!",
+  :message => "You'll need to fix the following fields:",
+  :header_tag => :h3 %>
+
+<div class="control-group">
+
+	<%= f.label :Parent_Test_case, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'children[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] })%>
+	</div>
+</div>
+
+<div class="control-group">
+
+	<%= f.label :content, :class => 'control-label' %>
+	<div class="controls">
+		<%= f.text_area :content, :rows=>5,:class => 'text_area' %>
+	</div>
+</div>
+
+<%= f.label :Status, :class => 'control-label' %>
+			<div class="controls">
+				<%= select_tag 'children[status]', options_for_select(@status.collect{ |u| [u.name] }) %>
+			</div>
+		</div>
+
+<div class="control-group">
+
+	<%= f.label :Agent, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'children[agent]', options_for_select(@login.collect{ |u| [u.user] })%>
+	</div>
+</div>
+<%= hidden_field_tag('children[id]', value = @children.id) %>
+<!-- <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %> -->
+<%= f.submit 'Update Child Test Case'%>
+
+<!-- <%= link_to 'Add Child Test Case',
+{ :controller=> 'children', :action => 'add_child_test_case', :post => @post}, :method => :post %> -->
+
+<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+:controller=> 'children', :action => 'display_all_child_test_cases)' , :class => 'btn'%>
+</div>
+
+<% end %>

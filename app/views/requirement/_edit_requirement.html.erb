@@ -1,58 +1,67 @@
-<%= form_for :requirement , url: { action: "update_requirement" }, :html => { :class => 'form-horizontal' }, :remote => true do |f| %>
-<!-- # Message Header -->
+<%= form_for :requirement , url: { action: "update_requirement" }, :html => { :class => 'form-horizontal' }, :remote => true do |f| %> <!-- # Message Header -->
 
 <%= f.error_messages :header_message => "Invalid fields!",
   :message => "You'll need to fix the following fields:",
   :header_tag => :h3 %>
-
+<div class="page-header">
+			<h1> <%= link_to 'Edit Requirements', :controller => 'requirement', :action => 'list_requirements' %></h1>
+		</div>
 <!-- # Progress bar -->
+<div class="row">
+	<div class="span6">
 
- <div class="control-group">
-      
-    <%= f.label :Associated_Project, :class => 'control-label' %>
-    <div class="controls">
-       <%= select_tag 'requirement[project_id]', options_for_select(@all_project.collect{ |u| [u.id] },@requirement.project_id )%>
-    </div>
-  </div>
-  
- 
-  <div class="control-group">
-      
-    <%= f.label :Requirement_Description, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :req_description, :rows=>5,:class => 'text_area' %>
-    </div>
-  </div>
- 
-  <div class="control-group">
-      
-    <%= f.label :Product_Owner, :class => 'control-label' %>
-    <div class="controls">
-      <%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] })%>
-    </div>
-  </div>
- 
-  <div class="control-group">
-      
-    <%= f.label :Developer_Assigned, :class => 'control-label' %>
-    <div class="controls">
-      <%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] })  %>
-    </div>
-  </div>
-  
-     <div class="control-group">
-      
-    <%= f.label :Status, :class => 'control-label' %>
-    <div class="controls">
-       <%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] }) %>
-    </div>
-  </div>
-  
-  <%= hidden_field_tag('requirement[id]', value = @requirement.id) %>
+		<div class="control-group">
 
-  <div class="form-actions">
-   <%= f.submit 'Update Requirements' %>
-  <%= button_to "Cancel",{:action=>'list_requirements'},:class => 'btn btn-mini btn-danger' %>
-  </div>
-  
+			<%= f.label :Associated_Project, :class => 'control-label' %>
+			<div class="controls">
+				<%= select_tag 'requirement[project_id]', options_for_select(@all_project.collect{ |u| [u.id] },@requirement.project_id )%>
+			</div>
+		</div>
+
+		<div class="control-group">
+
+			<%= f.label :Requirement_Description, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_area :req_description, :rows=>5,:class => 'text_area' %>
+			</div>
+		</div>
+
+		<div class="control-group">
+
+			<%= f.label :Product_Owner, :class => 'control-label' %>
+			<div class="controls">
+				<%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] })%>
+			</div>
+		</div>
+
+		<div class="control-group">
+
+			<%= f.label :Developer_Assigned, :class => 'control-label' %>
+			<div class="controls">
+				<%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] })  %>
+			</div>
+		</div>
+
+		<div class="control-group">
+
+			<%= f.label :Status, :class => 'control-label' %>
+			<div class="controls">
+				<%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] }) %>
+			</div>
+		</div>
+
+		<%= hidden_field_tag('requirement[id]', value = @requirement.id) %>
+
+		<div class="form-actions">
+			<%= f.submit 'Update Requirements' %>
+			<%= button_to "Cancel",{:action=>'list_requirements'},:class => 'btn btn-mini btn-danger' %>
+		</div>
+	</div>
+
+	<div class="span1">
+		<%= button_to "Done Editing",{:action=>'list_requirements'},:class => 'btn btn-mini btn-success' %>
+	</div>
+</div>
+
 <% end %>
+

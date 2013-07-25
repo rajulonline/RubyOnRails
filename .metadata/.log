@@ -1384,3 +1384,23 @@ org.eclipse.core.runtime.CoreException: File already exists on disk: /Users/laks
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
 !SUBENTRY 1 org.eclipse.core.filesystem 4 268 2013-07-24 11:51:11.859
 !MESSAGE File already exists on disk: /Users/lakshmi/Documents/StudyRails/Learning/app/views/requirement/edit_requirement.js.erb.
+!SESSION 2013-07-25 09:39:17.755 -----------------------------------------------
+eclipse.buildId=3.4.1.201306062137
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/lakshmi/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/lakshmi/.eclipse_keyring -consoleLog -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-07-25 09:39:24.808
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1002 2013-07-25 09:41:26.482
+!MESSAGE HTTP Server 'Bad Gateway' : http://download.aptana.com/studio3-rcp/plugin/update/content.xml
+!STACK 1
+org.eclipse.ecf.filetransfer.BrowseFileTransferException: HttpClient connection error response code 502.
+	at org.eclipse.ecf.provider.filetransfer.httpclient.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:249)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SUBENTRY 1 org.eclipse.ecf.identity 4 0 2013-07-25 09:41:26.484
+!MESSAGE HttpClient connection error response code 502.

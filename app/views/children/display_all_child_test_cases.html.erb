@@ -1,33 +1,15 @@
+<!doctype html>
 <%- model_class = Children -%>
+<html lang="en" id="test">
+	<head>
+		<meta charset="utf-8" />
+		
+		
+	</head>
 
-<div class="page-header">
-	<h1><%= 'Child Test Cases'%></h1>
+	<body>
+		
 
-</div>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th><%= model_class.human_attribute_name(:child_tc_id) %></th>
-			<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
-			<th><%= model_class.human_attribute_name(:content) %></th>
-			<th><%= model_class.human_attribute_name(:status) %></th>
-			<th><%= model_class.human_attribute_name(:agent) %></th>
-
-		</tr>
-	</thead>
-	<tbody>
-
-		<%@children.each do |children| %>
-		<tr>
-			<td><%= children.child_tc_id %></td>
-			<td><%= children.parent_tc_id %></td>
-			<td><%= h truncate(children.content,:length => 20) %></td>
-			<td><%= children.status %></td>
-			<td><%= link_to children.agent %></td>
-
-		</tr>
-		<% end %>
-
-	</tbody>
-</table>
-
+<div id='master'>
+			<%= render :partial => "display_all_child_test_cases" %>
+		</div>
