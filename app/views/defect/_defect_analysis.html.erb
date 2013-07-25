@@ -8,11 +8,11 @@
 		</div>
 		
 		<div id="dashboard_chart" style="width:800px; height:5px;">
-
 </div>
-
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript">
+<script type="text/javascript">
+  $(function() {
+    drawChart();
+  });
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {

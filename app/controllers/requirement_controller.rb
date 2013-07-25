@@ -42,20 +42,33 @@ class RequirementController < ApplicationController
   def edit_requirement
     if request.post?
       #@requirement = Requirement.find(params[:id])
+      
       @project = Project.find(params[:project_id])
       @all_project = Project.all
       @requirement = @project.requirements.find(params[:id])
       @post = Post.find(:all)
       @login = Login.select('DISTINCT user')
       @status = Status.find(:all)
-
     end
     @requirement.save
     respond_to do |format|
       format.html # index.html.erb
       format.js
+      #render :update do |page| page.replace_html "div_id", :partial => "new_content"
     end
   end
-
+  
+  def update_requirement
+    #write query for update
+    req = Requirement.find(params[:requirement]['id'])
+    req.update_attributes(params[:requirement])
+    #get all records
+    @requirement = Requirement.find(:all)
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+ 
 end
 

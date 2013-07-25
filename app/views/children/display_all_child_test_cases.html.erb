@@ -21,7 +21,7 @@
 		<tr>
 			<td><%= children.child_tc_id %></td>
 			<td><%= children.parent_tc_id %></td>
-			<td><%= children.content %></td>
+			<td><%= h truncate(children.content,:length => 20) %></td>
 			<td><%= children.status %></td>
 			<td><%= link_to children.agent %></td>
 

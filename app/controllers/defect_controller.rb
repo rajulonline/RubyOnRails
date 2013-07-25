@@ -1,16 +1,16 @@
 class DefectController < ApplicationController
   def defect_analysis
-    @defect = Defect.find(:all)
-   if !Defect.all.nil?
+    @defect = Defect.find_all_by_project_id(params[:id])
+   # if !Defect.all.nil?
       @total_defects = @defect.count
-      @reg_defect_count = Defect.find_all_by_category('Regression').count
-      @unit_test_defect_count = Defect.find_all_by_category('UnitTest').count
-      @def_severity = Defect.find_all_by_severity('Cosmetic Defect').count
+      @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Regression').count
+      @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'UnitTest').count
+      @def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Cosmetic Defect').count
+      
      
       #@reg_defect_count = Defect.find_all_by_category('Regression').count  
+ 
   end
-  end
-  
   
   def list_defects
      @defect = Defect.find(:all)

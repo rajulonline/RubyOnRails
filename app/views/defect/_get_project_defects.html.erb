@@ -26,7 +26,7 @@
 
 	<tr>
 		<td><%= defect.id %></td>
-		<td><%= defect.project_id%></td>
+		<td><%= link_to defect.project_id,:action=> 'defect_analysis',:id=>defect.project_id, :remote=> true%></td>
 		<td><%= defect.req_id %></td>
 		<td><%= defect.parent_tc_id %></td>
 		<td><%= defect.def_description %></td>
@@ -41,3 +41,9 @@
 	<% end %>
 
 	</table>
+	<div id='show_project_defect_analysis_dashboard'>
+	<% if !@defect_count.nil? %>
+	<%= render :partial => "defect_analysis" %>
+	<% end -%>
+</div>
+	

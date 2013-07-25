@@ -5,7 +5,6 @@ class Defect < ActiveRecord::Base
    belongs_to :requirement
    belongs_to :person
    belongs_to :project, :dependent => :destroy
-   
    validates :project_id, :parent_tc_id, :def_description,:tester_name,:dev_name,:status,:presence => true
    
   # before_validation :ensure_form_has_values

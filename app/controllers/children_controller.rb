@@ -38,10 +38,11 @@ class ChildrenController < ApplicationController
   end
 
   def display_all_child_test_cases
+    @children = Children.find(:all)
     if @children.nil?
     flash[:notice]='There are no child test cases'
     end
-      @children = Children.find(:all)
+      
   end
  
 end

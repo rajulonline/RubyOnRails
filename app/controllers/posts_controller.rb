@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+ http_basic_authenticate_with name: "dhh", password: "secret", except: [:index]
   # GET /posts
   # GET /posts.json
   def index
@@ -68,6 +69,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
+  
   def create
 
     @login = Login.all
