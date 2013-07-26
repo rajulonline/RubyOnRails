@@ -18,34 +18,36 @@
 
 					</tr>
 				</thead>
-					</head>
-				<tbody>
+	</head>
+	<tbody>
 
-					<%@children.each do |children| %>
-					<tr>
-						<td><%= children.child_tc_id %></td>
-						<td><%= children.parent_tc_id %></td>
-						<td><%= h truncate(children.content,:length => 20) %></td>
-						<td><%= children.status %></td>
-						<td><%= link_to children.agent %></td>
-						<td><%= button_to "Edit", { :action=>'edit_child_test_case',:id=>children.child_tc_id,:parent_tc_id=>children.parent_tc_id},:class => 'btn btn-mini', :remote=> true %> </td>
-
-						<td><%= button_to "Delete All",{:action=>'destroy',:id=>children.child_tc_id},:class => 'btn btn-mini btn-danger' %> </td>
-
-						<td><%= button_to "Show",{:action=>'create_requirement',:id=>children.child_tc_id},
-						:method => :show,
-						:class => 'btn btn-mini btn-success'%> </td>
-
-					</tr>
-					<% end %>
-
-				</tbody>
-			</table>
-		</div>
+		<%@children.each do |children| %>
 		<tr>
-			<div id='show_edit_child_test_case'>
-				<% if !@defect_count.nil? %>
-				<%= render :partial => "edit_child_test_case" %>
-				<% end -%>
-			</div>
+			<td><%= children.child_tc_id %></td>
+			<td><%= children.parent_tc_id %></td>
+			<td><%= h truncate(children.content,:length => 20) %></td>
+			<td><%= children.status %></td>
+			<td><%= link_to children.agent %></td>
+			<td><%= button_to "Edit", { :action=>'edit_child_test_case',:id=>children.child_tc_id,:parent_tc_id=>children.parent_tc_id},:class => 'btn btn-mini', :remote=> true %> </td>
+
+			<td><%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+			{:action=>'destroy',:id=>children.child_tc_id},:confirm => 'Are you sure,this might delete all associated issues.',
+			:class => 'btn btn-mini btn-danger' %></td>
+
+			<td><%= button_to "Show",{:action=>'create_requirement',:id=>children.child_tc_id},
+			:method => :show,
+			:class => 'btn btn-mini btn-success'%> </td>
+
 		</tr>
+		<% end %>
+
+	</tbody>
+	</table>
+	</div>
+	<tr>
+		<div id='show_edit_child_test_case'>
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "edit_child_test_case" %>
+			<% end -%>
+		</div>
+	</tr>

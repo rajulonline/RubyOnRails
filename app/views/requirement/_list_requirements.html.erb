@@ -27,14 +27,14 @@
 		<td><%= requirement.prod_owner %></td>
 		<td><%= requirement.dev_assigned%></td>
 		<td><%= requirement.created_at %></td>
-		<td><%= button_to "Edit", { :action=>'edit_requirement',:title=>requirement.id,:project_id => requirement.project_id},:class => 'btn btn-mini', :remote=> true %> </td>
+		<td><%= button_to "Edit", { :action=>'edit_requirement',:id=>requirement.id,:project_id => requirement.project_id},
+		:class => 'btn btn-mini', :remote=> true %> </td>
 
-		<td><%= button_to "Delete All",{:action=>'destroy',:id=>requirement.id},:class => 'btn btn-mini btn-danger' %> </td>
+		<td><%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+		{:action=>'destroy',:id=>requirement.id},:confirm => 'Are you sure,This might delete all associated issues.',
+		:class => 'btn btn-mini btn-danger' %></td>
 
-		<td><%= button_to "Show",{ :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :show,
-		:class => 'btn btn-mini btn-success'%> </td>
+		<td><%= button_to "Show",{ :controller => 'requirement',:action=>'show',:id=>requirement.id},:class => 'btn btn-mini btn-success'%> </td>
 	</tr>
 
 	<% end %>

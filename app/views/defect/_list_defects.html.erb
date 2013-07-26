@@ -1,64 +1,75 @@
 <%- model_class = Defect -%>
+<div id='master'>
+	<table class="table table-striped">
+		<head>
+		<meta charset="utf-8" />
+		
+		
+	</head>
 
-<table class="table table-striped">
-	<thead>
+		<thead>
+			<tr>
+				<th><%= model_class.human_attribute_name(:id) %></th>
+				<th><%= model_class.human_attribute_name(:project_id) %></th>
+				<th><%= model_class.human_attribute_name(:req_name) %></th>
+				<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+				<th><%= model_class.human_attribute_name(:def_description) %></th>
+				<th><%= model_class.human_attribute_name(:status) %></th>
+				<th><%= model_class.human_attribute_name(:category) %></th>
+				<th><%= model_class.human_attribute_name(:severity) %></th>
+				<th><%= model_class.human_attribute_name(:tester_name) %></th>
+				<th><%= model_class.human_attribute_name(:dev_name) %></th>
+				<th><%= model_class.human_attribute_name(:actions) %></th>
+
+			</tr>
+		</thead>
+
+		<% @defect.each do |defect|%>
+
 		<tr>
-			<th><%= model_class.human_attribute_name(:id) %></th>
-			<th><%= model_class.human_attribute_name(:project_id) %></th>
-			<th><%= model_class.human_attribute_name(:req_name) %></th>
-			<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
-			<th><%= model_class.human_attribute_name(:def_description) %></th>
-			<th><%= model_class.human_attribute_name(:status) %></th>
-			<th><%= model_class.human_attribute_name(:category) %></th>
-			<th><%= model_class.human_attribute_name(:severity) %></th>
-			<th><%= model_class.human_attribute_name(:tester_name) %></th>
-			<th><%= model_class.human_attribute_name(:dev_name) %></th>
-			<th><%= model_class.human_attribute_name(:actions) %></th>
+			<td><%= defect.id %></td>
+			<td><%= link_to defect.project_id,:action=> 'defect_analysis',:id=>defect.project_id, :remote=> true%></td>
+			<td><%if defect.req_name.present?%><%= defect.req_name %><%end%></td>
+			<td><%if defect.parent_tc_id.present?%><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %><%end%></td>
+			<td><%= defect.def_description%></td>
+			<td><%= defect.status %></td>
+			<td><%= defect.category %></td>
+			<td><%= defect.severity %></td>
+			<td><%= defect.tester_name %></td>
+			<td><%= defect.dev_name %></td>
+			<td><%= button_to "Edit", { :action=>'edit_defect',:id=>defect.id},:class => 'btn btn-mini',:remote=>true %> </td>
+
+			<td><%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+			{:action=>'destroy',:id=>defect.id},
+			:method => :delete,
+			:confirm => 'Are you sure,This might delete all associated issues.',
+			:class => 'btn btn-mini btn-danger' %></td>
+			<td><%= button_to "Show",{ :action=>'show',:id=>defect.id},
+			:method => :show,
+			:class => 'btn btn-mini btn-success'%></td>
 
 		</tr>
-	</thead>
 
-	<% @defect.each do |defect|%>
+		<% end %>
 
-	<tr>
-		<td><%= defect.id %></td>
-		<td><%= link_to defect.project_id,:action=> 'defect_analysis',:id=>defect.project_id, :remote=> true%></td>
-		<td><%= defect.req_name %></td>
-		<td><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %></td>
-		<td><%= defect.def_description%></td>
-		<td><%= defect.status %></td>
-		<td><%= defect.category %></td>
-		<td><%= defect.severity %></td>
-		<td><%= defect.tester_name %></td>
-		<td><%= defect.dev_name %></td>
-		<td><%= button_to "Edit", { :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :put ,:class => 'btn btn-mini' %> </td>
-
-		<td><%= button_to "Delete All",{ :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :delete,
-		:class => 'btn btn-mini btn-danger' %> </td>
-
-		<td><%= button_to "Show",{ :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :show,
-		:class => 'btn btn-mini btn-success'%> </td>
-
-	</tr>
-
-	<% end %>
-
-</table>
-<div>
-	<%= button_to "Add Defect", {
-	:action=>'create_defect'},
-	:method => :put ,:class => 'btn btn-mini btn-success'%> 
-</div>
-
-<div id='show_project_defect_analysis_dashboard'>
-	<% if !@defect_count.nil? %>
-	<%= render :partial => "defect_analysis" %>
-	<% end -%>
-</div>
+	</table>
+			<div>
+				<%= button_to "Add Defect", {
+				:action=>'create_defect'},
+				:method => :put ,:class => 'btn btn-mini btn-success'%>
+			</div>
+	</div>
+	
+		<div id="show_edit_defect">
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "edit_defect" %>
+			<% end -%>
+		</div>
+		<div id='show_project_defect_analysis_dashboard'>
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "defect_analysis" %>
+			<% end -%>
+		</div>
+		
+		
 

@@ -87,15 +87,14 @@ class PostsController < ApplicationController
       #saving it in the posts table. The piece of code from post_new till @post
       # does it
       @post = Post.new(params[:post])
-      binding.pry
-      if params[:req_name].present?
+      if params[:post][:req_name].present?
       post_new = Post.new(params[:post])
       req = Requirement.find_by_req_name([post_new.req_name])
       req.id
       post_new.req_id= req.id
       @post = post_new  
       end
-      
+    
     end
 
     respond_to do |format|

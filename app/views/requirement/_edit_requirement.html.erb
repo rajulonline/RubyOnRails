@@ -1,8 +1,5 @@
-<%= form_for :requirement , url: { action: "update_requirement" }, :html => { :class => 'form-horizontal' }, :remote => true do |f| %> <!-- # Message Header -->
+<%= form_for :requirement , :url=> { :action=> "update_requirement" }, :html => { :class => 'form-horizontal' }, :remote => true do |f| %> <!-- # Message Header -->
 
-<%= f.error_messages :header_message => "Invalid fields!",
-  :message => "You'll need to fix the following fields:",
-  :header_tag => :h3 %>
 <div class="page-header">
 	<h1> <%= link_to 'Edit Requirements', :controller => 'requirement', :action => 'list_requirements' %></h1>
 </div>

@@ -1,10 +1,14 @@
 class RequirementController < ApplicationController
   def list_requirements
-    @requirement = Requirement.find(:all)
-    if @requirement.nil?
-      flash[:notice]='There are no requirements'
+    @requirement=Requirement.find(:all)
+    if @requirement.blank?
+      flash[:notice]="No requirements"
     end
     @project = Project.find(:all)
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def create_requirement
@@ -42,7 +46,6 @@ class RequirementController < ApplicationController
   def edit_requirement
     if request.post?
       #@requirement = Requirement.find(params[:id])
-      
       @project = Project.find(params[:project_id])
       @all_project = Project.all
       @requirement = @project.requirements.find(params[:id])
@@ -54,10 +57,9 @@ class RequirementController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.js
-      #render :update do |page| page.replace_html "div_id", :partial => "new_content"
     end
   end
-  
+
   def update_requirement
     #write query for update
     req = Requirement.find(params[:requirement]['id'])
@@ -68,22 +70,27 @@ class RequirementController < ApplicationController
       format.js
     end
   end
-  
+
   def destroy
     # @post=Post.find_all_by_parent_tc_id(:id)
     @requirement = Requirement.find(params[:id])
     requirement = Requirement.find(params[:id])
     @post = Post.find_by_req_id(requirement.id)
     @defect = Defect.find_by_req_id(requirement.id)
-    binding.pry
     @requirement.destroy
-
     respond_to do |format|
       format.html {redirect_to :action=>'list_requirements'}
-     format.js
+      format.js
     end
   end
-  
- 
+
+  def show
+    @requirement = Requirement.find(params[:id])
+    respond_to do |format|
+      format.html { }
+      format.js
+    end
+  end
+
 end
 

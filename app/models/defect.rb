@@ -4,7 +4,7 @@ class Defect < ActiveRecord::Base
    belongs_to :post,:foreign_key=>:parent_tc_id
    belongs_to :requirement,:foreign_key=>:req_id
    # belongs_to :project, :dependent => :destroy
-   validates :project_id, :parent_tc_id, :def_description,:tester_name,:dev_name,:status,:presence => true
+   validates :project_id, :def_description,:tester_name,:dev_name,:status,:presence => true
    
   # before_validation :ensure_form_has_values
 #   

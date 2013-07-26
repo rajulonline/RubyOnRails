@@ -1,0 +1,111 @@
+<%- model_class = Requirement -%>
+
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<div>
+	<b>Requirement</b>
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:project_id) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.project_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:parent_tc_id) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.parent_tc_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:req_name) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.req_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:req_description) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.req_description %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:tester_assignedt) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.tester_assigned %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:dev_assigned) %>:</strong>
+	</dt>
+	<dd>
+		<%= @requirement.dev_assigned %>
+	</dd>
+</dl>
+
+<% if @requirement.posts.present? %>
+<% @requirement.posts.each {|post| %>
+<div>
+	<b>Test Case(s) for this requirement</b>
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:TestCase_id) %>:</strong>
+	</dt>
+	<dd>
+		<%= post.parent_tc_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:title) %>:</strong>
+	</dt>
+	<dd>
+		<%= post.title %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:content) %>:</strong>
+	</dt>
+	<dd>
+		<%= post.content %>
+	</dd>
+	
+</dl>
+<% } %>
+<% end %>
+
+
+<% if @requirement.defects.present? %>
+<% @requirement.defects.each {|defect| %>
+<div>
+	<b>Defect(s) for this requirement</b>
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Defect_id) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.req_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Defect_description) %>:</strong>
+	</dt>
+	<dd>
+		<%= defect.def_description %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Status) %>:</strong>
+	</dt>
+	<dd>status
+		<%= defect.status %>
+	</dd>
+	
+</dl>
+<% } %>
+<% end %>
+
+
+
+
+

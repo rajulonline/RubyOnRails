@@ -1,0 +1,57 @@
+<%- model_class = Defect -%>
+<%= javascript_include_tag "application" %>
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Project) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.project_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Requirement) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.req_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Test_Case) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.parent_tc_id %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Description) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.def_description %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Tester) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.tester_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Developer) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.dev_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Status) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.status %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Severity) %>:</strong>
+	</dt>
+	<dd>
+		<%= @defect.severity %>
+	</dd>
+</dl>
+

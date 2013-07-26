@@ -56,7 +56,7 @@
 					<%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
 					post_path(post),
 					:method => :delete,
-					:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure? You run the risk of deleting the child test cases and the associated defects as well?')),:id=>post.parent_tc_id },
+					:confirm => 'Are you sure? You run the risk of deleting the child test cases and the associated defects as well?',:id=>post.parent_tc_id,
 					:class => 'btn btn-mini btn-danger' %>
 
 					<%= link_to t('.new', :default => "Show"),
