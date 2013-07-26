@@ -15,6 +15,13 @@
 </div>
 
 <div class="control-group">
+	<%= f.label :requirement_title, :class => 'control-label' %>
+	<div class="controls">
+		<%= select_tag 'post[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }), {include_blank: 'None'}  %>
+	</div>
+</div>
+
+<div class="control-group">
 	<%= f.label :title, :class => 'control-label' %>
 	<div class="controls">
 		<%= f.text_field :title, :class => 'text_field' %>

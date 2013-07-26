@@ -69,6 +69,21 @@ class RequirementController < ApplicationController
     end
   end
   
+  def destroy
+    # @post=Post.find_all_by_parent_tc_id(:id)
+    @requirement = Requirement.find(params[:id])
+    requirement = Requirement.find(params[:id])
+    @post = Post.find_by_req_id(requirement.id)
+    @defect = Defect.find_by_req_id(requirement.id)
+    binding.pry
+    @requirement.destroy
+
+    respond_to do |format|
+      format.html {redirect_to :action=>'list_requirements'}
+     format.js
+    end
+  end
+  
  
 end
 

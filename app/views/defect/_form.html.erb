@@ -20,7 +20,7 @@
 
 	<%= f.label :Mapping_Requirement, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[req_id]', options_for_select(@requirement.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+		<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }), {include_blank: 'None'}  %>
 	</div>
 </div>
 

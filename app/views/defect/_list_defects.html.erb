@@ -5,7 +5,7 @@
 		<tr>
 			<th><%= model_class.human_attribute_name(:id) %></th>
 			<th><%= model_class.human_attribute_name(:project_id) %></th>
-			<th><%= model_class.human_attribute_name(:req_id) %></th>
+			<th><%= model_class.human_attribute_name(:req_name) %></th>
 			<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
 			<th><%= model_class.human_attribute_name(:def_description) %></th>
 			<th><%= model_class.human_attribute_name(:status) %></th>
@@ -23,7 +23,7 @@
 	<tr>
 		<td><%= defect.id %></td>
 		<td><%= link_to defect.project_id,:action=> 'defect_analysis',:id=>defect.project_id, :remote=> true%></td>
-		<td><%= defect.req_id %></td>
+		<td><%= defect.req_name %></td>
 		<td><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %></td>
 		<td><%= defect.def_description%></td>
 		<td><%= defect.status %></td>

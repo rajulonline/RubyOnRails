@@ -3,19 +3,19 @@
 	<head>
 		<meta charset="utf-8" />
 		<div id='master'>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th><%= model_class.human_attribute_name(:id) %></th>
-					<th><%= model_class.human_attribute_name(:project_id) %></th>
-					<th><%= model_class.human_attribute_name(:req_description) %></th>
-					<th><%= model_class.human_attribute_name(:status) %></th>
-					<th><%= model_class.human_attribute_name(:prod_owner) %></th>
-					<th><%= model_class.human_attribute_name(:dev_name) %></th>
-					<th><%= model_class.human_attribute_name(:created_at ) %></th>
-					<th><%= model_class.human_attribute_name(:actions ) %></th>
-				</tr>
-			</thead>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:id) %></th>
+						<th><%= model_class.human_attribute_name(:project_id) %></th>
+						<th><%= model_class.human_attribute_name(:req_description) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
+						<th><%= model_class.human_attribute_name(:prod_owner) %></th>
+						<th><%= model_class.human_attribute_name(:dev_name) %></th>
+						<th><%= model_class.human_attribute_name(:created_at ) %></th>
+						<th><%= model_class.human_attribute_name(:actions ) %></th>
+					</tr>
+				</thead>
 	</head>
 	<% @requirement.each do |requirement|%>
 
@@ -27,12 +27,9 @@
 		<td><%= requirement.prod_owner %></td>
 		<td><%= requirement.dev_assigned%></td>
 		<td><%= requirement.created_at %></td>
-		<td><%= button_to "Edit", { :action=>'edit_requirement',:id=>requirement.id,:project_id => requirement.project_id},:class => 'btn btn-mini', :remote=> true %> </td>
+		<td><%= button_to "Edit", { :action=>'edit_requirement',:title=>requirement.id,:project_id => requirement.project_id},:class => 'btn btn-mini', :remote=> true %> </td>
 
-		<td><%= button_to "Delete All",{ :controller => 'requirement',
-		:action=>'create_requirement'},
-		:method => :delete,
-		:class => 'btn btn-mini btn-danger' %> </td>
+		<td><%= button_to "Delete All",{:action=>'destroy',:id=>requirement.id},:class => 'btn btn-mini btn-danger' %> </td>
 
 		<td><%= button_to "Show",{ :controller => 'requirement',
 		:action=>'create_requirement'},
@@ -44,11 +41,10 @@
 	</tbody>
 	</table>
 	<td><%= button_to "Add Requirements",{
-		:action=>'create_requirement'},
-		:method => :put,
-		:class => 'btn btn-mini btn-success'%> </td>
+	:action=>'create_requirement'},
+	:method => :put,
+	:class => 'btn btn-mini btn-success'%> </td>
 	</div>
-	
 
 	<tr>
 		<div id='show_edit_requirement'>

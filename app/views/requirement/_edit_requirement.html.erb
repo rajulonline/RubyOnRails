@@ -4,8 +4,8 @@
   :message => "You'll need to fix the following fields:",
   :header_tag => :h3 %>
 <div class="page-header">
-			<h1> <%= link_to 'Edit Requirements', :controller => 'requirement', :action => 'list_requirements' %></h1>
-		</div>
+	<h1> <%= link_to 'Edit Requirements', :controller => 'requirement', :action => 'list_requirements' %></h1>
+</div>
 <!-- # Progress bar -->
 <div class="row">
 	<div class="span6">
@@ -17,7 +17,15 @@
 				<%= select_tag 'requirement[project_id]', options_for_select(@all_project.collect{ |u| [u.id] },@requirement.project_id )%>
 			</div>
 		</div>
+		
+		<div class="control-group">
 
+			<%= f.label :Requirement_Name, :class => 'control-label' %>
+			<div class="controls">
+				<%= f.text_field :req_name, :rows=>5,:class => 'text_field' %>
+			</div>
+		</div>
+		
 		<div class="control-group">
 
 			<%= f.label :Requirement_Description, :class => 'control-label' %>

@@ -30,13 +30,9 @@
 						<td><%= link_to children.agent %></td>
 						<td><%= button_to "Edit", { :action=>'edit_child_test_case',:id=>children.child_tc_id,:parent_tc_id=>children.parent_tc_id},:class => 'btn btn-mini', :remote=> true %> </td>
 
-						<td><%= button_to "Delete All",{ :controller => 'requirement',
-						:action=>'create_requirement'},
-						:method => :delete,
-						:class => 'btn btn-mini btn-danger' %> </td>
+						<td><%= button_to "Delete All",{:action=>'destroy',:id=>children.child_tc_id},:class => 'btn btn-mini btn-danger' %> </td>
 
-						<td><%= button_to "Show",{ :controller => 'requirement',
-						:action=>'create_requirement'},
+						<td><%= button_to "Show",{:action=>'create_requirement',:id=>children.child_tc_id},
 						:method => :show,
 						:class => 'btn btn-mini btn-success'%> </td>
 

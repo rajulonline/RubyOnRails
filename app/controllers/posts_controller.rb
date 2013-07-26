@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
- http_basic_authenticate_with name: "dhh", password: "secret", except: [:index]
+  http_basic_authenticate_with name: "dhh", password: "secret", except: [:index]
   # GET /posts
   # GET /posts.json
   def index
@@ -22,11 +22,11 @@ class PostsController < ApplicationController
 
   def get_test_case
     #@project = Project.where("name=?",params[:id]).all
-   @project = Project.find_by_name(params[:id])
+    @project = Project.find_by_name(params[:id])
     if @project.nil?
       @post=Post.all
     else
-    @post = Post.find_all_by_project_id(@project.id)
+      @post = Post.find_all_by_project_id(@project.id)
     end
     respond_to do |format|
       format.html # index.html.erb
@@ -49,9 +49,10 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
+    @project = Project.all
+    @requirement=Requirement.all
     @login=Login.all
     @status = Status.all
-    @project = Project.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,22 +66,38 @@ class PostsController < ApplicationController
     @login = Login.all
     @status = Status.all
     @project = Project.all
+    @requirement=Requirement.all
   end
 
   # POST /posts
   # POST /posts.json
-  
+
   def create
 
     @login = Login.all
     @status = Status.all
     @project = Project.all
+    @requirement=Requirement.all
 
     # @person = Person.new(:agent => @post.agent, :status=>@post.status)
     # @person.save
     if request.post?
+      #before saving the parent test case details i am actually,
+      #finding the id for the corresponding requirement and then
+      #saving it in the posts table. The piece of code from post_new till @post
+      # does it
       @post = Post.new(params[:post])
+      binding.pry
+      if params[:req_name].present?
+      post_new = Post.new(params[:post])
+      req = Requirement.find_by_req_name([post_new.req_name])
+      req.id
+      post_new.req_id= req.id
+      @post = post_new  
+      end
+      
     end
+
     respond_to do |format|
       if @post.save
         format.html {
@@ -90,7 +107,6 @@ class PostsController < ApplicationController
         format.json { render json: @post,status: :created, location: @post }
       else
         format.html { render action: "new" }
-
       end
     end
   end

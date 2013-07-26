@@ -69,6 +69,19 @@ class ChildrenController < ApplicationController
       format.js
     end
   end
+  
+  # DELETE /posts/1
+  # DELETE /posts/1.json
+  def destroy
+    # @post=Post.find_all_by_parent_tc_id(:id)
+    @children = Children.find(params[:id])
+    @children.destroy
+
+    respond_to do |format|
+      format.html {redirect_to :action=>'display_all_child_test_cases'}
+     format.js
+    end
+  end
 
 end
 
