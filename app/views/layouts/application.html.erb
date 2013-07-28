@@ -20,8 +20,18 @@
 					<a class="brand" href="#">Test Manager</a>
 					<div class="nav-collapse">
 						<ul class="nav">
+							
 							<li>
-								<%= link_to "Test Case Manager Home", posts_path %>
+								<%= link_to t('.new', :default => "Projects"), :controller=>'project',:action=>'list_all_projects' %>
+							</li>
+							<li>
+								<%= link_to t('.new', :default => "Requirements"), :controller=>'requirement',:action=>'list_requirements' %>
+							</li>
+							<li>
+								<%= link_to "Test Cases ", posts_path %>
+							</li>
+							<li>
+								<%= link_to t('.new', :default => "Bugs"), :controller=>'defect',:action=>'list_defects' %>
 							</li>
 							<li>
 								<%= link_to t('.genesis', :default => t("helpers.links.Genesis")),
@@ -30,11 +40,12 @@
 							<li>
 								<%= link_to t('.New User', :default => t("helpers.links.Add New User")),
 								:controller=>'login',:action=>'new' %>
-							</li>
+							</li>				
 							<li>
 								<%= link_to t('.Logout', :default => t("helpers.links.Logout")),
 								:controller=>'tools',:action=>'genesis' %>
 							</li>
+							
 						</ul>
 					</div>
 				</div>

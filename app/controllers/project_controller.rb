@@ -1,28 +1,28 @@
 class ProjectController < ApplicationController
   def list_all_projects
     @project = Project.all
-    
+
     if @project.nil?
       flash[:notice]='Currently there are no projects'
     end
-     respond_to do |format|
+    respond_to do |format|
       format.html
       format.js
       format.json
     end
 
   end
-  
+
   def get_one_project
-   # project_name = Project.find_all_by_name(:name)
-  # value = Project.find_by_name(project_name).id
-  # @project = Project.find_all_by_id(value)
+    # project_name = Project.find_all_by_name(:name)
+    # value = Project.find_by_name(project_name).id
+    # @project = Project.find_all_by_id(value)
 
     @project = Project.find_all_by_name(params[:id])
     if @project.nil?
       flash[:notice]='Currently there are no projects'
     end
-     respond_to do |format|
+    respond_to do |format|
       format.html
       format.js
       format.json
@@ -44,7 +44,7 @@ class ProjectController < ApplicationController
     end
     @project = Project.find(params[:id])
     @defect_count = @project.defects.find_all_by_status('Open').count
-    @req_count   = @project.requirements.find_all_by_status('In Progress').count
+    @req_count   = @project.requirements.find_all_by_status('Awaiting Approval').count
     @post_count = @project.posts.find_all_by_status('Open').count
     @total_in_progress_issues = @post_count+@req_count
 
@@ -71,4 +71,29 @@ class ProjectController < ApplicationController
       end
     end
   end
+
+  def edit_project
+    if request.post?
+    @project=Project.find(params[:id])  
+    end
+    @project.save
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def update_project
+    #write query for update
+    proj = Project.find(params[:project]['id'])
+    proj.update_attributes(params[:project])
+    #get all records
+    @project = Project.find(:all)
+    respond_to do |format|
+      format.js
+      format.html
+    end
+  end
+
+
 end

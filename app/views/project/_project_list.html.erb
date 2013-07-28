@@ -1,4 +1,5 @@
 <%- model_class = Project -%>
+<div id="master">
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -18,8 +19,8 @@
 			<td><%= h truncate(project.description , :length => 15) %></td>
 			<td><%= project.created_at %></td>
 			<td><%= button_to "Edit", { :controller => 'project',
-		:action=>'list_all_projects'},
-		:method => :put ,:class => 'btn btn-mini' %> </td>
+		:action=>'edit_project',:id=>project.id},
+		:class => 'btn btn-mini',:remote=>true %> </td>
 
 		<td><%= button_to "Delete All",{ :controller => 'project',
 		:action=>'list_all_projects'},
@@ -35,13 +36,6 @@
 <% end %>
 
 </table>
-		<tr>
-			<div id='show_project_dashboard'>
-				<% if !@defect_count.nil? %>
-				<%= render :partial => "project_dashboard" %>
-				<% end -%>
-			</div>
-		</tr>
-		<!-- <%= select_tag options_for_select(@project.collect{ |u| [u.id] }), :action => 'project_dashboard'%> -->
-
+</div>
 		
+		<!-- <%= select_tag options_for_select(@project.collect{ |u| [u.id] }), :action => 'project_dashboard'%> -->

@@ -1,7 +1,10 @@
-<%= form_for :project , :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for :project , :url=> { :action=> "update_project" }, :html => { :class => 'form-horizontal' }, :remote => true do |f| %>
 
 <!-- # Message Header -->
 <%- model_class = Project -%>
+<div class="page-header">
+	<h1><%= t '.Edit Project', :model => model_class.model_name.human.titleize %></h1>
+</div>
 
 <%= f.error_messages :header_message => "Invalid fields!",
   :message => "You'll need to fix the following fields:",
@@ -13,7 +16,7 @@
       
     <%= f.label :Project_name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name,:class => 'text_field' %>
+      <%= f.text_field :name,:class => 'text_field',:value=>@project.name %>
     </div>
   </div>
    
@@ -26,11 +29,11 @@
     </div>
   </div>
  
+ <%= hidden_field_tag('project[id]', value = @project.id) %>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
-   
-  </div>
-
+		<div class="form-actions">
+			<%= f.submit 'Update Projects' %>
+			<%= button_to "Cancel",{:action=>'list_all_projects'},:class => 'btn btn-mini btn-danger' %>
+		</div>
   
 <% end %>

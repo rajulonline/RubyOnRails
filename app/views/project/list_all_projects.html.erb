@@ -37,6 +37,12 @@
 			<%= render :partial => "project_dashboard"%>
 			<%end%>
 		</div>
+		
+	<div id='show_edit_project'>
+				<% if !@defect_count.nil? %>
+				<%= render :partial => "edit_project" %>
+				<% end -%>
+			</div>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">

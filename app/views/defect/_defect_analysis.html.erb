@@ -9,46 +9,53 @@
 		
 		<div id="dashboard_chart" style="width:800px; height:5px;">
 </div>
-<script type="text/javascript">
-  $(function() {
-    drawChart();
-  });
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-          var data = google.visualization.arrayToDataTable([
-          ['Defect', 'Analysis'],
-          ['Regression Defects',  <%= @reg_defect_count %> ],
-          ['Unit Testing Defects',     <%=@unit_test_defect_count%> ]
-         
-        ]);
-        
-          var data2 = google.visualization.arrayToDataTable([
-     	['Severity', 'Analysis'],
-          ['Cosmetic Defect',  <%= @def_severity %> ]
-          
-         
-        ]);
+			<script type="text/javascript">
+			  $(function() {
+			    drawChart();
+			  });
+			      google.load("visualization", "1", {packages:["corechart"]});
+			      google.setOnLoadCallback(drawChart);
+			      function drawChart() {
+			          var data = google.visualization.arrayToDataTable([
+			          ['Defect', 'Analysis'],
+			          ['Regression Defects',  <%= @reg_defect_count %> ],
+			          ['Unit Testing Defects',     <%=@unit_test_defect_count%> ],
+			          ['Missed during regression',     <%=@missed_during_regression_defect_count%> ],
+			          ['Adhoc Defects',     <%=@adhoc_defect_count%> ],
+			          ['Automation',     <%=@automation_defect_count%> ],
+			          ['Production',     <%=@production_defect_count%> ]
+			         
+			        ]);
+			        
+			          var data2 = google.visualization.arrayToDataTable([
+			     	['Severity', 'Analysis'],
+			          ['Cosmetic Defect',  <%= @cosmetic_def_severity %> ],
+			          ['Show stopper',  <%= @show_stopper_def_severity %> ],
+			          ['Minor',  <%=  @minor_def_severity %> ],
+			          ['Work around possible',  <%= @work_around_possible_def_severity%> ],
+			          ['Major but not show stopper',  <%= @major_but_not_show_stopper_def_severity %> ]
+			          
+			         
+			        ]);
+			
+			          var options = {
+			              title: 'Defect Analysis Dashboard'
+			          };
+			           var options2 = {
+			              title: 'Severity Analysis Dashboard'
+			          };
+			
+			          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			          chart.draw(data, options);
+			
+			          var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+			          chart2.draw(data2, options2);
+			      }
+			  </script>
 
-          var options = {
-              title: 'Defect Analysis Dashboard'
-          };
-           var options2 = {
-              title: 'Severity Analysis Dashboard'
-          };
-
-          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-
-          var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-          chart2.draw(data2, options2);
-      }
-    
-  </script>
-
-  <div id="chart_div" style="width: 900px; height: 500px;"></div>
-
-<div id="chart_div2" style="width: 900px; height: 500px;"></div>
-</div>
+		  <div id="chart_div" style="width: 900px; height: 500px;"></div>
+		
+		<div id="chart_div2" style="width: 900px; height: 500px;"></div>
+		</div>
 </body>
 </html>

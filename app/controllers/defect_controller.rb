@@ -1,14 +1,21 @@
 class DefectController < ApplicationController
+  
   def defect_analysis
     @defect = Defect.find_all_by_project_id(params[:id])
     # if !Defect.all.nil?
     @total_defects = @defect.count
     @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Regression').count
     @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'UnitTest').count
-    @def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Cosmetic Defect').count
-
-  #@reg_defect_count = Defect.find_all_by_category('Regression').count
-
+    @missed_during_regression_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Missed during regression').count
+    @adhoc_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Adhoc').count
+    @automation_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Automation').count
+    @production_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Production').count
+    @cosmetic_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Cosmetic Defect').count
+    @show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Show stopper').count
+    @minor_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Minor').count
+    @work_around_possible_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Work around possible').count
+    @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Major but not show stopper').count
+    
   end
 
   def list_defects
@@ -41,7 +48,7 @@ class DefectController < ApplicationController
         defect_new.req_id= req.id
         @defect = defect_new
       end
-      binding.pry
+
       # logger.error("----------------------#{@defect.valid?}")
       if @defect.save
         flash[:notice] = "Saved successfully"
@@ -86,7 +93,7 @@ class DefectController < ApplicationController
   end
 
   def update_defect
-     defect = Defect.find(params[:defect]['id'])
+    defect = Defect.find(params[:defect]['id'])
     defect.update_attributes(params[:defect])
     #get all records
     @defect = Defect.find(:all)
@@ -96,7 +103,7 @@ class DefectController < ApplicationController
   end
 
   def edit_defect
-   
+
     if request.post?
       @defect_project=Defect.select('DISTINCT project_id')
       @defect=Defect.find(params[:id])
@@ -107,7 +114,7 @@ class DefectController < ApplicationController
       @status = Status.find(:all)
       @defecttype= Defecttype.find(:all)
       @severity = Defectseverity.find(:all)
-     
+
     end
     @defect.save
 

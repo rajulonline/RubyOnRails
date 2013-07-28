@@ -47,10 +47,11 @@
 </dl>
 
 <% if @requirement.posts.present? %>
-<% @requirement.posts.each {|post| %>
 <div>
 	<b>Test Case(s) for this requirement</b>
 </div>
+<% @requirement.posts.each {|post| %>
+
 <dl class="dl-horizontal">
 	<dt>
 		<strong><%= model_class.human_attribute_name(:TestCase_id) %>:</strong>
@@ -77,10 +78,11 @@
 
 
 <% if @requirement.defects.present? %>
-<% @requirement.defects.each {|defect| %>
 <div>
 	<b>Defect(s) for this requirement</b>
 </div>
+<% @requirement.defects.each {|defect| %>
+
 <dl class="dl-horizontal">
 	<dt>
 		<strong><%= model_class.human_attribute_name(:Defect_id) %>:</strong>

@@ -34,7 +34,7 @@ class RequirementController < ApplicationController
     else
       @requirement = Requirement.find_all_by_project_id(@project.id)
       if @requirement.blank?
-        flash.now[:notice]='No requirements for this project'
+        flash[:notice]='No requirements for this project'
       end
     end
     respond_to do |format|
