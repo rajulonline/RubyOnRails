@@ -1,6 +1,37 @@
 <%= form_for :defect do |f| %>
 
 <!-- # Message Header -->
+<script>
+	function get_next_value(id, name) {
+		if (name == 'defect[project_id]') {
+			$.ajax({
+				url : 'get_requirement_name?' + 'id=' + id,
+				type : "GET",
+				dataType : "script",
+				success : function(e) {
+
+				}
+			});
+
+		}
+		
+		if (name == 'defect[req_name]') {
+			name=id
+			$.ajax({
+				url : 'get_requirement_name?' + 'name=' + name,
+				type : "GET",
+				dataType : "script",
+				success : function(e) {
+
+				}
+			});
+
+		}
+		
+		
+	}
+
+</script>
 
 <%= f.error_messages :header_message => "Invalid fields!",
   :message => "You'll need to fix the following fields:",
@@ -12,25 +43,39 @@
 
 	<%= f.label :Associated_Project, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[project_id]', options_for_select(@project.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+		<%= select("defect", "project_id", @project.collect {|r| [ r.name, r.id ] }, { :include_blank => true },:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true)%>
+	</div>
+</div>
+<div class="control-group">
+	<div id="req_name">
+		<div class="controls">
+
+		</div>
 	</div>
 </div>
 
 <div class="control-group">
-
-	<%= f.label :Mapping_Requirement, :class => 'control-label' %>
-	<div class="controls">
-		<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }), {include_blank: 'None'}  %>
+	<div id="req_name">
+		<div class="controls">
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "get_requirement_name" %>
+			<% end -%>
+		</div>
 	</div>
 </div>
+
 
 <div class="control-group">
-
-	<%= f.label :Parent_testcase, :class => 'control-label' %>
-	<div class="controls">
-		<%= select_tag 'defect[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] }), {include_blank: 'None'}  %>
+	<div id="post_name">
+		<div class="controls">
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "get_requirement_name" %>
+			<% end -%>
+		</div>
 	</div>
 </div>
+
+
 
 <div class="control-group">
 
@@ -63,7 +108,6 @@
 		<%= select_tag 'defect[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
 	</div>
 </div>
-
 
 <div class="control-group">
 

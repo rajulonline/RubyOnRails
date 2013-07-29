@@ -1,5 +1,4 @@
 class DefectController < ApplicationController
-  
   def defect_analysis
     @defect = Defect.find_all_by_project_id(params[:id])
     # if !Defect.all.nil?
@@ -15,7 +14,7 @@ class DefectController < ApplicationController
     @minor_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Minor').count
     @work_around_possible_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Work around possible').count
     @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Major but not show stopper').count
-    
+
   end
 
   def list_defects
@@ -29,6 +28,19 @@ class DefectController < ApplicationController
     @severity = Defectseverity.find(:all)
   end
 
+  def get_requirement_name
+   if params[:id]
+    @requirement = Requirement.find_all_by_project_id(params[:id]) 
+   end 
+   if params[:name]
+     @post = Post.find_all_by_req_name(params[:name])
+   end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
+  end
+
   def create_defect
     @project = Project.find(:all)
     @requirement = Requirement.find(:all)
@@ -37,10 +49,8 @@ class DefectController < ApplicationController
     @status = Status.find(:all)
     @defecttype= Defecttype.find(:all)
     @severity = Defectseverity.find(:all)
-
     if request.post?
       @defect = Defect.new(params[:defect])
-
       if params[:defect][:req_name].present?
         defect_new = Defect.new(params[:defect])
         req = Requirement.find_by_req_name([defect_new.req_name])
@@ -48,11 +58,13 @@ class DefectController < ApplicationController
         defect_new.req_id= req.id
         @defect = defect_new
       end
-
       # logger.error("----------------------#{@defect.valid?}")
       if @defect.save
         flash[:notice] = "Saved successfully"
-        redirect_to :action => "list_defects"
+        respond_to do |format|
+        format.html { redirect_to :action => "list_defects"}
+        format.js 
+      end
       end
     end
   end
