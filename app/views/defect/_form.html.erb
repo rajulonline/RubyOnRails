@@ -3,31 +3,16 @@
 <!-- # Message Header -->
 <script>
 	function get_next_value(id, name) {
-		if (name == 'defect[project_id]') {
-			$.ajax({
-				url : 'get_requirement_name?' + 'id=' + id,
-				type : "GET",
-				dataType : "script",
-				success : function(e) {
 
-				}
-			});
+		$.ajax({
+			url : 'get_requirement_name?' + 'id=' + id,
+			type : "GET",
+			dataType : "script",
+			success : function(e) {
 
-		}
-		
-		if (name == 'defect[req_name]') {
-			$.ajax({
-				url : 'get_requirement_name?' + 'id=' + id,
-				type : "GET",
-				dataType : "script",
-				success : function(e) {
+			}
+		});
 
-				}
-			});
-
-		}
-		
-		
 	}
 
 </script>
@@ -63,7 +48,6 @@
 	</div>
 </div>
 
-
 <div class="control-group">
 	<div id="post_name">
 		<div class="controls">
@@ -73,8 +57,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <div class="control-group">
 
