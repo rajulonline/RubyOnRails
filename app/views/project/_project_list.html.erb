@@ -23,13 +23,11 @@
 		:class => 'btn btn-mini',:remote=>true %> </td>
 
 		<td><%= button_to "Delete All",{ :controller => 'project',
-		:action=>'list_all_projects'},
-		:method => :delete,
+		:action=>'destroy',:id=>project.id},
 		:class => 'btn btn-mini btn-danger' %> </td>
 
 		<td><%= button_to "Show",{ :controller => 'project',
-		:action=>'list_all_projects'},
-		:method => :show,
+		:action=>'show',:id=>project.id},
 		:class => 'btn btn-mini btn-success'%> </td>
 		</tr>
 	</tbody>
