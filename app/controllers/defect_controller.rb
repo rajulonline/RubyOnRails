@@ -30,10 +30,14 @@ class DefectController < ApplicationController
 
   def get_requirement_name
    if params[:id]
-    @requirement = Requirement.find_all_by_project_id(params[:id]) 
-   end 
-   if params[:name]
-     @post = Post.find_all_by_req_name(params[:name])
+    @requirement = Requirement.find_all_by_project_id(params[:id])
+    if @requirement.nil?
+      @requirement=[]
+    end
+    @post = Post.find_all_by_req_name(params[:id])
+    if @post.blank?
+      @post=[]
+    end
    end
     respond_to do |format|
       format.html # index.html.erb

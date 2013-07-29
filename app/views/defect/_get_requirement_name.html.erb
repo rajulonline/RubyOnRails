@@ -1,5 +1,7 @@
 <%- model_class = Defect -%>
 <%= form_for :defect do |f| %>
+
+
 <%if @requirement.present?%>
 <%= f.label :Mapping_Requirement, :class => 'control-label' %>
 <%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }),:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true, :prompt=> "please select"  %>
@@ -8,4 +10,7 @@
 <%= f.label :Parent_testcase, :class => 'control-label' %>
 <%= select_tag 'defect[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] }), {include_blank: 'None'}  %>
 <%end%>
+
+
+
 <%end%>

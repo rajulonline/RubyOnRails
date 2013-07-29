@@ -16,9 +16,8 @@
 		}
 		
 		if (name == 'defect[req_name]') {
-			name=id
 			$.ajax({
-				url : 'get_requirement_name?' + 'name=' + name,
+				url : 'get_requirement_name?' + 'id=' + id,
 				type : "GET",
 				dataType : "script",
 				success : function(e) {
