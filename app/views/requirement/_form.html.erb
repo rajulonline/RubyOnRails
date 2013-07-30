@@ -11,7 +11,7 @@
       
     <%= f.label :Associated_Project, :class => 'control-label' %>
     <div class="controls">
-       <%= select_tag 'requirement[project_id]', options_for_select(@project.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+       <%= select("requirement", "project_id", @project.collect {|r| [ r.name, r.id ] }, { :include_blank => true })%>
     </div>
   </div>
   

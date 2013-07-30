@@ -6,9 +6,7 @@
 <%end%>
 <%if @post.present?%>
 <%= f.label :Parent_testcase, :class => 'control-label' %>
-<%= select_tag 'defect[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] }), {include_blank: 'None'}  %>
+<%= select("defect","parent_tc_id", @post.collect{ |u| [u.title,u.parent_tc_id] }, {include_blank: 'None'})  %>
 <%end%>
-
-
 
 <%end%>

@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  
   attr_accessible :project_id,:parent_tc_id,:content, :agent, :title, :status,:req_name,:req_id
   # belongs_to :person
   belongs_to :project,:foreign_key=>:project_id

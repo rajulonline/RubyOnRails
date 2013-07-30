@@ -25,17 +25,14 @@ class LoginController < ApplicationController
     
     respond_to do |format|
       if @login.save
-        format.html { redirect_to @login, notice: 'Login was successfully created.' }
-        format.json { render json: @login, status: :created, location: @login }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @login.errors, status: :unprocessable_entity }
-      end
+        respond_to do |format|
+          redirect_to :controller=>'tools', :action=>'genesis'
+        end
+    end
     end
   end
 
   def index
-
     redirect_to :action => "new"
   end
 

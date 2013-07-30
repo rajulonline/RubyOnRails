@@ -16,7 +16,7 @@
 
 	<%= f.label :Associated_Project, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[project_id]', options_for_select(@defect_project.collect{ |u| [u.project_id] }) %>
+		<%= select("defect","project_id", @project.collect{ |u| [u.name,u.id] }, {include_blank: 'None'})  %>
 	</div>
 </div>
 
@@ -24,7 +24,7 @@
 
 	<%= f.label :Mapping_Requirement, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }) , {include_blank: 'None'}   %>
+		<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }) ,:prompt=>"please select"   %>
 	</div>
 </div>
 
@@ -32,7 +32,7 @@
 
 	<%= f.label :Parent_testcase, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[parent_tc_id]', options_for_select(@post.collect{ |u| [u.parent_tc_id] }) , {include_blank: 'None'}   %>
+		<%= select("defect","parent_tc_id", @post.collect{ |u| [u.title,u.parent_tc_id] }, {include_blank: 'None'})  %>
 	</div>
 </div>
 
@@ -67,7 +67,6 @@
 		<%= select_tag 'defect[status]', options_for_select(@status.collect{ |u| [u.name] })  %>
 	</div>
 </div>
-
 
 <div class="control-group">
 
