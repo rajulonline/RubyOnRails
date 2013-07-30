@@ -11,6 +11,7 @@
 					<tr>
 						<th><%= model_class.human_attribute_name(:child_tc_id) %></th>
 						<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+						<th><%= model_class.human_attribute_name(:title) %></th>
 						<th><%= model_class.human_attribute_name(:content) %></th>
 						<th><%= model_class.human_attribute_name(:status) %></th>
 						<th><%= model_class.human_attribute_name(:agent) %></th>
@@ -25,6 +26,7 @@
 		<tr>
 			<td><%= children.child_tc_id %></td>
 			<td><%= children.parent_tc_id %></td>
+			<td><%= children.title %></td>
 			<td><%= h truncate(children.content,:length => 20) %></td>
 			<td><%= children.status %></td>
 			<td><%= link_to children.agent %></td>
