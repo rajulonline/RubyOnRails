@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
 
     #,:uniqueness => { :case_sensitive => false }
    # before_validation :ensure_agent_has_a_value
-
+  validates :content, :presence => true
   validates :title, :presence => true
   validates :status, :presence => true,
                     :length => { :minimum => 3 }

@@ -34,7 +34,7 @@
 			{:action=>'destroy',:id=>children.child_tc_id},:confirm => 'Are you sure,this might delete all associated issues.',
 			:class => 'btn btn-mini btn-danger' %></td>
 
-			<td><%= button_to "Show",{:action=>'create_requirement',:id=>children.child_tc_id},
+			<td><%= button_to "Show",{:action=>'display_child_test_case',:id=>children.child_tc_id},
 			:method => :show,
 			:class => 'btn btn-mini btn-success'%> </td>
 

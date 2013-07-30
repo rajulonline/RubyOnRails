@@ -1,36 +1,33 @@
 class ChildrenController < ApplicationController
   def add_child_test_case
-
-    @post = Post.find(params[:post])
+    @post = Post.find_by_parent_tc_id(params[:id])
+    @status = Status.find(:all)
+    if request.post?
+      @children = Children.create(params[:children])
+      @children.parent_tc_id  = @post.parent_tc_id
+      @children.agent = @post.agent
+      @children.save
+      respond_to do |format|
+        if @children != nil || @children != 'NULL'
+          if @children.save
+            format.html {
+              flash[:notice] = 'Child Test Case was successfully created.'
+            }
+            redirect_to @post
+            format.json { render json: @children, status: :created, location: @children }
+          else
+            format.html { render action: "new" }
+            format.json { render json: @new_post.errors, status: :unprocessable_entity }
+          end
+        end
+      end
+    end
 
   end
 
   def display_child_test_case
-
-    # logger.error("__________#{request.post?}------------")
-
-    post = params[:id]
-    @post = Post.find((post))
-
-    @children = Children.create(params[:children])
-    @children.parent_tc_id  = @post.parent_tc_id
-    @children.agent = @post.agent
-    @children.save
-
-    respond_to do |format|
-      if @children != nil || @children != 'NULL'
-        if @children.save
-          format.html {
-            flash[:notice] = 'Child Test Case was successfully created.'
-          }
-
-          format.json { render json: @children, status: :created, location: @children }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
-      end
-    end
+    @children = Children.find(params[:id])
+  # logger.error("__________#{request.post?}------------")
   end
 
   def display_all_child_test_cases
@@ -44,7 +41,6 @@ class ChildrenController < ApplicationController
   def edit_child_test_case
 
     if request.post?
-      
       @post = Post.find(:all)
       @login = Login.select('DISTINCT user')
       @status = Status.find(:all)
@@ -69,7 +65,7 @@ class ChildrenController < ApplicationController
       format.js
     end
   end
-  
+
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
@@ -79,7 +75,7 @@ class ChildrenController < ApplicationController
 
     respond_to do |format|
       format.html {redirect_to :action=>'display_all_child_test_cases'}
-     format.js
+      format.js
     end
   end
 

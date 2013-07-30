@@ -1,4 +1,4 @@
-<%= form_for :children, :url => { :action => :display_child_test_case, :id=>@post } do |f| %>
+<%= form_for :children do |f| %>
 
 <%- model_class = Children -%>
 <div class="page-header">
@@ -14,20 +14,23 @@
   :message => "You'll need to fix the following fields:",
   :header_tag => :h3 %>
 
-<div class="control-group">
-
-	<%= f.label :content, :class => 'control-label' %>
-	<div class="controls">
-		<%= f.text_area :content, :rows=>5,:class => 'text_area' %>
-	</div>
-</div>
 
 <div class="control-group">
-	<%= f.label :status, :class => 'control-label' %>
-	<div class="controls">
-		<%= f.select :status, [['Not executed'],['Passed'],['Failed']] %>
-	</div>
-</div>
+      
+    <%= f.label :Content, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :content, :rows=>5,:class => 'text_area' %>
+    </div>
+  </div>
+  
+     <div class="control-group">
+      
+    <%= f.label :Status, :class => 'control-label' %>
+    <div class="controls">
+       <%= select_tag 'children[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
+    </div>
+  </div>
+  
 
 <!-- <%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %> -->
 <%= f.submit 'Add Children'%>
