@@ -26,3 +26,12 @@ margin-right: auto;
 width: 70%;
 
 }*/
+
+.footer-right {
+float: right;
+text-align: right;
+margin-bottom: 0;
+color: #444;
+font-size: 11px;
+line-height: 2;
+}
