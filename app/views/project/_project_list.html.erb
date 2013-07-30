@@ -23,7 +23,7 @@
 		:class => 'btn btn-mini',:remote=>true %> </td>
 
 		<td><%= button_to "Delete All",{ :controller => 'project',
-		:action=>'destroy',:id=>project.id},
+		:action=>'destroy',:id=>project.id},:confirm => 'Are you sure,This might delete all associated issues.',
 		:class => 'btn btn-mini btn-danger' %> </td>
 
 		<td><%= button_to "Show",{ :controller => 'project',

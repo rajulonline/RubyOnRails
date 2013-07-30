@@ -74,7 +74,7 @@ class ProjectController < ApplicationController
 
   def edit_project
     if request.post?
-    @project=Project.find(params[:id])  
+      @project=Project.find(params[:id])
     end
     @project.save
     respond_to do |format|
@@ -82,7 +82,7 @@ class ProjectController < ApplicationController
       format.js
     end
   end
-  
+
   def update_project
     #write query for update
     proj = Project.find(params[:project]['id'])
@@ -94,16 +94,22 @@ class ProjectController < ApplicationController
       format.html
     end
   end
- def destroy
-   @project = Project.find(params[:id])
-   @requirement=Requirement.find_all_by_project_id(params[:id])
-   @post=Post.find_all_by_project_id(params[:id])
-   @defect=Defect.find_all_by_project_id(params[:id])
-   @project.destroy
-   respond_to do |format|
+
+  def destroy
+    @project = Project.find(params[:id])
+    @requirement=Requirement.find_all_by_project_id(params[:id])
+    @post=Post.find_all_by_project_id(params[:id])
+    @defect=Defect.find_all_by_project_id(params[:id])
+    @project.destroy
+    respond_to do |format|
       format.js
       format.html {redirect_to :action=>'list_all_projects'}
     end
- end
+  end
+
+  def show
+    @project = Project.find(params[:id])
+    @requirement = Requirement.find_by_project_id(params[:id])
+  end
 
 end

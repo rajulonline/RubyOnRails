@@ -88,13 +88,13 @@ class PostsController < ApplicationController
       # does it
       @post = Post.new(params[:post])
       if params[:post][:req_name].present?
-      post_new = Post.new(params[:post])
-      req = Requirement.find_by_req_name([post_new.req_name])
-      req.id
-      post_new.req_id= req.id
-      @post = post_new  
+        post_new = Post.new(params[:post])
+        req = Requirement.find_by_req_name([post_new.req_name])
+        req.id
+        post_new.req_id= req.id
+        @post = post_new
       end
-    
+
     end
 
     respond_to do |format|
@@ -178,6 +178,18 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @all_posts }
+    end
+  end
+
+  def get_requirement_list
+    @requirement = Requirement.find_all_by_project_id(params[:id])
+
+    if @requirement.nil?
+      @requirement = []
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

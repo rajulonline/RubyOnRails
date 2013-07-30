@@ -1,6 +1,21 @@
-<%= form_for @post, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @post do |f| %>
 
 <!-- # Message Header -->
+<script>
+	function get_next_value(id, name) {
+
+		$.ajax({
+			url : 'get_requirement_list?' + 'id=' + id,
+			type : "POST",
+			dataType : "script",
+			success : function(e) {
+
+			}
+		});
+
+	}
+
+</script>
 
 <%= f.error_messages :header_message => "Invalid fields!",
   :message => "You'll need to fix the following fields:",
@@ -10,14 +25,17 @@
 <div class="control-group">
 	<%= f.label :project_id, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'post[project_id]', options_for_select(@project.collect{ |u| [u.id] }), {include_blank: 'None'}  %>
+		<%= select("post", "project_id", @project.collect {|r| [ r.name, r.id ] }, { :include_blank => true },:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true)%>
 	</div>
 </div>
 
 <div class="control-group">
-	<%= f.label :requirement_title, :class => 'control-label' %>
-	<div class="controls">
-		<%= select_tag 'post[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }), {include_blank: 'None'}  %>
+	<div id="requirement_list">
+		<div class="controls">
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "get_requirement_list" %>
+			<% end -%>
+		</div>
 	</div>
 </div>
 
@@ -48,7 +66,7 @@
 </div>
 
 <div class="form-actions">
-	<%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'  %>
+	<%= f.submit nil, :class => 'btn btn-primary',:id => 'testing'%>
 	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
 	posts_path, :class => 'btn'%>
 </div>

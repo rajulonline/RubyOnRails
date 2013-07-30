@@ -1,0 +1,8 @@
+<%- model_class = Defect -%>
+<%= form_for :post do |f| %>
+<%if @requirement.present?%>
+<%= f.label :Req, :class => 'control-label' %>
+<%= select("post", "req_name", @requirement.collect {|r| [ r.req_name, r.id ] }, { :include_blank => true },:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true)%>
+<%end%>
+
+<%end%>

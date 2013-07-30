@@ -29,16 +29,16 @@ class DefectController < ApplicationController
   end
 
   def get_requirement_name
-   if params[:id]
-    @requirement = Requirement.find_all_by_project_id(params[:id])
-    if @requirement.nil?
-      @requirement=[]
+    if params[:id]
+      @requirement = Requirement.find_all_by_project_id(params[:id])
+      if @requirement.nil?
+        @requirement=[]
+      end
+      @post = Post.find_all_by_req_name(params[:id])
+      if @post.blank?
+        @post=[]
+      end
     end
-    @post = Post.find_all_by_req_name(params[:id])
-    if @post.blank?
-      @post=[]
-    end
-   end
     respond_to do |format|
       format.html # index.html.erb
       format.js
@@ -66,9 +66,9 @@ class DefectController < ApplicationController
       if @defect.save
         flash[:notice] = "Saved successfully"
         respond_to do |format|
-        format.html { redirect_to :action => "list_defects"}
-        format.js 
-      end
+          format.html { redirect_to :action => "list_defects"}
+          format.js
+        end
       end
     end
   end

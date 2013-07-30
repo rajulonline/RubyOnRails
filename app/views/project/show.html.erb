@@ -1,0 +1,64 @@
+<%- model_class = Project -%>
+
+<div class="page-header">
+	<h1><%= t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<div>
+	<b>Project</b>
+</div>
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Name) %>:</strong>
+	</dt>
+	<dd>
+		<%= @project.name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Description) %>:</strong>
+	</dt>
+	<dd>
+		<%= @project.description %>
+	</dd>
+	
+</dl>
+
+<% if @project.requirements.present? %>
+<div>
+	<b>Requirement(s) for this requirement</b>
+</div>
+
+<% @project.requirements.each {|requirement| %>
+
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Requirement) %>:</strong>
+	</dt>
+	<dd>
+		<%= requirement.req_name %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Req_description) %>:</strong>
+	</dt>
+	<dd>
+		<%= requirement.req_description %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Status) %>:</strong>
+	</dt>
+	<dd>status
+		<%= requirement.status %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Product_owner) %>:</strong>
+	</dt>
+	<dd>status
+		<%= requirement.prod_owner %>
+	</dd>
+	
+</dl>
+<% } %>
+<% end %>
+
+
+
