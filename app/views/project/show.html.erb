@@ -61,4 +61,43 @@
 <% end %>
 
 
+<% if @project.posts.present? %>
+<div>
+	<b>TestCases(s) for this requirement</b>
+</div>
+
+<% @project.posts.each {|post| %>
+
+<dl class="dl-horizontal">
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Title) %>:</strong>
+	</dt>
+	<dd>
+		<%= post.title %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Content) %>:</strong>
+	</dt>
+	<dd>
+		<%= post.content %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:Status) %>:</strong>
+	</dt>
+	<dd>status
+		<%= post.status %>
+	</dd>
+	<dt>
+		<strong><%= model_class.human_attribute_name(:agent) %>:</strong>
+	</dt>
+	<dd>status
+		<%= post.agent %>
+	</dd>
+	
+</dl>
+<% } %>
+<% end %>
+
+
+
 
