@@ -24,7 +24,7 @@
 
 	<%= f.label :Mapping_Requirement, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }) ,:prompt=>"please select"   %>
+		<%= select("defect", "req_name",@requirement.collect {|r| [ r.req_name ] },:selected=>@defect.req_name)%>
 	</div>
 </div>
 
@@ -32,7 +32,7 @@
 
 	<%= f.label :Parent_testcase, :class => 'control-label' %>
 	<div class="controls">
-		<%= select("defect","parent_tc_id", @post.collect{ |u| [u.title,u.parent_tc_id] }, {include_blank: 'None'})  %>
+		<%= select("defect","parent_tc_id", @post.collect{ |u| [u.title,u.parent_tc_id] })  %>
 	</div>
 </div>
 
@@ -64,7 +64,8 @@
 
 	<%= f.label :Status, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[status]', options_for_select(@status.collect{ |u| [u.name] })  %>
+		
+		<%= select_tag 'defect[status]', options_for_select(@status.collect{ |u| [u.name] },:selected=>@defect.status ) %>
 	</div>
 </div>
 
@@ -72,7 +73,7 @@
 
 	<%= f.label :Severity, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[severity]', options_for_select(@severity.collect{ |u| [u.severity] })%>
+		<%= select_tag 'defect[severity]', options_for_select(@severity.collect{ |u| [u.severity] },:selected=>@defect.severity)%>
 	</div>
 </div>
 <%= hidden_field_tag('defect[id]', value = @defect.id) %>
@@ -80,7 +81,7 @@
 
 	<%= f.label :category, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[category]', options_for_select(@defecttype.collect{ |u| [u.category] })%>
+		<%= select_tag 'defect[category]', options_for_select(@defecttype.collect{ |u| [u.category] },:selected=>@defect.category)%>
 	</div>
 </div>
 

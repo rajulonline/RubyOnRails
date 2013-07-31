@@ -10,7 +10,6 @@
 		<%= javascript_include_tag "application" %>
 		<%= javascript_include_tag 'jquery-1.9.1','application' %>
 		<%= csrf_meta_tags %>
-
 	</head>
 	<body>
 		<div class="navbar navbar-fixed-top">
@@ -20,7 +19,6 @@
 					<a class="brand" href="#">Test Manager</a>
 					<div class="nav-collapse">
 						<ul class="nav">
-
 							<li>
 								<%= link_to t('.new', :default => "Projects"), :controller=>'project',:action=>'list_all_projects' %>
 							</li>

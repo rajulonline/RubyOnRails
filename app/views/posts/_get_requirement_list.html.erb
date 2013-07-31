@@ -2,7 +2,7 @@
 <%= form_for :post do |f| %>
 <%if @requirement.present?%>
 <%= f.label :Req, :class => 'control-label' %>
-<%= select("post", "req_name", @requirement.collect {|r| [ r.req_name ] }, { :include_blank => true })%>
+<%= select("post", "req_name", @requirement.collect {|r| [ r.req_name ] })%>
 <%end%>
 
 <%end%>

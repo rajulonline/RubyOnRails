@@ -11,7 +11,7 @@
 
 			<%= f.label :Associated_Project, :class => 'control-label' %>
 			<div class="controls">
-				<%= select("requirement", "project_id",@all_project.collect {|r| [ r.name, r.id ] }, { :include_blank => true })%>
+				<%= select("requirement", "project_id",@all_project.collect {|r| [ r.name, r.id ] },:selected=>@project.name)%>
 			</div>
 		</div>
 		
@@ -35,7 +35,7 @@
 
 			<%= f.label :Product_Owner, :class => 'control-label' %>
 			<div class="controls">
-				<%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] })%>
+				<%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] },:selected=> @requirement.prod_owner)%>
 			</div>
 		</div>
 
@@ -43,7 +43,7 @@
 
 			<%= f.label :Developer_Assigned, :class => 'control-label' %>
 			<div class="controls">
-				<%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] })  %>
+				<%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] },:selected=> @requirement.dev_assigned)  %>
 			</div>
 		</div>
 
@@ -51,7 +51,7 @@
 
 			<%= f.label :Status, :class => 'control-label' %>
 			<div class="controls">
-				<%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] }) %>
+				<%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] },:selected=> @requirement.status) %>
 			</div>
 		</div>
 

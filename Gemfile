@@ -14,6 +14,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem "bullet", :group => "development"
 
 
 # Gems used only for assets and not required
