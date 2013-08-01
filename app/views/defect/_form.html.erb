@@ -5,7 +5,8 @@
 	function get_next_value(id, name) {
 
 		$.ajax({
-			url : 'get_requirement_name?' + 'id=' + id,
+			data: { 'id' : id, 'name' : name},
+			url : 'get_requirement_name?' + 'id=',
 			type : "GET",
 			dataType : "script",
 			success : function(e) {

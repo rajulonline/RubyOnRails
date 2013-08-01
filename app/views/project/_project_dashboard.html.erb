@@ -1,48 +1,50 @@
-<!doctype html>
-
-<%- model_class = Project -%>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<script type="text/javascript"></script>
-		<div class="page-header">
-			<h1> <%= 'Project Dashboard' %></h1>
-		</div>
-		
-		
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
-
-<div id="chart_div"></div>
-<script type="text/javascript">
-  $(function() {
-    drawChart();
-  });
-
-  function drawChart() {
-  	
-          var data = google.visualization.arrayToDataTable([
-          ['Project', 'Dashboard'],
-          ['OpenTestCases',  <%= @post_count %> ],
-          ['Open Defects',     <%=@defect_count%> ],
-          ['In Progress Requirements',<%=@req_count%>  ],
-        ]);
-
-          var options = {
-              title: 'Project Dashboard'
-          };
-
-          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-          
-          google.visualization.events.addListener(chart,'select', selectHandler);
-           function selectHandler() {
-           alert('You selected ');
-          
-           $.ajax({
-           type: "POST",
-           url: "/posts/index" // the URL of the controller action method
-                  });
-           }
-      }
-</script>
- 
+	<!doctype html>
+	
+	<%- model_class = Project -%>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<script type="text/javascript"></script>
+			<div class="page-header">
+				<h1> <%= 'Project Dashboard' %></h1>
+			</div>
+	
+	
+	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+	
+	<div id="chart_div"></div>
+	<script type="text/javascript">
+	  $(function() {
+	    drawChart();
+	  });
+	
+	  function drawChart() {
+	  	
+	          var data = google.visualization.arrayToDataTable([
+	          ['Project', 'Dashboard','ProjectId'],
+	          ['OpenTestCases',  <%= @post_count %>,<%= @project_id %> ],
+	          ['Open Defects',     <%=@defect_count%>,<%= @project_id %> ],
+	          ['In Progress Requirements',<%=@req_count%>,<%= @project_id %>  ]
+	        ]);
+	
+	          var options = {
+	              title: 'Project Dashboard'        
+	          };
+	
+	          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	          chart.draw(data, options);
+	         
+	          google.visualization.events.addListener(chart,'select', selectHandler);
+	            function selectHandler() {
+	           var proj_id = data.getValue(chart.getSelection()[0].row, 2);
+	           var req_info = data.getValue(chart.getSelection()[0].row, 1);
+	           var issue_type  = data.getValue(chart.getSelection()[0].row, 0);
+	           $.ajax({
+				data: { 'proj_id' : proj_id,'req_info' : req_info, 'issue_type' : issue_type},
+				url : 'get_detailed_project_info',
+				type : "POST",
+				dataType : "script"
+			});         
+	          }
+	      }
+	</script>

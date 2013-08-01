@@ -29,6 +29,7 @@ class DefectController < ApplicationController
   end
 
   def get_requirement_name
+
     if params[:id]
       @requirement = Requirement.find_all_by_project_id(params[:id])
       if @requirement.nil?
@@ -130,7 +131,7 @@ class DefectController < ApplicationController
       @status = Status.find(:all)
       @defecttype= Defecttype.find(:all)
       @severity = Defectseverity.find(:all)
-
+# binding.pry
     end
     @defect.save
 

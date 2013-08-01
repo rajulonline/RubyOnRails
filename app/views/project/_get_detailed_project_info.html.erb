@@ -1,0 +1,43 @@
+<%- model_class = Project -%>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis', :controller => 'project', :action => 'list_all_projects' %></h1>
+		</div>
+	</head>
+	<body>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><%= model_class.human_attribute_name(:id) %>></th>
+					<th><%= model_class.human_attribute_name(:Project_id) %></th>
+				    <th><%= model_class.human_attribute_name(:Requirement_name) %></th>
+					<th><%= model_class.human_attribute_name(:agent) %></th>
+					<th><%= model_class.human_attribute_name(:title) %></th>
+					<th><%= model_class.human_attribute_name(:content) %></th>
+					<th><%= model_class.human_attribute_name(:status) %></th>
+					
+				
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @open_post.each do |post| %>
+				<tr>
+					<td><%= link_to post.id%></td>
+					<td><%= link_to post.project_id,:action => :all_project_test_cases, :id=>post.project_id %></td>
+					<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
+					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
+					<td><%= post.title %></td>
+					<td><%= h truncate(post.content  , :length => 15) %></td>
+					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
+				</tr>
+				<% end %>
+				
+			</tbody>
+		</table>
+		</div>
+	</body>
+</html>
+

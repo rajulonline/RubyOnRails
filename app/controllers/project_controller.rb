@@ -43,6 +43,7 @@ class ProjectController < ApplicationController
 
     end
     @project = Project.find(params[:id])
+    @project_id = @project.id
     @defect_count = @project.defects.find_all_by_status('Open').count
     @req_count   = @project.requirements.find_all_by_status('Awaiting Approval').count
     @post_count = @project.posts.find_all_by_status('Open').count
@@ -110,6 +111,18 @@ class ProjectController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @requirement = Requirement.find_by_project_id(params[:id])
+  end
+  
+  def get_detailed_project_info
+
+@open_post = Post.where('project_id in (?) AND status  in (?)', params[:proj_id], 'Open')
+@open_defect = Defect.where('project_id in (?) AND status  in (?)', params[:proj_id], 'Open')
+@in_progress_requirement = Requirement.where('project_id in (?) AND status  in (?)', params[:proj_id], 'In progress')
+
+    respond_to do |format|
+      format.js
+      format.html 
+    end
   end
 
 end
