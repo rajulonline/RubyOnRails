@@ -4,6 +4,9 @@
 		<meta charset="utf-8" />
 		<div id='master'>
 			<table class="table table-striped">
+				<div class="page-header">
+			<h1> <%= link_to 'Requirements Management', :controller => 'defect', :action => 'list_defects' %></h1>
+		</div>
 				<thead>
 					<tr>
 						<th><%= model_class.human_attribute_name(:id) %></th>

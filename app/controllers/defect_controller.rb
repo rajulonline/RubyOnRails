@@ -1,6 +1,7 @@
 class DefectController < ApplicationController
   def defect_analysis
     @defect = Defect.find_all_by_project_id(params[:id])
+    @project_id = params[:id]
     # if !Defect.all.nil?
     @total_defects = @defect.count
     @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Regression').count
@@ -15,6 +16,21 @@ class DefectController < ApplicationController
     @work_around_possible_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Work around possible').count
     @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Major but not show stopper').count
 
+  end
+  
+  def get_detailed_defect_info
+    if params[:analysis_by] == 'defect_type'
+      @defect_analysis_type = Defect.where('project_id in (?) AND category in (?)', params[:proj_id], params[:issue_type])
+    end
+    
+    if params[:analysis_by] == 'defect_severity'
+      @defect_analysis_severity = Defect.where('project_id in (?) AND severity in (?)', params[:proj_id], params[:issue_type])
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
   end
 
   def list_defects

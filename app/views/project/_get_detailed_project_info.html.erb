@@ -2,13 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<div class="page-header">
-			<h1> <%= link_to 'Detailed analysis', :controller => 'project', :action => 'list_all_projects' %></h1>
-		</div>
+		
 	</head>
 	<body>
 		<%if @open_post.present? %>
 		<div id = "test_cases_detailed_info">
+			<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis by test cases', :controller => 'project', :action => 'list_all_projects' %></h1>
+		</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -40,6 +41,9 @@
 
 		<%if @open_defect.present? %>
 		<div id = "defects_detailed_info">
+			<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis by defects', :controller => 'project', :action => 'list_all_projects' %></h1>
+		</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -76,6 +80,9 @@
 
 		<%if @in_progress_requirement.present? %>
 		<div id = "requirements_detailed_info">
+			<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis by requirements', :controller => 'project', :action => 'list_all_projects' %></h1>
+		</div>
 			<table class="table table-striped">
 				<thead>
 					<tr>

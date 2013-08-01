@@ -1,0 +1,87 @@
+<%- model_class = Defect -%>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<%if @defect_analysis_type.present? %>
+		<div id = "defects_analysis_info_by_type">
+			<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis by type', :controller => 'defect', :action => 'list_defects' %></h1>
+		</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:Defect_id) %></th>
+						<th><%= model_class.human_attribute_name(:req_name) %></th>
+						<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+						<th><%= model_class.human_attribute_name(:def_description) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
+						<th><%= model_class.human_attribute_name(:category) %></th>
+						<th><%= model_class.human_attribute_name(:severity) %></th>
+						<th><%= model_class.human_attribute_name(:tester_name) %></th>
+						<th><%= model_class.human_attribute_name(:dev_name) %></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @defect_analysis_type.each do |defect| %>
+					<tr>
+						<td><%= defect.id %></td>
+						<td><%if defect.req_name.present?%><%= defect.req_name %><%end%></td>
+						<td><%if defect.parent_tc_id.present?%><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %><%end%></td>
+						<td><%= modify_truncate(defect.def_description,15)%></td>
+						<td><%= defect.status %></td>
+						<td><%= defect.category %></td>
+						<td><%= defect.severity %></td>
+						<td><%= defect.tester_name %></td>
+						<td><%= defect.dev_name %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<%end%>
+
+		<%if @defect_analysis_severity.present? %>
+		<div id = "defects_analysis_info_by_severity">
+			<div class="page-header">
+			<h1> <%= link_to 'Detailed analysis by severity', :controller => 'defect', :action => 'list_defects' %></h1>
+		</div>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:Defect_id) %></th>
+						<th><%= model_class.human_attribute_name(:req_name) %></th>
+						<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+						<th><%= model_class.human_attribute_name(:def_description) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
+						<th><%= model_class.human_attribute_name(:category) %></th>
+						<th><%= model_class.human_attribute_name(:severity) %></th>
+						<th><%= model_class.human_attribute_name(:tester_name) %></th>
+						<th><%= model_class.human_attribute_name(:dev_name) %></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @defect_analysis_severity.each do |defect| %>
+					<tr>
+						<td><%= defect.id %></td>
+						<td><%if defect.req_name.present?%><%= defect.req_name %><%end%></td>
+						<td><%if defect.parent_tc_id.present?%><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %><%end%></td>
+						<td><%= modify_truncate(defect.def_description,15)%></td>
+						<td><%= defect.status %></td>
+						<td><%= defect.category %></td>
+						<td><%= defect.severity %></td>
+						<td><%= defect.tester_name %></td>
+						<td><%= defect.dev_name %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<%end%>
+	</body>
+</html>
+
+

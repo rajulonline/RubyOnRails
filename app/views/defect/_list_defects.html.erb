@@ -73,5 +73,11 @@
 			<% end -%>
 		</div>
 		
+		<div id='show_project_detailed_defect_analysis'>
+			<% if !@defect_count.nil? %>
+			<%= render :partial => "get_detailed_defect_info" %>
+			<% end -%>
+		</div>
+		
 		
 
