@@ -48,7 +48,7 @@
 					<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
 					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
 					<td><%= post.title %></td>
-					<td><%= h truncate(post.content  , :length => 15) %></td>
+					<td><%=modify_truncate(post.content,15) %></td>
 					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
 					<td><%= l post.created_at %></td>
 					<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
