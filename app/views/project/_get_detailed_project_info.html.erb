@@ -7,37 +7,107 @@
 		</div>
 	</head>
 	<body>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th><%= model_class.human_attribute_name(:id) %>></th>
-					<th><%= model_class.human_attribute_name(:Project_id) %></th>
-				    <th><%= model_class.human_attribute_name(:Requirement_name) %></th>
-					<th><%= model_class.human_attribute_name(:agent) %></th>
-					<th><%= model_class.human_attribute_name(:title) %></th>
-					<th><%= model_class.human_attribute_name(:content) %></th>
-					<th><%= model_class.human_attribute_name(:status) %></th>
-					
-				
-				</tr>
-			</thead>
+		<%if @open_post.present? %>
+		<div id = "test_cases_detailed_info">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:id) %></th>
+						<th><%= model_class.human_attribute_name(:Requirement_name) %></th>
+						<th><%= model_class.human_attribute_name(:agent) %></th>
+						<th><%= model_class.human_attribute_name(:title) %></th>
+						<th><%= model_class.human_attribute_name(:content) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
 
-			<tbody>
-				<% @open_post.each do |post| %>
-				<tr>
-					<td><%= link_to post.id%></td>
-					<td><%= link_to post.project_id,:action => :all_project_test_cases, :id=>post.project_id %></td>
-					<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
-					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
-					<td><%= post.title %></td>
-					<td><%= h truncate(post.content  , :length => 15) %></td>
-					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
-				</tr>
-				<% end %>
-				
-			</tbody>
-		</table>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @open_post.each do |post| %>
+					<tr>
+						<td><%= link_to post.id%></td>
+						<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
+						<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
+						<td><%= post.title %></td>
+						<td><%= h truncate(post.content  , :length => 15) %></td>
+						<td><%= post.status %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
 		</div>
+		<%end%>
+
+		<%if @open_defect.present? %>
+		<div id = "defects_detailed_info">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:id) %></th>
+						<th><%= model_class.human_attribute_name(:project_id) %></th>
+						<th><%= model_class.human_attribute_name(:req_name) %></th>
+						<th><%= model_class.human_attribute_name(:parent_tc_id) %></th>
+						<th><%= model_class.human_attribute_name(:def_description) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
+						<th><%= model_class.human_attribute_name(:category) %></th>
+						<th><%= model_class.human_attribute_name(:severity) %></th>
+						<th><%= model_class.human_attribute_name(:tester_name) %></th>
+						<th><%= model_class.human_attribute_name(:dev_name) %></th>
+						<th><%= model_class.human_attribute_name(:actions) %></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @open_defect.each do |defect| %>
+					<tr>
+						<td><%= defect.id %></td>
+						<td><%= link_to defect.project_id,:action=> 'defect_analysis',:id=>defect.project_id, :remote=> true%></td>
+						<td><%if defect.req_name.present?%><%= defect.req_name %><%end%></td>
+						<td><%if defect.parent_tc_id.present?%><%= link_to defect.parent_tc_id,:controller=>'posts',:action=>'show',:id=>defect.parent_tc_id %><%end%></td>
+						<td><%= defect.def_description%></td>
+						<td><%= defect.status %></td>
+						<td><%= defect.category %></td>
+						<td><%= defect.severity %></td>
+						<td><%= defect.tester_name %></td>
+						<td><%= defect.dev_name %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<%end%>
+
+		<%if @in_progress_requirement.present? %>
+		<div id = "requirements_detailed_info">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th><%= model_class.human_attribute_name(:id) %></th>
+						<th><%= model_class.human_attribute_name(:project_id) %></th>
+						<th><%= model_class.human_attribute_name(:req_description) %></th>
+						<th><%= model_class.human_attribute_name(:status) %></th>
+						<th><%= model_class.human_attribute_name(:prod_owner) %></th>
+						<th><%= model_class.human_attribute_name(:dev_name) %></th>
+						<th><%= model_class.human_attribute_name(:created_at ) %></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @in_progress_requirement.each do |requirement| %>
+					<tr>
+						<td><%= requirement.id %></td>
+						<td><%= requirement.project_id%></td>
+						<td><%= modify_truncate(requirement.req_description,15) %></td>
+						<td><%= requirement.status %></td>
+						<td><%= requirement.prod_owner %></td>
+						<td><%= requirement.dev_assigned%></td>
+						<td><%= requirement.created_at %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		<%end%>
 	</body>
 </html>
 
