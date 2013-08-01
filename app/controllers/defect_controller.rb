@@ -2,19 +2,24 @@ class DefectController < ApplicationController
   def defect_analysis
     @defect = Defect.find_all_by_project_id(params[:id])
     @project_id = params[:id]
+    @defect_types = Defecttype.select('DISTINCT category')
+    @defect_severity = Defectseverity.select('DISTINCT severity')
     # if !Defect.all.nil?
     @total_defects = @defect.count
-    @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Regression').count
-    @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'UnitTest').count
-    @missed_during_regression_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Missed during regression').count
-    @adhoc_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Adhoc').count
-    @automation_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Automation').count
-    @production_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], 'Production').count
-    @cosmetic_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Cosmetic Defect').count
-    @show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Show stopper').count
-    @minor_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Minor').count
-    @work_around_possible_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Work around possible').count
-    @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], 'Major but not show stopper').count
+    
+    @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[0].category).count
+    @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[1].category).count
+    @missed_during_regression_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[2].category).count
+    @adhoc_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[3].category).count
+    @automation_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[4].category).count
+    @production_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[5].category).count
+    
+    
+    @cosmetic_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[0].severity).count
+    @show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[1].severity).count
+    @minor_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[2].severity).count
+    @work_around_possible_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[3].severity).count
+    @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[4].severity).count
 
   end
   
