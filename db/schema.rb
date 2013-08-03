@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130719175629) do
-
-  create_table "books", :force => true do |t|
-    t.string   "title",       :limit => 32, :null => false
-    t.float    "price"
-    t.integer  "subject_id"
-    t.text     "description"
-    t.datetime "created_at"
-  end
+ActiveRecord::Schema.define(:version => 20130802184652) do
 
   create_table "children", :primary_key => "child_tc_id", :force => true do |t|
     t.string   "agent"
@@ -28,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130719175629) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "parent_tc_id"
+    t.string   "title"
   end
 
   create_table "defects", :force => true do |t|
@@ -42,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20130719175629) do
     t.datetime "updated_at",      :null => false
     t.string   "category"
     t.string   "severity"
+    t.string   "req_name"
   end
 
   create_table "defectseverities", :force => true do |t|
@@ -68,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20130719175629) do
     t.datetime "updated_at",               :null => false
     t.string   "agent",      :limit => 30
     t.string   "status",     :limit => 30
+    t.string   "req_name"
+    t.integer  "req_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -80,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20130719175629) do
   create_table "requirements", :force => true do |t|
     t.integer  "project_id"
     t.integer  "parent_tc_id"
-    t.string   "title"
+    t.string   "req_name"
     t.string   "req_description"
     t.string   "tester_assigned"
     t.string   "dev_assigned"
@@ -94,8 +90,12 @@ ActiveRecord::Schema.define(:version => 20130719175629) do
     t.string "name"
   end
 
-  create_table "subjects", :force => true do |t|
-    t.string "name"
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "login"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+ 
   # before_filter :isLogged_In
   def cache_everything
-    @post = Post.all_cached
-    @children = Children.all_cached
+    #@post = Post.all_cached
+    @post = Post.includes(:children)
+   
   end
   
   def isLogged_In

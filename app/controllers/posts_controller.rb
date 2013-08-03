@@ -4,6 +4,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @project = Project.all
+    params[:proj_name] == 'Pr'
+    @search_result = Project.where("name LIKE '%#{params[:proj_name]}%'")
+  
     # @post = Post.all
     # @children = Children.all
     cache_everything
@@ -17,6 +20,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @post }
+      
     end
   end
 

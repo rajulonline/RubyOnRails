@@ -2,11 +2,6 @@ Learning::Application.routes.draw do
  
   resources :login
   resources :person
-  
-  resources :products do
-  get :autocomplete_brand_name, :on => :collection
-end
-  
   resources :posts do
   :children
   end
@@ -15,7 +10,7 @@ end
   resources :defect,:requirement,:projects
    end
   
-  match "children" => "children/add_child_test_case"
+  # match "children" => "children/add_child_test_case"
   #match 'children/add_child_test_case' => 'children#add_child_test_case'
 
 #match 'login/edit' => 'login#edit'

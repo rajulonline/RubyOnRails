@@ -7,88 +7,103 @@
 			<h1> <%= 'Defect Analysis Report' %></h1>
 		</div>
 
-		<div id="dashboard_chart" style="width:800px; height:5px;">
-</div>
-			<script type="text/javascript">
-			  $(function() {
-			    drawChart();
-			  });
-			      google.load("visualization", "1", {packages:["corechart"]});
-			      google.setOnLoadCallback(drawChart);
-			      function drawChart() {
-			          var data = google.visualization.arrayToDataTable([
-			          ['Defect', 'Analysis','Project_Id'],
-			          ['Regression',  <%= @reg_defect_count %>,<%= @project_id%>],
-			          ['UnitTest',     <%=@unit_test_defect_count%>,<%= @project_id%> ],
-			          ['Missed during regression',     <%=@missed_during_regression_defect_count%>,<%= @project_id%> ],
-			          ['Adhoc',     <%=@adhoc_defect_count%>,<%= @project_id%> ],
-			          ['Automation',     <%=@automation_defect_count%>,<%= @project_id%> ],
-			          ['Production',     <%=@production_defect_count%>,<%= @project_id%> ]
+		<div id="dashboard_chart" style="width:800px; height:5px;"></div>
+		<script type="text/javascript">
+			$(function() {
+					drawChart();
+					});
+					google.load("visualization", "1", {packages:["corechart"]});
+					google.setOnLoadCallback(drawChart);
+					function drawChart() {
+					var data = google.visualization.arrayToDataTable([
+					['Defect', 'Analysis','Project_Id'],
+					['Regression',  <%= @reg_defect_count %>,<%= @project_id%>],
+					['UnitTest',     <%= @unit_test_defect_count%>,<%= @project_id%> ],
+					['Missed during regression',     <%= @missed_during_regression_defect_count%>,<%= @project_id%> ],
+					['Adhoc',     <%= @adhoc_defect_count%>,<%= @project_id%> ],
+					['Automation',     <%= @automation_defect_count%>,<%= @project_id%> ],
+					['Production',     <%= @production_defect_count%>,<%= @project_id%> ]
+					
+					]);
+					
+					var data2 = google.visualization.arrayToDataTable([
+					['Severity', 'Analysis','Project_Id'],
+					['Cosmetic Defect',  <%= @cosmetic_def_severity %>,<%= @project_id%> ],
+					['Show stopper',  <%= @show_stopper_def_severity %>,<%= @project_id%> ],
+					['Minor',  <%= @minor_def_severity %>,<%= @project_id%> ],
+					['Work around possible',  <%= @work_around_possible_def_severity%>,<%= @project_id%> ],
+					['Major but not show stopper',  <%= @major_but_not_show_stopper_def_severity %>,<%= @project_id%>
+						]
+					
+						]);
+					
+						var options = {
+							title : 'Defect Analysis Dashboard'
+						};
+						var options2 = {
+							title : 'Severity Analysis Dashboard'
+						};
+					
+						var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+						chart.draw(data, options);
+					
+						var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+						chart2.draw(data2, options2);
+					
+						google.visualization.events.addListener(chart, 'select', selectHandlerByDefectType);
+					
+						function selectHandlerByDefectType() {
+					
+							var proj_id = data.getValue(chart.getSelection()[0].row, 2);
+							var req_info = data.getValue(chart.getSelection()[0].row, 1);
+							var issue_type = data.getValue(chart.getSelection()[0].row, 0);
+					
+							$.ajax({
+								data : {
+									'proj_id' : proj_id,
+									'req_info' : req_info,
+									'issue_type' : issue_type,
+									'analysis_by' : 'defect_type'
+								},
+								url : 'get_detailed_defect_info',
+								type : "POST",
+								dataType : "script"
+							});
+					
+						}
 
-			        ]);
 
-			          var data2 = google.visualization.arrayToDataTable([
-			     	  ['Severity', 'Analysis','Project_Id'],
-			          ['Cosmetic Defect',  <%= @cosmetic_def_severity %>,<%= @project_id%> ],
-			          ['Show stopper',  <%= @show_stopper_def_severity %>,<%= @project_id%> ],
-			          ['Minor',  <%=  @minor_def_severity %>,<%= @project_id%> ],
-			          ['Work around possible',  <%= @work_around_possible_def_severity%>,<%= @project_id%> ],
-			          ['Major but not show stopper',  <%= @major_but_not_show_stopper_def_severity %>,<%= @project_id%> ]
+	google.visualization.events.addListener(chart2, 'select', selectHandlerBySeverity);
 
+	function selectHandlerBySeverity() {
 
-			        ]);
+		var proj_id = data2.getValue(chart2.getSelection()[0].row, 2);
+		var req_info = data2.getValue(chart2.getSelection()[0].row, 1);
+		var issue_type = data2.getValue(chart2.getSelection()[0].row, 0);
 
-			          var options = {
-			              title: 'Defect Analysis Dashboard'
-			          };
-			           var options2 = {
-			              title: 'Severity Analysis Dashboard'
-			          };
+		$.ajax({
+			data : {
+				'proj_id' : proj_id,
+				'req_info' : req_info,
+				'issue_type' : issue_type,
+				'analysis_by' : 'defect_severity'
+			},
+			url : 'get_detailed_defect_info',
+			type : "POST",
+			dataType : "script"
+		});
 
-			          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-			          chart.draw(data, options);
+	}
 
-			          var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
-			          chart2.draw(data2, options2);
-			          
-			          google.visualization.events.addListener(chart,'select', selectHandlerByDefectType);
-			          
-			          function selectHandlerByDefectType() {
-	          
-	           var proj_id = data.getValue(chart.getSelection()[0].row, 2);
-	           var req_info = data.getValue(chart.getSelection()[0].row, 1);
-	           var issue_type  = data.getValue(chart.getSelection()[0].row, 0);
-	           
-	            $.ajax({
-				data: { 'proj_id' : proj_id,'req_info' : req_info, 'issue_type' : issue_type, 'analysis_by' : 'defect_type'},
-				url : 'get_detailed_defect_info',
-				type : "POST",
-				dataType : "script"
-			}); 
-	                   
-	          }
-	             google.visualization.events.addListener(chart2,'select', selectHandlerBySeverity);
-	             
-	            function selectHandlerBySeverity() {
-	          
-	           var proj_id = data2.getValue(chart2.getSelection()[0].row, 2);
-	           var req_info = data2.getValue(chart2.getSelection()[0].row, 1);
-	           var issue_type  = data2.getValue(chart2.getSelection()[0].row, 0);
-	           
-	                 $.ajax({
-				data: { 'proj_id' : proj_id,'req_info' : req_info, 'issue_type' : issue_type,'analysis_by' : 'defect_severity'},
-				url : 'get_detailed_defect_info',
-				type : "POST",
-				dataType : "script"
-			}); 
-			   
-	          }       
-			      }
-			  </script>
+	}
+		</script>
 
-		  <div id="chart_div" style="width: 900px; height: 500px;"></div>
-
-		<div id="chart_div2" style="width: 900px; height: 500px;"></div>
+		<div class="span5">
+			<div id="chart_div" style="width: 750px; height: 500px;"></div>
 		</div>
-</body>
+		<div class="span5">
+			<div id="chart_div2"  style="width: 750px; height: 500px;"></div>
+		</div>
+		</div>
+		</body>
 </html>
