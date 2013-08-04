@@ -6,15 +6,14 @@ class DefectController < ApplicationController
     @defect_severity = Defectseverity.select('DISTINCT severity')
     # if !Defect.all.nil?
     @total_defects = @defect.count
-    
+
     @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[0].category).count
     @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[1].category).count
     @missed_during_regression_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[2].category).count
     @adhoc_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[3].category).count
     @automation_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[4].category).count
     @production_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[5].category).count
-    
-    
+
     @cosmetic_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[0].severity).count
     @show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[1].severity).count
     @minor_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[2].severity).count
@@ -22,12 +21,12 @@ class DefectController < ApplicationController
     @major_but_not_show_stopper_def_severity = Defect.where('project_id in (?) AND severity in (?)', params[:id], @defect_severity[4].severity).count
 
   end
-  
+
   def get_detailed_defect_info
     if params[:analysis_by] == 'defect_type'
       @defect_analysis_type = Defect.where('project_id in (?) AND category in (?)', params[:proj_id], params[:issue_type])
     end
-    
+
     if params[:analysis_by] == 'defect_severity'
       @defect_analysis_severity = Defect.where('project_id in (?) AND severity in (?)', params[:proj_id], params[:issue_type])
     end
@@ -40,6 +39,10 @@ class DefectController < ApplicationController
 
   def list_defects
     @defect = Defect.find(:all)
+    @defect_description_autocomplete = Defect.all.map(&:def_description).join('","').html_safe
+    @testcases_title_autocomplete = Post.all.map(&:title).join('","').html_safe
+    @project_name_autocomplete = Project.all.map(&:name).join('","').html_safe
+
     if @defect.nil?
       flash[:notice]='There are no defects'
     end
@@ -152,11 +155,21 @@ class DefectController < ApplicationController
       @status = Status.find(:all)
       @defecttype= Defecttype.find(:all)
       @severity = Defectseverity.find(:all)
-# binding.pry
+    # binding.pry
     end
     @defect.save
 
     respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def get_search_result
+    
+@defect = Defect.find_all_by_def_description(params[:id])
+
+respond_to do |format|
       format.html
       format.js
     end

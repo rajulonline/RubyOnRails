@@ -1,6 +1,8 @@
 <%- model_class = Defect -%>
 <html lang="en">
 	<head>
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<meta charset="utf-8" />
 		<script>
 			function get_project_post(project_name) {
@@ -15,18 +17,62 @@
 					
 				});
 			}
+		
+		$(function perform_auto_complete() {
 			
-			
-		</script>
-	</head>
+			var availableTags = ["<%=@defect_description_autocomplete%>","<%= @testcases_title_autocomplete%>","<%= @project_name_autocomplete%>"];
+			$("#Search_value").autocomplete({
+				source : availableTags
+			});
+		});
+		
+		$(document).ready(function() {
+			$("#Defect_search").click(function() {
+		var search_param = $("#Search_value").val();
+		
+		
+		$.ajax({
+					type : "POST",
+					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+					data: { id: search_param},
+					url : 'get_search_result',
+					dataType : "script",
+					
+					
+				});
+		
+		
+		
+		
 
-	
+});
+  // Handler for .ready() called.
+  
+});
+		
+
+	</script>
+	</head>
+		<div class="ui-widget">
+			<label for="Defects">Auto Complete Defects Search: </label>
+			<input type="text" id = "Search_value">
+    <input id = "Defect_search" type="submit" value="Go" />
+			
+			
+		</div>
+		
 		<%= form_tag do %>
 		<%= select_tag  'project_name',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_post($(this).val())", :style=>"width: 500px;", :prompt => "All Projects" %>
 		<% end %>
 
 		<div id="project_defects">
 			<%= render :partial => 'list_defects' %>
+		</div>
+		
+		<div id="search">
+			<% if !@defect_count.nil?%>
+			<%= render :partial => 'get_search_result' %>
+			<%end%>
 		</div>
 
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
