@@ -1,6 +1,7 @@
 class RequirementController < ApplicationController
   def list_requirements
     @requirement=Requirement.find(:all)
+    @requirements_name_autocomplete = Requirement.all.map(&:req_name).join('","').html_safe
     if @requirement.blank?
       flash[:notice]="No requirements"
     end
@@ -86,6 +87,14 @@ class RequirementController < ApplicationController
 
   def show
     @requirement = Requirement.find(params[:id])
+    respond_to do |format|
+      format.html { }
+      format.js
+    end
+  end
+  
+  def get_search_result
+    @requirement = Requirement.find_all_by_req_name(params[:id])
     respond_to do |format|
       format.html { }
       format.js

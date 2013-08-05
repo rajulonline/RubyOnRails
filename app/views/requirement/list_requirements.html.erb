@@ -19,14 +19,33 @@
 					}
 				});
 			}
+			
+			$(function perform_auto_complete() {
+			
+			var availableTags = ["<%= @requirements_name_autocomplete%>"];
+				$("#Search_value").autocomplete({
+				source : availableTags
+				});
+				});
 		</script>
 	</head>
-
+	<div class="ui-widget">
+			<label>Auto Complete Search: </label>
+			<input type="text" id = "Search_value">
+    		<input id = "Search_button" type="submit" value="Go" />
+		</div>
 	<body>
 		<%= form_tag do %>
 		<%= select_tag  'project_name',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_post($(this).val())", :style=>"width: 500px;", :prompt => "All Projects" %>
 		<% end %>
 
 		<div id="project_requirements">
+			<% if !@defect_count.nil?%>
 			<%= render :partial => 'list_requirements' %>
-		</div
+			<%end%>
+		</div>
+		<div id="search">
+			<% if !@defect_count.nil?%>
+			<%= render :partial => 'get_search_result' %>
+			<%end%>
+		</div>

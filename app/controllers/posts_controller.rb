@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @project = Project.all
+    @testcases_title_autocomplete = Post.all.map(&:title).join('","').html_safe
     params[:proj_name] == 'Pr'
     @search_result = Project.where("name LIKE '%#{params[:proj_name]}%'")
   

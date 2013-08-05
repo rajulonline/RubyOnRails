@@ -40,8 +40,7 @@ class DefectController < ApplicationController
   def list_defects
     @defect = Defect.find(:all)
     @defect_description_autocomplete = Defect.all.map(&:def_description).join('","').html_safe
-    @testcases_title_autocomplete = Post.all.map(&:title).join('","').html_safe
-    @project_name_autocomplete = Project.all.map(&:name).join('","').html_safe
+    
 
     if @defect.nil?
       flash[:notice]='There are no defects'

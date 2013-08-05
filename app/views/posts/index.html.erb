@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<script>
-			function get_project_post(project_name) {
+						function get_project_post(project_name) {
 				$.ajax({
 					type : "POST",
 					data: { id: project_name},
@@ -18,10 +18,22 @@
 					}
 				});
 			}
+			$(function perform_auto_complete() {
+			
+			var availableTags = ["<%= @testcases_title_autocomplete%>"];
+				$("#Search_value").autocomplete({
+				source : availableTags
+				});
+				});
 		</script>
 	</head>
 
 	<body>
+		<div class="ui-widget">
+			<label>Auto Complete Search: </label>
+			<input type="text" id = "Search_value">
+    <input id = "Search_button" type="submit" value="Go" />
+		</div>
 		<%= form_tag do %>
 		<%= select_tag  'project_name',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_post($(this).val())", :style=>"width: 500px;", :prompt => "All Projects" %>
 		<% end %>
