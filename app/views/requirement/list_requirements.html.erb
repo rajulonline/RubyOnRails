@@ -1,5 +1,5 @@
 <!doctype html>
-<%- model_class = Post -%>
+<%- model_class = Requirement -%>
 <html lang="en" id="test">
 	<head>
 		<meta charset="utf-8" />
@@ -40,12 +40,13 @@
 		<% end %>
 
 		<div id="project_requirements">
-			<% if !@defect_count.nil?%>
+			<% if !@requirement.nil? %>
 			<%= render :partial => 'list_requirements' %>
 			<%end%>
 		</div>
 		<div id="search">
-			<% if !@defect_count.nil?%>
+		<% if !@defect_count.nil? %>
 			<%= render :partial => 'get_search_result' %>
-			<%end%>
+			<% end -%>
 		</div>
+	

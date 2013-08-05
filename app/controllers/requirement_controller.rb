@@ -7,8 +7,8 @@ class RequirementController < ApplicationController
     end
     @project = Project.find(:all)
     respond_to do |format|
-      format.js
       format.html
+      format.js
     end
   end
 
