@@ -20,9 +20,10 @@ class RequirementController < ApplicationController
 
     if request.post?
       @requirement = Requirement.new(params[:requirement])
-      @retain_product_owner = params[:requirement][:prod_owner]
-      @retain_dev_assigned = params[:requirement][:dev_assigned]
-      @retain_status = params[:requirement][:status]
+      
+      @on_error_retain_product_owner = params[:requirement][:prod_owner]
+      @on_error_retain_dev_assigned = params[:requirement][:dev_assigned]
+      @on_error_retain_status = params[:requirement][:status]
       
      if @requirement.valid?
       @requirement.save

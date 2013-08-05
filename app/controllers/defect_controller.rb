@@ -40,7 +40,6 @@ class DefectController < ApplicationController
   def list_defects
     @defect = Defect.find(:all)
     @defect_description_autocomplete = Defect.all.map(&:def_description).join('","').html_safe
-    
 
     if @defect.nil?
       flash[:notice]='There are no defects'
@@ -79,6 +78,14 @@ class DefectController < ApplicationController
     @severity = Defectseverity.find(:all)
     if request.post?
       @defect = Defect.new(params[:defect])
+
+      @on_error_retain_req_name = params[:defect][:req_name]
+      @on_error_retain_tester_name=params[:defect][:tester_name]
+      @on_error_retain_dev_name = params[:defect][:dev_name]
+      @on_error_retain_status= params[:defect][:status]
+      @on_error_retain_severity= params[:defect][:severity]
+      @on_error_retain_category= params[:defect][:category]
+
       if params[:defect][:req_name].present?
         defect_new = Defect.new(params[:defect])
         req = Requirement.find_by_req_name([defect_new.req_name])
@@ -165,10 +172,10 @@ class DefectController < ApplicationController
   end
 
   def get_search_result
-    
-@defect = Defect.find_all_by_def_description(params[:id])
 
-respond_to do |format|
+    @defect = Defect.find_all_by_def_description(params[:id])
+
+    respond_to do |format|
       format.html
       format.js
     end

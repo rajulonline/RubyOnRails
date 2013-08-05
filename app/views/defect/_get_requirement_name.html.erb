@@ -2,7 +2,7 @@
 <%= form_for :defect do |f| %>
 <%if @requirement.present?%>
 <%= f.label :Mapping_Requirement, :class => 'control-label' %>
-<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }),:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true, :prompt=> "please select"  %>
+<%= select_tag 'defect[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] },@on_error_retain_req_name),:onchange=>"get_next_value($(this).val(),$(this).attr('name'))",:remote=>true, :prompt=> "please select"  %>
 <%end%>
 <%if @post.present?%>
 <%= f.label :Parent_testcase, :class => 'control-label' %>

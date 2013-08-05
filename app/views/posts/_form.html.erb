@@ -55,13 +55,13 @@
 <div class="control-group">
 	<%= f.label :agent, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'post[agent]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+		<%= select_tag 'post[agent]', options_for_select(@login.collect{ |u| [u.user] },@on_error_retain_agent), {include_blank: 'None'}  %>
 	</div>
 </div>
 <div class="control-group">
 	<%= f.label :status, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'post[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
+		<%= select_tag 'post[status]', options_for_select(@status.collect{ |u| [u.name] },@on_error_retain_status), {include_blank: 'None'}  %>
 	</div>
 </div>
 

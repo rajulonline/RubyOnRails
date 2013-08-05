@@ -92,6 +92,9 @@ class PostsController < ApplicationController
       #saving it in the posts table. The piece of code from post_new till @post
       # does it
       @post = Post.new(params[:post])
+      
+      @on_error_retain_agent = params[:post][:agent]
+      @on_error_retain_status = params[:post][:status]
       if params[:post][:req_name].present?
         post_new = Post.new(params[:post])
         req = Requirement.find_by_req_name([post_new.req_name])
