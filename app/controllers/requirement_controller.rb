@@ -20,14 +20,16 @@ class RequirementController < ApplicationController
 
     if request.post?
       @requirement = Requirement.new(params[:requirement])
-      if @requirement.valid?
+      @retain_product_owner = params[:requirement][:prod_owner]
+      @retain_dev_assigned = params[:requirement][:dev_assigned]
+      @retain_status = params[:requirement][:status]
+      
+     if @requirement.valid?
       @requirement.save
       flash[:notice] = "Saved successfully"
-     render :action => 'list_requirements'
+      redirect_to :action => "list_requirements"
     end
     end
-  else
-    render :action => 'create_requirement'
   end
 
   def get_project_requirements

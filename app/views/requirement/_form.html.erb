@@ -36,7 +36,7 @@
       
     <%= f.label :Product_Owner, :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+      <%= select_tag 'requirement[prod_owner]', options_for_select(@login.collect{ |u| [u.user] },@retain_product_owner), {include_blank: 'None'}  %>
     </div>
   </div>
  
@@ -44,7 +44,7 @@
       
     <%= f.label :Developer_Assigned, :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] }), {include_blank: 'None'}  %>
+      <%= select_tag 'requirement[dev_assigned]', options_for_select(@login.collect{ |u| [u.user] },@retain_dev_assigned), {include_blank: 'None'} %>
     </div>
   </div>
   
@@ -52,7 +52,7 @@
       
     <%= f.label :Status, :class => 'control-label' %>
     <div class="controls">
-       <%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] }), {include_blank: 'None'}  %>
+       <%= select_tag 'requirement[status]', options_for_select(@status.collect{ |u| [u.name] },@retain_status), {include_blank: 'None'}  %>
     </div>
   </div>
   
