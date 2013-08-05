@@ -20,12 +20,14 @@ class RequirementController < ApplicationController
 
     if request.post?
       @requirement = Requirement.new(params[:requirement])
-      # if @requirement.valid?
+      if @requirement.valid?
       @requirement.save
       flash[:notice] = "Saved successfully"
-      redirect_to :action => "list_requirements"
-    # end
+     render :action => 'list_requirements'
     end
+    end
+  else
+    render :action => 'create_requirement'
   end
 
   def get_project_requirements

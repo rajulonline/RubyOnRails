@@ -4,5 +4,5 @@ class Project < ActiveRecord::Base
   has_many :posts,:foreign_key=>:project_id,:dependent => :destroy
   has_many :defects, :foreign_key=>:project_id,:dependent => :destroy
   
-
+validates :name,:description, :presence => true
 end
