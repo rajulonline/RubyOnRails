@@ -17,6 +17,7 @@
 				<th><%= model_class.human_attribute_name(:prod_owner) %></th>
 				<th><%= model_class.human_attribute_name(:dev_name) %></th>
 				<th><%= model_class.human_attribute_name(:created_at ) %></th>
+				<th><%= model_class.human_attribute_name(:actions ) %></th>
 			</tr>
 		</thead>
 		</head>
@@ -30,6 +31,15 @@
 			<td><%= requirement.prod_owner %></td>
 			<td><%= requirement.dev_assigned%></td>
 			<td><%= requirement.created_at %></td>
+			<td><%= button_to "Edit", { :action=>'edit_requirement',:id=>requirement.id,:project_id => requirement.project_id},
+		:class => 'btn btn-mini', :remote=> true %> </td>
+
+		<td><%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+		{:action=>'destroy',:id=>requirement.id},:confirm => 'Are you sure,This might delete all associated issues.',
+		:class => 'btn btn-mini btn-danger' %></td>
+
+		<td><%= button_to "Show",{ :controller => 'requirement',:action=>'show',:id=>requirement.id},:class => 'btn btn-mini btn-success'%> </td>
+	
 		</tr>
 
 		<% end %>

@@ -20,7 +20,7 @@
 				<th><%= model_class.human_attribute_name(:severity) %></th>
 				<th><%= model_class.human_attribute_name(:tester_name) %></th>
 				<th><%= model_class.human_attribute_name(:dev_name) %></th>
-				
+				<th><%= model_class.human_attribute_name(:actions) %></th>
 
 			</tr>
 		</thead>
@@ -37,6 +37,17 @@
 			<td><%= defect.severity %></td>
 			<td><%= defect.tester_name %></td>
 			<td><%= defect.dev_name %></td>
+			<td><%= button_to "Edit", { :action=>'edit_defect',:id=>defect.id},:class => 'btn btn-mini',:remote=>true %> </td>
+
+			<td><%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+			{:action=>'destroy',:id=>defect.id},
+			:method => :delete,
+			:confirm => 'Are you sure,This might delete all associated issues.',
+			:class => 'btn btn-mini btn-danger' %></td>
+			<td><%= button_to "Show",{ :action=>'show',:id=>defect.id},
+			:method => :show,
+			:class => 'btn btn-mini btn-success'%></td>
+
 </tr>
 
 		<% end %>

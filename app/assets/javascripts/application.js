@@ -21,7 +21,7 @@ $(document).ajaxError(function(event, request) {
 		alert(msg);
 });
 
-	$(document).ready(function() {
+$(document).ready(function() {
 	$("#Search_button").click(function() {
 		var search_param = $("#Search_value").val();
 
@@ -40,5 +40,5 @@ $(document).ajaxError(function(event, request) {
 	});
 	// Handler for .ready() called.
 
-}); 
+});
 

@@ -5,12 +5,10 @@ class PostsController < ApplicationController
   def index
     @project = Project.all
     @testcases_title_autocomplete = Post.all.map(&:title).join('","').html_safe
-    params[:proj_name] == 'Pr'
-    @search_result = Project.where("name LIKE '%#{params[:proj_name]}%'")
   
-    # @post = Post.all
-    # @children = Children.all
-    cache_everything
+    @post = Post.all
+    @children = Children.all
+    #cache_everything
     # cache = ActiveSupport::Cache::MemoryStore.new
     # @stats = Rails.cache.stats.first.last
 
@@ -195,6 +193,15 @@ class PostsController < ApplicationController
     if @requirement.nil?
       @requirement = []
     end
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  
+  def get_search_result
+    @post = Post.find_all_by_title(params[:id])
+
     respond_to do |format|
       format.html
       format.js

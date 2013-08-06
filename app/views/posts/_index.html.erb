@@ -2,36 +2,32 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<div class="page-header">
-			<h1> <%= link_to 'Test Case Management'%></h1>
-		</div>
-		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<div id="testcases">
+			<div class="page-header">
+				<h1> <%= link_to 'Test Case Management'%></h1>
+			</div>
+			<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+			<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	</head>
 	<body>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all issues related to the test case">
-						<%= model_class.human_attribute_name(:id) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all issues related to the test case"> <%= model_class.human_attribute_name(:id) %> </div></th>
 
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the project">
-						<%= model_class.human_attribute_name(:Project_id) %> </div></th>
-				    <th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the requirement">
-						<%= model_class.human_attribute_name(:Requirement_name) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the project"> <%= model_class.human_attribute_name(:Project_id) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the requirement"> <%= model_class.human_attribute_name(:Requirement_name) %> </div></th>
 
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the agent to get all test cases assigned to the agent">
-						<%= model_class.human_attribute_name(:agent) %></div></th>
-					
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the agent to get all test cases assigned to the agent"> <%= model_class.human_attribute_name(:agent) %></div></th>
+
 					<th><%= model_class.human_attribute_name(:title) %></th>
-					
+
 					<th><%= model_class.human_attribute_name(:content) %></th>
-					
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the status to get all issues in the selected status">
-						<%= model_class.human_attribute_name(:status) %> </div></th>
-					
+
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the status to get all issues in the selected status"> <%= model_class.human_attribute_name(:status) %> </div></th>
+
 					<th><%= model_class.human_attribute_name(:created_at) %></th>
-					
+
 					<th><%= t '.actions', :default => t("helpers.actions") %></th>
 				</tr>
 			</thead>
@@ -43,7 +39,7 @@
 					<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
 					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
 					<td><%= post.title %></td>
-					<td><%=modify_truncate(post.content,15) %></td>
+					<td><%= modify_truncate(post.content,15) %></td>
 					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
 					<td><%= l post.created_at %></td>
 					<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -69,5 +65,11 @@
 
 		<%= link_to "Display all Child Test Cases",{ :controller=> 'children', :action => 'display_all_child_test_cases'},
 		:class => 'btn btn-success' %>
+		</div>
+		<div id="search">
+			<% if !@post.nil? %>
+			<%= render :partial => 'get_search_result' %>
+			<% end %>
+		</div>
 	</body>
 </html>

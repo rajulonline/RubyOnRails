@@ -1,0 +1,64 @@
+<%- model_class = Post -%>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<div class="page-header">
+			<h1> <%= link_to 'Test Case search result'%></h1>
+		</div>
+	</head>
+	<body>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all issues related to the test case">
+						<%= model_class.human_attribute_name(:id) %> </div></th>
+
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the project">
+						<%= model_class.human_attribute_name(:Project_id) %> </div></th>
+				    <th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the requirement">
+						<%= model_class.human_attribute_name(:Requirement_name) %> </div></th>
+
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the agent to get all test cases assigned to the agent">
+						<%= model_class.human_attribute_name(:agent) %></div></th>
+					
+					<th><%= model_class.human_attribute_name(:title) %></th>
+					
+					<th><%= model_class.human_attribute_name(:content) %></th>
+					
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the status to get all issues in the selected status">
+						<%= model_class.human_attribute_name(:status) %> </div></th>
+					
+					<th><%= model_class.human_attribute_name(:created_at) %></th>
+					
+					<th><%= model_class.human_attribute_name(:actions) %></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @post.each do |post| %>
+				<tr>
+					<td><%= link_to post.id, post_path(post),:remote=>true %></td>
+					<td><%= link_to post.project_id,:action => :all_project_test_cases, :id=>post.project_id %></td>
+					<td><%if post.req_name%><%= link_to post.req_name %><%end%></td>
+					<td><%= link_to post.agent , :controller => :posts , :action => :all_agent, :id => post.agent %></td>
+					<td><%= post.title %></td>
+					<td><%=modify_truncate(post.content,15) %></td>
+					<td><%= link_to post.status, :controller => :posts , :action => :all_status, :id => post.status %></td>
+					<td><%= l post.created_at %></td>
+					<td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+					edit_post_path(post), :class => 'btn btn-mini' %>
+					<%= link_to t('.destroy', :default => t("helpers.links.Delete All")),
+					post_path(post),
+					:method => :delete,
+					:confirm => 'Are you sure? You run the risk of deleting the child test cases and the associated defects as well?',:id=>post.parent_tc_id,
+					:class => 'btn btn-mini btn-danger' %>
+
+					<%= link_to t('.new', :default => "Show"),
+					post,
+					:class => 'btn btn-mini btn-success' %> </td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		</div>
+	</body>
+</html>

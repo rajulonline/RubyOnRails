@@ -1,30 +1,50 @@
 <!doctype html>
 <%- model_class = Post -%>
-<html lang="en" id="test">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<script>
-						function get_project_post(project_name) {
+			function get_project_post(project_name) {
 				$.ajax({
-					type : "POST",
-					data: { id: project_name},
-					url : 'posts/get_test_case',
-					dataType : "script",
-					success : function(data) {
-						// $('#testcases').html(data);
-					},
-					error : function(e) {
-						console.log(e.message);
-					}
-				});
-			}
-			$(function perform_auto_complete() {
+				type : "POST",
+				data: { id: project_name},
+				url : 'posts/get_test_case',
+				dataType : "script",
+				success : function(data) {
+				// $('#testcases').html(data);
+				},
+				error : function(e) {
+				console.log(e.message);
+					 }
+				  });
+				}
 			
-			var availableTags = ["<%= @testcases_title_autocomplete%>"];
-				$("#Search_value").autocomplete({
-				source : availableTags
+			$(document).ready(function(){
+				$('#search').hide()
+			});
+			
+			
+			$(document).ready(function() {
+			$("#Search_button").click(function() {
+			var search_param = $("#Search_value").val();
+
+				$.ajax({
+				type : "POST",
+				beforeSend : function(xhr) {
+				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				data : {id : search_param},
+				url : 'posts/get_search_result',
+				dataType : "script"
+						});
+					});
 				});
-				});
+
+			$(function perform_auto_complete() {
+				var availableTags = ["<%= @testcases_title_autocomplete%>"];
+					$("#Search_value").autocomplete({
+					source : availableTags
+						});
+					});
 		</script>
 	</head>
 
@@ -32,12 +52,17 @@
 		<div class="ui-widget">
 			<label>Auto Complete Search: </label>
 			<input type="text" id = "Search_value">
-    <input id = "Search_button" type="submit" value="Go" />
+			<input id = "Search_button" type="submit" value="Go" />
 		</div>
 		<%= form_tag do %>
 		<%= select_tag  'project_name',options_for_select(@project.collect{ |u| [u.name] }),:onchange=>"get_project_post($(this).val())", :style=>"width: 500px;", :prompt => "All Projects" %>
 		<% end %>
 
 		<div id="testcases">
+			<% if !@post.nil? %>
 			<%= render :partial => 'index' %>
-		</div
+			<%end%>
+		</div>
+		
+			</body>
+</html>
