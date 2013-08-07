@@ -14,6 +14,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 //= require_tree
 $(document).ajaxError(function(event, request) {
 	var msg = request.getResponseHeader('X-Message');
@@ -41,4 +43,9 @@ $(document).ready(function() {
 	// Handler for .ready() called.
 
 });
+$.extend( $.fn.dataTableExt.oStdClasses, {
+    "sWrapper": "dataTables_wrapper form-inline"
+} );
+
+
 

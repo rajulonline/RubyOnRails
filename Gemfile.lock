@@ -65,6 +65,8 @@ GEM
     jist (1.5.1)
       json
     journey (1.0.4)
+    jquery-datatables-rails (1.11.2)
+      jquery-rails
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -75,16 +77,16 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.3.1)
     libv8 (3.11.8.17)
-    lunchy (0.6.0)
+    lunchy (0.7.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     memcachier (0.0.2)
-    method_source (0.8.1)
+    method_source (0.8.2)
     mime-types (1.23)
-    multi_json (1.7.7)
+    multi_json (1.7.8)
     mysql2 (0.3.13)
-    pg (0.15.1)
+    pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -107,14 +109,14 @@ GEM
       pry-docmore
       pry-rescue
       pry-stack_explorer
-    pry-rails (0.3.1)
+    pry-rails (0.3.2)
       pry (>= 0.9.10)
     pry-rescue (1.1.1)
       interception (>= 0.3)
       pry
-    pry-stack_explorer (0.4.9)
+    pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
-      pry (~> 0.9.11)
+      pry (>= 0.9.11)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
@@ -152,7 +154,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
-    sass (3.2.9)
+    sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -160,7 +162,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    slop (3.4.5)
+    slop (3.4.6)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -185,7 +187,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     uniform_notifier (1.2.0)
     will_paginate (3.0.4)
-    yard (0.8.6.2)
+    yard (0.8.7)
 
 PLATFORMS
   ruby
@@ -197,6 +199,7 @@ DEPENDENCIES
   dalli
   debugger
   dynamic_form
+  jquery-datatables-rails
   jquery-rails
   less-rails
   lunchy
