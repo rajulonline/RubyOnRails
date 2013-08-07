@@ -23,29 +23,7 @@ $(document).ajaxError(function(event, request) {
 		alert(msg);
 });
 
-$(document).ready(function() {
-	$("#Search_button").click(function() {
-		var search_param = $("#Search_value").val();
 
-		$.ajax({
-			type : "POST",
-			beforeSend : function(xhr) {
-				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-			},
-			data : {
-				id : search_param
-			},
-			url : 'get_search_result',
-			dataType : "script"
-		});
-
-	});
-	// Handler for .ready() called.
-
-});
-$.extend( $.fn.dataTableExt.oStdClasses, {
-    "sWrapper": "dataTables_wrapper form-inline"
-} );
 
 
 

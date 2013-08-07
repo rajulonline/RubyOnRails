@@ -9,6 +9,8 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require dataTables/jquery.dataTables.bootstrap
+ *= require DT_bootstrap
  *= require_tree .
  */
 #children_content{
@@ -35,3 +37,5 @@ color: #444;
 font-size: 11px;
 line-height: 2;
 }
+
+

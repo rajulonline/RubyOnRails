@@ -71,7 +71,7 @@
 
 	<%= f.label :Tester_Name, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[tester_name]', options_for_select(@login.collect{ |u| [u.user] },@on_error_retain_tester_name), {include_blank: 'None'}  %>
+	 <%= f.select :tester_name, Login.all.collect {|p| [ p.user ] }, { include_blank: 'None' } %>
 	</div>
 </div>
 
@@ -79,7 +79,7 @@
 
 	<%= f.label :Developer_Name, :class => 'control-label' %>
 	<div class="controls">
-		<%= select_tag 'defect[dev_name]', options_for_select(@login.collect{ |u| [u.user] },@on_error_retain_dev_name), {include_blank: 'None'}  %>
+		<%= f.select :dev_name, Login.all.collect {|p| [ p.user ] }, { include_blank: 'None' } %>
 	</div>
 </div>
 

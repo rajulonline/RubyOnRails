@@ -11,20 +11,26 @@
 	</head>
 	<body>
 		<table class="table table-striped">
+		
 			<thead>
 				<tr>
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all issues related to the test case"> <%= model_class.human_attribute_name(:id) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all issues related to the test case"> 
+						<%= model_class.human_attribute_name(:id) %> </div></th>
 
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the project"> <%= model_class.human_attribute_name(:Project_id) %> </div></th>
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the requirement"> <%= model_class.human_attribute_name(:Requirement_name) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the project"> 
+						<%= model_class.human_attribute_name(:Project_id) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the id to get all test cases related to the requirement"> 
+						<%= model_class.human_attribute_name(:Requirement_name) %> </div></th>
 
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the agent to get all test cases assigned to the agent"> <%= model_class.human_attribute_name(:agent) %></div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the agent to get all test cases assigned to the agent"> 
+						<%= model_class.human_attribute_name(:agent) %></div></th>
 
 					<th><%= model_class.human_attribute_name(:title) %></th>
 
 					<th><%= model_class.human_attribute_name(:content) %></th>
 
-					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the status to get all issues in the selected status"> <%= model_class.human_attribute_name(:status) %> </div></th>
+					<th><a href="#" rel="tooltip" data-placement="bottom" title="Click on the status to get all issues in the selected status"> 
+						<%= model_class.human_attribute_name(:status) %> </div></th>
 
 					<th><%= model_class.human_attribute_name(:created_at) %></th>
 

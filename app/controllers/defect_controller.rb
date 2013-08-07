@@ -4,8 +4,11 @@ class DefectController < ApplicationController
     @project_id = params[:id]
     @defect_types = Defecttype.select('DISTINCT category')
     @defect_severity = Defectseverity.select('DISTINCT severity')
+    @rambo = Defect.select('DISTINCT severity').group('severity').count
     # if !Defect.all.nil?
+   
     @total_defects = @defect.count
+    
 
     @reg_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[0].category).count
     @unit_test_defect_count = Defect.where('project_id in (?) AND category in (?)', params[:id], @defect_types[1].category).count

@@ -201,7 +201,6 @@ class PostsController < ApplicationController
   
   def get_search_result
     @post = Post.find_all_by_title(params[:id])
-
     respond_to do |format|
       format.html
       format.js
