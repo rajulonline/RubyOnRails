@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
     t.text     "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.binary   "avatar"
   end
 
   create_table "posts", :primary_key => "parent_tc_id", :force => true do |t|
@@ -67,10 +68,15 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
   end
 
   create_table "projects", :force => true do |t|
+    t.integer  "project_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "requirements", :force => true do |t|
@@ -88,14 +94,6 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
 
   create_table "statuses", :force => true do |t|
     t.string "name"
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "login"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
 end

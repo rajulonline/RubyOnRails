@@ -1,12 +1,13 @@
 class Projects < ActiveRecord::Migration
   def up
    create_table :projects do |t|
-      t.integer :project_id
+      
       t.string :name
       t.text :description
-      
+      t.attachment :avatar
  
       t.timestamps
     end
   end
+  
 end

@@ -9,8 +9,8 @@
 	<section name="DialogBounds_SearchDialog">
 		<item value="522" key="DIALOG_WIDTH"/>
 		<item value="127" key="DIALOG_Y_ORIGIN"/>
-		<item value="459" key="DIALOG_X_ORIGIN"/>
 		<item value="414" key="DIALOG_HEIGHT"/>
+		<item value="459" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="Search">
@@ -30,18 +30,7 @@
 		<item value="false" key="CASE_SENSITIVE"/>
 		<item value="false" key="REG_EX_SEARCH"/>
 		<item value="false" key="SEARCH_DERIVED"/>
-		<item value="4" key="HISTORY_SIZE"/>
-		<section name="HISTORY2">
-			<item value="false" key="isRegExSearch"/>
-			<item value="children_content" key="textPattern"/>
-			<item value="0" key="scope"/>
-			<item value="true" key="ignoreCase"/>
-			<list key="fileNamePatterns">
-				<item value=".css"/>
-			</list>
-			<list key="workingSets">
-			</list>
-		</section>
+		<item value="7" key="HISTORY_SIZE"/>
 		<section name="EXTENSIONS">
 			<item value="*.html.erb" key="3"/>
 			<item value="*.erb" key="2"/>
@@ -49,18 +38,18 @@
 			<item value="*.*" key="0"/>
 			<item value="*" key="4"/>
 		</section>
-		<section name="HISTORY3">
+		<section name="HISTORY2">
 			<item value="false" key="isRegExSearch"/>
-			<item value="children" key="textPattern"/>
+			<item value="auto" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<list key="fileNamePatterns">
-				<item value=".css"/>
+				<item value="*.*"/>
 			</list>
 			<list key="workingSets">
 			</list>
 		</section>
-		<section name="HISTORY0">
+		<section name="HISTORY3">
 			<item value="false" key="isRegExSearch"/>
 			<item value="1111" key="textPattern"/>
 			<item value="0" key="scope"/>
@@ -71,13 +60,57 @@
 			<list key="workingSets">
 			</list>
 		</section>
+		<section name="HISTORY0">
+			<item value="false" key="isRegExSearch"/>
+			<item value="dataTables_length" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<list key="fileNamePatterns">
+				<item value="*.*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
 		<section name="HISTORY1">
+			<item value="false" key="isRegExSearch"/>
+			<item value="complete" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<list key="fileNamePatterns">
+				<item value="*.*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY5">
+			<item value="false" key="isRegExSearch"/>
+			<item value="children_content" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<list key="fileNamePatterns">
+				<item value=".css"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY4">
 			<item value="false" key="isRegExSearch"/>
 			<item value="html_safe" key="textPattern"/>
 			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<list key="fileNamePatterns">
 				<item value="*.*"/>
+			</list>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY6">
+			<item value="false" key="isRegExSearch"/>
+			<item value="children" key="textPattern"/>
+			<item value="0" key="scope"/>
+			<item value="true" key="ignoreCase"/>
+			<list key="fileNamePatterns">
+				<item value=".css"/>
 			</list>
 			<list key="workingSets">
 			</list>

@@ -8,7 +8,7 @@ class ProjectController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.json
+      format.json { render json: @project}
     end
 
   end
@@ -65,6 +65,7 @@ class ProjectController < ApplicationController
   def create_new_project
     if request.post?
       @project = Project.new(params[:project])
+      binding.pry
       if @project.save
         redirect_to :action=>'list_all_projects'
         flash[:notice]= 'Project added successfully'
@@ -132,5 +133,6 @@ class ProjectController < ApplicationController
       format.html
     end
   end
-
+  
+  
 end

@@ -1,4 +1,4 @@
-<%= form_for :project ,:html => { :multipart => true }, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for :project ,:html => { :multipart => true } do |f| %>
 
 <!-- # Message Header -->
 <%- model_class = Project -%>
@@ -29,7 +29,7 @@
 	<%= f.label :File_Upload, :class => 'control-label' %>
 	<div class="controls">
 		<%= f.file_field :avatar %>
-		<%= f.submit "Upload",:action=>'file_upload' %>
+		
 	</div>
 </div>
 
