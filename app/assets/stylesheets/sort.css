@@ -1,0 +1,5 @@
+h1 { padding: .2em; margin: 0; }
+#projects { float:left; width: 500px; margin-right: 2em; }
+#projects { width: 200px; float: left; }
+/* style the list to maximize the droppable hitarea */
+#cart ol { margin: 0; padding: 1em 0 1em 3em; }

@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<script>
+			$(function() {
+				$("#catalog").accordion();
+				$("#catalog li").draggable({
+					appendTo : "body",
+					helper : "clone"
+				});
+				$("#cart ol").droppable({
+					activeClass : "ui-state-default",
+					hoverClass : "ui-state-hover",
+					accept : ":not(.ui-sortable-helper)",
+					drop : function(event, ui) {
+						$(this).find(".placeholder").remove();
+						$("<li></li>").text(ui.draggable.text()).addClass("cart-item").appendTo(this);
+						var $hiddenInput = $('<input/>',{type:'hidden',value:ui.draggable.text()});
+						$hiddenInput.appendTo('#hidden_dragged_values');
+					}
+				}).sortable({
+					items : "li:not(.placeholder)",
+					sort : function() {
+						$(this).removeClass("ui-state-default");
+					}
+				});
+				$("#catalog ul").droppable({
+					drop : function(event, ui) {
+						$(ui.draggable).remove();
+					},
+					hoverClass : "ui-state-hover",
+					accept : '.cart-item'
+				});
+			});
+
+		</script>
+	</head>
+	<div class="demo">
+
+		<div id="users">
+			<h1 class="ui-widget-header">Users</h1>
+			<div id="catalog">
+
+				<h3><a href="#">Users</a></h3>
+				<div>
+					<ul>
+						<% @login.each do |login|%>
+						<li>
+							<%= login.user %>
+						</li>
+						<%end%>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="cart">
+
+		<h1 class="ui-widget-header">Projects</h1>
+		<div class="ui-widget-content">
+			<ul>
+				<% @project.each do |project|%>
+				<%= form_for :project,:url=>{:action=>'update_project_users',:id=>project.id} do %>
+				<ol>Project Title --- <%= project.name%>
+					<li class="placeholder">
+						Add your users here here for the project
+					</li>
+				</ol>
+				<%= button_to "Update"%> </td>
+				<%end%>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<div id="hidden_dragged_values"></div>
+
+	</div><!-- End demo -->
+
