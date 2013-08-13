@@ -41,6 +41,8 @@ Learning::Application.configure do
 
   config.assets.enabled = true
 
+
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true

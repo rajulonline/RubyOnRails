@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
   end
 
   create_table "projects", :force => true do |t|
-    t.integer  "project_id"
     t.string   "name"
     t.text     "description"
     t.string   "avatar_file_name"
@@ -77,6 +76,9 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
     t.datetime "avatar_updated_at"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.string   "audio_file_size"
   end
 
   create_table "requirements", :force => true do |t|

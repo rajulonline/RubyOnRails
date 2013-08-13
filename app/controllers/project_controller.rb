@@ -1,7 +1,7 @@
 class ProjectController < ApplicationController
   def list_all_projects
     @project = Project.all
-@login = Login.all
+    @login = Login.all
     if @project.nil?
       flash[:notice]='Currently there are no projects'
     end
@@ -65,7 +65,7 @@ class ProjectController < ApplicationController
   def create_new_project
     if request.post?
       @project = Project.new(params[:project])
-     
+
       if @project.save
         redirect_to :action=>'list_all_projects'
         flash[:notice]= 'Project added successfully'
@@ -133,10 +133,10 @@ class ProjectController < ApplicationController
       format.html
     end
   end
-  
+
   def user_management
-     @project = Project.all
-     @login = Login.all
+    @project = Project.all
+    @login = Login.all
     if @project.nil?
       flash[:notice]='Currently there are no projects'
     end
@@ -146,10 +146,10 @@ class ProjectController < ApplicationController
       format.json { render json: @project}
     end
   end
-  
+
   def update_project_users
     @project = Project.find_by_id(params[:id])
     binding.pry
   end
-  
+
 end

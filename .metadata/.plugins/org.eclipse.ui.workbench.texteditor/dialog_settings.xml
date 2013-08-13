@@ -2,19 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="wholeword"/>
-		<item value="dataTables_length" key="selection"/>
+		<item value="swf_url" key="selection"/>
 		<list key="findhistory">
+			<item value="swf_url"/>
+			<item value="movie is"/>
+			<item value="config.serve_static_assets"/>
+			<item value="serve_"/>
+			<item value="serve"/>
 			<item value="dataTables_length"/>
 			<item value=" dataTables_length"/>
 			<item value="popover"/>
-			<item value="result"/>
-			<item value="def_"/>
-			<item value="def_desc"/>
-			<item value="def"/>
-			<item value="all_agent"/>
 		</list>
 	</section>
 </section>
