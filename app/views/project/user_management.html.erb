@@ -16,6 +16,8 @@
 						$("<li></li>").text(ui.draggable.text()).addClass("cart-item").appendTo(this);
 						var $hiddenInput = $('<input/>',{type:'hidden',value:ui.draggable.text()});
 						$hiddenInput.appendTo('#hidden_dragged_values');
+						console.log($hiddenInput.val());
+						
 					}
 				}).sortable({
 					items : "li:not(.placeholder)",
@@ -59,21 +61,24 @@
 
 		<h1 class="ui-widget-header">Projects</h1>
 		<div class="ui-widget-content">
-			<ul>
+			
 				<% @project.each do |project|%>
 				<%= form_for :project,:url=>{:action=>'update_project_users',:id=>project.id} do %>
+				<div id="hidden_dragged_values">
 				<ol>Project Title --- <%= project.name%>
+					
 					<li class="placeholder">
 						Add your users here here for the project
 					</li>
 				</ol>
+				</div>
+				
 				<%= button_to "Update"%> </td>
 				<%end%>
 				<% end %>
-			</ul>
+			
 		</div>
 	</div>
-	<div id="hidden_dragged_values"></div>
-
+	
 	</div><!-- End demo -->
 

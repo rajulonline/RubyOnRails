@@ -14,10 +14,6 @@ class ProjectController < ApplicationController
   end
 
   def get_one_project
-    # project_name = Project.find_all_by_name(:name)
-    # value = Project.find_by_name(project_name).id
-    # @project = Project.find_all_by_id(value)
-
     @project = Project.find_all_by_name(params[:id])
     if @project.nil?
       flash[:notice]='Currently there are no projects'
@@ -118,13 +114,9 @@ class ProjectController < ApplicationController
 
     if params[:issue_type] == 'OpenTestCases'
       @open_post = Post.where('project_id in (?) AND status  in (?)', params[:proj_id], 'Open')
-    end
-
-    if params[:issue_type] == 'Open Defects'
+   elsif params[:issue_type] == 'Open Defects'
       @open_defect = Defect.where('project_id in (?) AND status  in (?)', params[:proj_id], 'Open')
-    end
-
-    if params[:issue_type] == 'In Progress Requirements'
+   elsif params[:issue_type] == 'In Progress Requirements'
       @in_progress_requirement = Requirement.where('project_id in (?) AND status  in (?)', params[:proj_id], 'In progress')
     end
 

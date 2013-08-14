@@ -26,7 +26,8 @@
 						<th><%= model_class.human_attribute_name(:description) %></th>
 						<th><%= model_class.human_attribute_name(:created_at ) %></th>
 						<th><%= model_class.human_attribute_name(:actions ) %></th>
-						<th><%= model_class.human_attribute_name(:audio_or_avatar ) %></th>
+						<th><%= model_class.human_attribute_name(:avatar ) %></th>
+						<th><%= model_class.human_attribute_name(:audio ) %></th>
 
 					</tr>
 				</thead>
@@ -37,7 +38,7 @@
 						<div id="mode">
 							<td><%= project.name %></td>
 						</div>
-						<td><%= h truncate(project.description , :length => 15) %></td>
+						<td><%= truncate(project.description , :length => 15) %></td>
 						<td><%= project.created_at %></td>
 
 						<td><%= button_to "Edit", { :controller => 'project',
@@ -50,11 +51,14 @@
 						:action=>'show',:id=>project.id},
 						:class => 'btn btn-mini btn-success'%> </td>
 
-						<%if project.audio.present?%>
-						<td><%= audio_tag project.audio,:controls=> true%></td>
-						<%else%>
-						<td><%= image_tag project.avatar.url(:small)%></td>
-						<%end%>
+						
+						<td><%if project.avatar.present?%>
+						<%= image_tag project.avatar.url(:small)%>
+						<%end%></td>
+						<td><%if project.audio.present?%>
+						<%= project.audio_file_name%> <%= audio_tag project.audio,:controls=> true%>
+						<%end%></td>
+						
 					</tr>
 					<% end %>
 				</tbody>
