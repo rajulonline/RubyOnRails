@@ -1,8 +1,8 @@
-<%- model_class = Defect -%>
-<%= form_for :post do |f| %>
+<%- model_class = Post -%>
+
 <%if @requirement.present?%>
-<%= f.label :Req, :class => 'control-label' %>
-<%= select("post", "req_name", @requirement.collect {|r| [ r.req_name ] })%>
-<%end%>
+<%= label_tag :Req, "Requirement" %>
+<%= select_tag 'post[req_name]', options_for_select(@requirement.collect{ |u| [u.req_name] }), {include_blank: 'None'}  %>
+
 
 <%end%>

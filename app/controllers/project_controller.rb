@@ -95,10 +95,9 @@ class ProjectController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
-    @requirement=Requirement.find_all_by_project_id(params[:id])
-    @post=Post.find_all_by_project_id(params[:id])
-    @defect=Defect.find_all_by_project_id(params[:id])
+
     @project.destroy
+
     respond_to do |format|
       format.js
       format.html {redirect_to :action=>'list_all_projects'}

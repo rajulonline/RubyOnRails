@@ -8,8 +8,11 @@
    
   end
   
-  def isLogged_In
-    session[:logged_in] = true if http_basic_authenticate_with name: "dhh", password: "secret"
-  end
-  
+   helper_method :current_user
+
+private
+
+def current_user
+  @current_user ||= User.find(session[:user_id]) if session[:user_id]
+end
 end

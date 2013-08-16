@@ -13,7 +13,7 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
-
+gem 'bcrypt-ruby', :require => 'bcrypt'
 gem "bullet", :group => "development"
 
 gem 'rack-protection'

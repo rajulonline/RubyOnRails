@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  
   # GET /posts
   # GET /posts.json
   def index
@@ -9,7 +10,10 @@ class PostsController < ApplicationController
       flash[:notice]='There are no test cases'
     end
     @post = Post.paginate :page => params[:page], :per_page => 5, :order => 'agent ASC'
-    just_respond_to_do
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @post }     
+    end
   end
 
   def get_test_case
@@ -19,14 +23,20 @@ class PostsController < ApplicationController
     else
       @post = Post.find_all_by_project_id(@project.id)
     end
-    just_respond_to_do
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js
+    end
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    just_respond_to_do
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @post }
+    end
 
   end
 
@@ -34,14 +44,24 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-    call_other_models
-    just_respond_to_do
+    @project = Project.all
+    @requirement=Requirement.all
+    @login=Login.all
+    @status = Status.all
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @post }
+    end
   end
 
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
-    call_other_models
+    @login = Login.all
+    @status = Status.all
+    @project = Project.all
+    @requirement=Requirement.all
   end
 
   # POST /posts
@@ -49,7 +69,10 @@ class PostsController < ApplicationController
 
   def create
 
-    call_other_models
+    @login = Login.all
+    @status = Status.all
+    @project = Project.all
+    @requirement=Requirement.all
 
     # @person = Person.new(:agent => @post.agent, :status=>@post.status)
     # @person.save
@@ -59,7 +82,7 @@ class PostsController < ApplicationController
       #saving it in the posts table. The piece of code from post_new till @post
       # does it
       @post = Post.new(params[:post])
-
+      binding.pry
       @on_error_retain_agent = params[:post][:agent]
       @on_error_retain_status = params[:post][:status]
       if params[:post][:req_name].present?
@@ -109,6 +132,7 @@ class PostsController < ApplicationController
     @children=Children.find_all_by_parent_tc_id(:parent_tc_id)
     @defect=Defect.find_all_by_parent_tc_id(:parent_tc_id)
     @post.destroy
+
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
@@ -149,35 +173,30 @@ class PostsController < ApplicationController
     if @all_posts.nil?
       flash[:notice] = 'No test cases available for this project'
     end
-    just_respond_to_do
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @all_posts }
+    end
   end
 
   def get_requirement_list
     @requirement = Requirement.find_all_by_project_id(params[:id])
+
     if @requirement.nil?
       @requirement = []
     end
-    just_respond_to_do
-  end
-
-  def get_search_result
-    @post = Post.find_all_by_title(params[:id])
-    just_respond_to_do
-  end
-  
-  def just_respond_to_do
-  respond_to do |format|
-      format.html # index.html.erb
-      format.json
+    respond_to do |format|
+      format.html
       format.js
     end
   end
   
-  def call_other_models
-    @project = Project.all
-    @requirement=Requirement.all
-    @login=Login.all
-    @status = Status.all
+  def get_search_result
+    @post = Post.find_all_by_title(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
 end

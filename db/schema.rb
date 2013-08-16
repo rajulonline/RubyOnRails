@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802184652) do
+ActiveRecord::Schema.define(:version => 20130816030117) do
 
   create_table "children", :primary_key => "child_tc_id", :force => true do |t|
     t.string   "agent"
@@ -59,12 +59,15 @@ ActiveRecord::Schema.define(:version => 20130802184652) do
     t.integer  "project_id"
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
-    t.string   "agent",      :limit => 30
-    t.string   "status",     :limit => 30
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "agent",              :limit => 30
+    t.string   "status",             :limit => 30
     t.string   "req_name"
     t.integer  "req_id"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.string   "audio_file_size"
   end
 
   create_table "projects", :force => true do |t|

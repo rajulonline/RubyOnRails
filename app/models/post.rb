@@ -31,5 +31,4 @@ class Post < ActiveRecord::Base
     Rails.cache.fetch('Post.all'){all}
   end
 
-
 end
