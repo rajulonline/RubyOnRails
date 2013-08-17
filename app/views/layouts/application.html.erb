@@ -65,7 +65,9 @@
   <% if current_user %>
     Logged in as <%= current_user.email %>.
     <%= link_to "Log out", log_out_path %>
+    <%= yield %>
   <% else %>
+  Please login first if you have already signed up or Sign up now ! <br /> <br />
     <%= link_to "Sign up", sign_up_path %> or
     <%= link_to "log in", log_in_path %>
   <% end %>
@@ -74,7 +76,8 @@
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
-					<%= yield %>
+					<%= yield :login %>
+					<%= yield :signup %>
 				</div>
 				<div class="span3">
 					<a href="javascript: history.go(-1)">Back</a>
