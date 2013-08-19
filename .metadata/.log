@@ -12918,3 +12918,23 @@ org.eclipse.core.runtime.CoreException: File already exists on disk: /Users/laks
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1410)
 !SUBENTRY 1 org.eclipse.core.filesystem 4 268 2013-08-12 16:54:54.651
 !MESSAGE File already exists on disk: /Users/lakshmi/Documents/StudyRails/Learning/public/assets/audios/Test.mp3.
+!SESSION 2013-08-16 21:45:55.160 -----------------------------------------------
+eclipse.buildId=3.4.1.201306062137
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/lakshmi/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/lakshmi/.eclipse_keyring -consoleLog -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-08-16 21:47:11.626
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2013-08-19 11:31:30.127 -----------------------------------------------
+eclipse.buildId=3.4.1.201306062137
+java.version=1.6.0_51
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=en_US
+Framework arguments:  -keyring /Users/lakshmi/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/lakshmi/.eclipse_keyring -consoleLog -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-08-19 11:31:51.643
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
