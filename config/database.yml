@@ -11,10 +11,10 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: Learning_development
-  username: root
-  password:
-  host: localhost
+  database: d2i8u4e5l1o5kh
+  username: 
+  password: 
+  host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
 
 # Warning: The database defined as "test" will be erased and
@@ -23,17 +23,18 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: Learning_test
-  username: root
-  password:
-  host: localhost
+  database: d2i8u4e5l1o5kh
+  username: 
+  password: 
+  host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
+
   
 production:
   adapter: postgresql
   encoding: utf8
-  database: Learning_production
-  username: root
-  password:
-  host: localhost
+  database: d2i8u4e5l1o5kh
+  username: 
+  password: 
+  host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
