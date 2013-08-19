@@ -13,7 +13,7 @@ destination:
   hostname: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
   username: ifnqjpovvamfxz
-  password: ITLBG1ahc7M06ovK5e9QBASaiu
+  password: 
   database: d2i8u4e5l1o5kh
 
 
