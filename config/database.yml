@@ -12,8 +12,8 @@ development:
   adapter: postgresql
   encoding: utf8
   database: d2i8u4e5l1o5kh
-  username: 
-  password: 
+  username: ifnqjpovvamfxz
+  password: ITLBG1ahc7M06ovK5e9QBASaiu
   host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
 
@@ -24,8 +24,8 @@ test:
   adapter: postgresql
   encoding: utf8
   database: d2i8u4e5l1o5kh
-  username: 
-  password: 
+  username: ifnqjpovvamfxz
+  password: ITLBG1ahc7M06ovK5e9QBASaiu
   host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
 
@@ -34,7 +34,7 @@ production:
   adapter: postgresql
   encoding: utf8
   database: d2i8u4e5l1o5kh
-  username: 
-  password: 
+  username: ifnqjpovvamfxz
+  password: ITLBG1ahc7M06ovK5e9QBASaiu 
   host: ec2-75-101-167-151.compute-1.amazonaws.com
   port: 5432
