@@ -13,101 +13,54 @@
 				$("#tabs").tabs();
 			});
 		</script>
-		
+
 		<script type="text/javascript">
-      (function() {
-       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-       po.src = 'https://apis.google.com/js/client:plusone.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-     })();
-    </script>
-    <script>
-    function signinCallback(authResult) {
-  if (authResult['access_token']) {
-    // Successfully authorized
-    // Hide the sign-in button now that the user is authorized, for example:
-    document.getElementById('signinButton').setAttribute('style', 'display: none');
-  } else if (authResult['error']) {
-    // There was an error.
-    // Possible error codes:
-    //   "access_denied" - User denied access to your app
-    //   "immediate_failed" - Could not automatically log in the user
-    // console.log('There was an error: ' + authResult['error']);
-  }
-}
-    </script>
-    
-    
+			(function() {
+				var po = document.createElement('script');
+				po.type = 'text/javascript';
+				po.async = true;
+				po.src = 'https://apis.google.com/js/client:plusone.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(po, s);
+			})();
+		</script>
+		<script>
+			function signinCallback(authResult) {
+				if (authResult['access_token']) {
+					window.open("http://0.0.0.0:3000/tools/genesis");
+					// Successfully authorized
+					// Hide the sign-in button now that the user is authorized, for example:
+					document.getElementById('signinButton').setAttribute('style', 'display: none');
+				} else if (authResult['error']) {
+					// There was an error.
+					// Possible error codes:
+					//   "access_denied" - User denied access to your app
+					//   "immediate_failed" - Could not automatically log in the user
+					// console.log('There was an error: ' + authResult['error']);
+				}
+			}
+		</script>
 	</head>
 	<body>
-		<span id="signinButton">
-  <span
-    class="g-signin"
-    data-callback="signinCallback"
-    data-clientid="1095087075896-7516nrvlumkr797ks1a8dit1dudcmasp.apps.googleusercontent.com"
-    data-cookiepolicy="single_host_origin"
-    data-requestvisibleactions="http://schemas.google.com/AddActivity"
-    data-scope="https://www.googleapis.com/auth/plus.login">
-  </span>
-</span>
 
 		<div id="tabs">
 			<ul>
 				<li>
-					<a href="#tabs-1">Create Account</a>
+					<a href="#tabs-1">Login with Google Plus</a>
 				</li>
-				<li>
-					<a href="#tabs-2">User Login</a>
-				</li>
+
 			</ul>
 			<div id="tabs-1">
-				<%= form_for :login, :url => { :action => "create" } do |f| %>
 
-				<div class="control-group">
-					<%= f.label :user, :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :user, :class => 'text_field' %>
-					</div>
-				</div>
-				<div class="control-group">
-					<%= f.label :password, :class => 'control-label' %>
-					<div class="controls">
-						<%= password_field(:login, :password, size: 3)%>
-					</div>
-				</div>
+				<span id="signinButton"> <span
+					class="g-signin"
+					data-callback="signinCallback"
+					data-clientid="1095087075896-7516nrvlumkr797ks1a8dit1dudcmasp.apps.googleusercontent.com"
+					data-cookiepolicy="single_host_origin"
+					data-requestvisibleactions="http://schemas.google.com/AddActivity"
+					data-scope="https://www.googleapis.com/auth/plus.login"> </span> </span>
 
-				<div class="control-group">
-					<%= f.label :email, :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :email, :rows=>5,:class => 'text_area' %>
-					</div>
-				</div>
-				<%= f.submit :action=> 'create'%>
-				<% end %>
 			</div>
-			
-			
-			<div id="tabs-2">
-				<%= form_for :login, :url => { :action => "create" } do |f| %>
-
-				<div class="control-group">
-					<%= f.label :user, :class => 'control-label' %>
-					<div class="controls">
-						<%= f.text_field :user, :class => 'text_field' %>
-					</div>
-				</div>
-				<div class="control-group">
-					<%= f.label :password, :class => 'control-label' %>
-					<div class="controls">
-						<%= password_field(:login, :password, size: 3)%>
-					</div>
-				</div>	
-				<%= f.submit 'Login'%>			
-				</div>
-				
-			</div>
-			<% end %>
-		</div>
 	</body>
 </html>
 
