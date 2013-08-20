@@ -4,8 +4,9 @@ gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'unicorn'
 group :development do
+  gem 'unicorn-rails'
 gem 'mysql2psql'
 end
 
@@ -14,10 +15,10 @@ gem 'request-log-analyzer'
 group :development do
   gem 'mysql2'
 end
-group :production do
+
   gem 'pg'
   gem 'rails_12factor'
-end
+
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem "bullet", :group => "development"
 
@@ -33,7 +34,7 @@ group :assets do
   gem 'jquery-datatables-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'less-rails'
-  gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
