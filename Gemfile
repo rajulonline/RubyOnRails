@@ -5,19 +5,21 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'unicorn'
-group :development do
-  gem 'unicorn-rails'
-gem 'mysql2psql'
-end
 
+group :development do
+
+  gem 'unicorn-rails'
+  
+end
 
 gem 'request-log-analyzer'
-group :development do
-  gem 'mysql2'
+
+gem 'mysql2'
+group :production do
+gem 'pg'
+gem 'rails_12factor'
 end
 
-  gem 'pg'
-  gem 'rails_12factor'
 
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem "bullet", :group => "development"
@@ -27,23 +29,22 @@ gem 'rack-protection'
 gem 'soundcloud'
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'twitter-bootstrap-rails' 
+
+  gem 'twitter-bootstrap-rails'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-datatables-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'less-rails'
-  #gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-end
+
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem 'pry'
 gem 'pry-rails'
 gem 'pry-plus'
-
 
 gem 'jquery-rails'
 gem 'barista'
