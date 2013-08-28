@@ -8,7 +8,7 @@ gem 'unicorn'
 
 group :development do
 
-  
+  gem 'unicorn-rails'
   
 end
 
@@ -16,7 +16,6 @@ gem 'request-log-analyzer'
 
 gem 'mysql2'
 group :production do
-
 gem 'pg'
 gem 'rails_12factor'
 end
