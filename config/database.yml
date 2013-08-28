@@ -31,7 +31,7 @@ test:
 
   
 production:
-  adapter: postgresql
+  
   encoding: utf8
   database: d2i8u4e5l1o5kh
   username: ifnqjpovvamfxz
