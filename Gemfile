@@ -17,6 +17,7 @@ gem 'request-log-analyzer'
 gem 'mysql2'
 group :production do
 gem 'unicorn-rails'
+gem 'postgres-pr'
 gem 'pg'
 gem 'rails_12factor'
 end
