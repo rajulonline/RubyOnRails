@@ -110,7 +110,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     mysql2 (0.3.13)
-    pg (0.9.0)
+    pg (0.16.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -180,6 +180,8 @@ GEM
       json (~> 1.4)
     ref (1.0.5)
     request-log-analyzer (1.12.9)
+    ruby-pg (0.8.0)
+      pg (~> 0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -243,7 +245,6 @@ DEPENDENCIES
   memcachier
   mysql2
   paperclip!
-  pg
   pry
   pry-plus
   pry-rails
@@ -253,6 +254,7 @@ DEPENDENCIES
   rails-footnotes
   rails_12factor
   request-log-analyzer
+  ruby-pg
   sass-rails (~> 3.2.3)
   simple_form
   soundcloud
