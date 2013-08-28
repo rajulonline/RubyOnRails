@@ -17,6 +17,7 @@ gem 'request-log-analyzer'
 gem 'mysql2'
 group :production do
 gem 'unicorn-rails'
+gem 'therubyracer-heroku', '0.8.1.pre3'
 gem 'pg'
 gem 'rails_12factor'
 end
